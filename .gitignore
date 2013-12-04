@@ -3,7 +3,7 @@ target/*
 
 # intellij
 .idea
-*.iml
+
 
 # eclipse
 .project

@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Todooz</title>
+    <title>Bitcoinerie</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="../../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
     <style type="text/css">
         body {
@@ -19,7 +21,7 @@
 <div class="container">
     <div class="navbar navbar-default">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Todooz</a>
+            <a class="navbar-brand" href="/">Bitcoinerie</a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <form class="navbar-form navbar-left" role="search">
@@ -35,6 +37,9 @@
     <div class="row">
         <div class="col-lg-7 col-lg-offset-1">
             <legend>All tasks</legend>
+            ${transaction}
+            ${transaction.id_transaction}
+            ${transaction.montant}
 
             <div>
                 <p>20 juillet 2012</p>
