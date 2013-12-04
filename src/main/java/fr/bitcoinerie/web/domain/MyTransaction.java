@@ -1,5 +1,8 @@
 package fr.bitcoinerie.web.domain;
 
+import javax.persistence.Column;
+import javax.persistence.*;
+
 import java.util.Date;
 
 /**
@@ -9,11 +12,20 @@ import java.util.Date;
  * Time: 10:22
  * To change this template use File | Settings | File Templates.
  */
+
+@Entity
+@Table(name="transaction")
 public class MyTransaction {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_transaction;
+    @Column
     private MyUser emetteur;
+    @Column
     private MyUser recepteur;
+    @Column
     private double montant;
+    @Column
     private Date date_temps;
 
     public MyTransaction(int id_transaction, double montant, Date date_temps) {
