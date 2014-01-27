@@ -1,11 +1,17 @@
 package fr.bitcoinerie.hibernate;
 
-import fr.bitcoinerie.web.domain.MyTransaction;
+import fr.bitcoinerie.domain.Transaction.MyTransaction;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,7 +21,9 @@ import org.junit.Test;
  * To change this template use File | Settings | File Templates.
  */
 public class HibernateTest {
-    @Test
+    private SessionFactory sessionFactory;
+
+    @Before
     public void createSessionFactory() {
         Configuration configuration = new Configuration();
 
@@ -28,7 +36,39 @@ public class HibernateTest {
         ServiceRegistry serviceRegistry = new ServiceRegistryBuilder()
                 .applySettings(configuration.getProperties()).buildServiceRegistry();
 
-        SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+    }
+
+    @After
+    public void cleanDb() {
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction = session.beginTransaction();
+
+        session.createQuery("delete from MyTransaction").executeUpdate();
+
+        transaction.commit();
+
+        session.close();
+
+        sessionFactory.close();
+    }
+
+    @Test
+    public void saveMyTransaction() {
+        MyTransaction myTransaction = new MyTransaction(20, new Date(),"A","B");
+
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction = session.beginTransaction();
+
+        session.save(myTransaction);
+
+
+
+        transaction.commit();
+
+        session.close();
     }
 }
 

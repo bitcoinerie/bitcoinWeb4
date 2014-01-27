@@ -1,4 +1,6 @@
-package fr.bitcoinerie.web.domain;
+package fr.bitcoinerie.domain.Echange;
+
+import fr.bitcoinerie.domain.User.MyUser;
 
 import java.util.Date;
 

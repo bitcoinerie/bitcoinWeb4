@@ -1,6 +1,6 @@
 package fr.bitcoinerie.web.servlet;
 
-import fr.bitcoinerie.web.domain.MyTransaction;
+import fr.bitcoinerie.domain.Transaction.MyTransaction;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +21,7 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("transaction", new MyTransaction(1, 12.1, new Date()) );
+        request.setAttribute("transaction", new MyTransaction(1234, new Date(), "Arielle","Babybel" ) );
         request.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(request, response);
     }
 }
