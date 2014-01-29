@@ -127,9 +127,9 @@ public class MyTransactionServiceTest {
 
     @Test
     public void udpate() {
-        MyTransaction myTransaction = MyTransaction();
+        MyTransaction myTransaction = myTransaction();
 
-        myTransactionService.update(myTransaction);
+        myTransactionService.save(myTransaction);
         myTransactionService.update(myTransaction);
 
         Assert.assertEquals(1, myTransactionService.count());
