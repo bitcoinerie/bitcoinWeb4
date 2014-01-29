@@ -12,13 +12,7 @@ import java.util.List;
 
 
 
-/**
- * Created with IntelliJ IDEA.
- * User: marjolaine
- * Date: 06/12/13
- * Time: 21:10
- * To change this template use File | Settings | File Templates.
- */
+
 
 @Service
 public class MyTransactionServiceImpl implements MyTransactionService {

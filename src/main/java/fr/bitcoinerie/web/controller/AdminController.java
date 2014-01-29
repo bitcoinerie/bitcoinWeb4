@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.inject.Inject;
 import java.util.Date;
 
-/**
- * Created by marjolaine on 07/01/14.
- */
 
 @Controller
 public class AdminController {

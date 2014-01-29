@@ -11,13 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: bphan-luong
- * Date: 04/12/13
- * Time: 15:22
- * To change this template use File | Settings | File Templates.
- */
+
 
 @Controller
 public class IndexController {
