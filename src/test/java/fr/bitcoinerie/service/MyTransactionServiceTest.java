@@ -47,7 +47,7 @@ public class MyTransactionServiceTest {
     @Test
     public void testSave() throws Exception {
 
-        myTransactionService.save(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
 
     }
 
@@ -65,9 +65,9 @@ public class MyTransactionServiceTest {
 
         MyTransaction myTransaction = myTransaction();
 
-        myTransactionService.save(myTransaction);
+        myTransactionService.saveTransaction(myTransaction);
 
-        myTransactionService.delete(myTransaction.getId_transaction());
+        myTransactionService.deleteTransaction(myTransaction.getId_transaction());
 
         Session session = sessionFactory.openSession();
 
@@ -80,21 +80,21 @@ public class MyTransactionServiceTest {
     @Test
     public void testFindAll() throws Exception {
 
-        myTransactionService.save(myTransaction());
-        myTransactionService.save(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
 
-        Assert.assertEquals(2, myTransactionService.findAll().size());
+        Assert.assertEquals(2, myTransactionService.findAllTransaction().size());
 
     }
 
     @Test
     public void testFindByQuery() throws Exception {
 
-        myTransactionService.save(myTransaction());
-        myTransactionService.save(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
 
-        Assert.assertEquals(2, myTransactionService.findByQuery("Paul").size());
-        Assert.assertEquals(0, myTransactionService.findByQuery("Pierre").size());
+        Assert.assertEquals(2, myTransactionService.findByQueryTransaction("Paul").size());
+        Assert.assertEquals(0, myTransactionService.findByQueryTransaction("Pierre").size());
 
     }
 
@@ -104,7 +104,7 @@ public class MyTransactionServiceTest {
 
         MyTransaction myTransaction = myTransaction();
 
-        myTransactionService.save(myTransaction);
+        myTransactionService.saveTransaction(myTransaction);
 
         Assert.assertEquals("Paul", myTransactionService.findById(myTransaction.getId_transaction()).getEmetteur());
 
@@ -113,20 +113,22 @@ public class MyTransactionServiceTest {
     @Test
     public void testCount() throws Exception {
 
-        myTransactionService.save(myTransaction());
-        myTransactionService.save(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
 
         Assert.assertEquals(2, myTransactionService.count());
     }
 
+    /*
     @Test
     public void udpate() {
-        MyTransaction myTransaction = MyTransaction();
+        MyTransaction myTransaction = new MyTransaction();
 
         myTransactionService.update(myTransaction);
         myTransactionService.update(myTransaction);
 
         Assert.assertEquals(1, myTransactionService.count());
     }
+    */
 
 }

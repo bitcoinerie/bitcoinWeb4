@@ -1,13 +1,7 @@
 ----------------------------------------------------------------
-Wed Jan 29 14:47:51 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0143-de41-7f30-000003376df8 
-on database directory /Users/bphan-luong/Desktop/bitcoinWeb2/target/taskdb with class loader WebappClassLoader
-  context: 
-  delegate: false
-  repositories:
-----------> Parent Classloader:
-ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.1, parent: sun.misc.Launcher$AppClassLoader@43be2d65]
- 
+Wed Jan 29 16:54:03 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0143-deb5-0a87-000004276d48 
+on database directory /Users/bphan-luong/Desktop/bitcoinWeb2/target/testdb with class loader sun.misc.Launcher$AppClassLoader@535ff48b 
 Loaded from file:/Users/bphan-luong/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
 java.vendor=Apple Inc.
 java.runtime.version=1.6.0_33-b03-424-11M3720

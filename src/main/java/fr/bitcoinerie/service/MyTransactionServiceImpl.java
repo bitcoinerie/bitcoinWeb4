@@ -22,7 +22,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
     @Override
     @Transactional
-    public void save(MyTransaction myTransaction) {
+    public void saveTransaction(MyTransaction myTransaction) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -32,7 +32,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
         Transaction transaction = session.beginTransaction();
 
-        session.save(myTransaction);
+        session.saveTransaction(myTransaction);
 
         transaction.commit();
 
@@ -46,7 +46,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public void delete(Long id) {
+    public void deleteTransaction(Long id) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -60,7 +60,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public List<MyTransaction> findAll() {
+    public List<MyTransaction> findAllTransaction() {
         Session session = sessionFactory.getCurrentSession();
 
         Query query = session.createQuery("from MyTransaction");
@@ -74,7 +74,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public List<MyTransaction> findByQuery(String query) {
+    public List<MyTransaction> findByQueryTransaction(String query) {
         Session session = sessionFactory.getCurrentSession();
 
         Criteria criteria = session.createCriteria(MyTransaction.class);
@@ -114,7 +114,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     @Override
     public int count() {
         // TODO
-        return findAll().size();
+        return findAllTransaction().size();
     }
 
     /*

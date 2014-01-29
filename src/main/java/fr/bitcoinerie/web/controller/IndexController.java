@@ -21,7 +21,7 @@ public class IndexController {
     @RequestMapping({"/", "/index"})
     public String index(Model model) {
         model.addAttribute("transaction", new MyTransaction(45, new Date(),"Anabelle","Bernard") );
-        model.addAttribute("transactions", myTransactionService.findAll());
+        model.addAttribute("transactions", myTransactionService.findAllTransaction());
 
         return "index";
     }
@@ -35,7 +35,7 @@ public class IndexController {
     /*
     @RequestMapping("/search")
     public List<String> search(String query, Model model) {
-        List<MyTransaction> myTransactionList = myTransactionService.findByQuery(query);
+        List<MyTransaction> myTransactionList = myTransactionService.findByQueryTransaction(query);
         List<String> transactionEmetteur = null;
         for (MyTransaction t: myTransactionList){
             transactionEmetteur.add(t.getEmetteur());
@@ -46,7 +46,7 @@ public class IndexController {
 
     @RequestMapping("/search")
     public String search(String query, Model model) {
-        model.addAttribute("transactionsByQuery", myTransactionService.findByQuery(query));
+        model.addAttribute("transactionsByQuery", myTransactionService.findByQueryTransaction(query));
         return "index";
     }
 
@@ -60,7 +60,7 @@ public class IndexController {
             myTransaction.setEmetteur("Arnold");
             myTransaction.setRecepteur("Fabien");
             myTransaction.setMontant(24);
-            myTransactionService.save(myTransaction);
+            myTransactionService.saveTransaction(myTransaction);
 
             MyTransaction myTransaction2 = new MyTransaction();
 
@@ -68,7 +68,7 @@ public class IndexController {
             myTransaction2.setEmetteur("Henri");
             myTransaction2.setRecepteur("Jo");
             myTransaction2.setMontant(241);
-            myTransactionService.save(myTransaction2);
+            myTransactionService.saveTransaction(myTransaction2);
 
             MyTransaction myTransaction3 = new MyTransaction();
 
@@ -76,7 +76,7 @@ public class IndexController {
             myTransaction3.setEmetteur("Clement");
             myTransaction3.setRecepteur("Pascal");
             myTransaction3.setMontant(58);
-            myTransactionService.save(myTransaction3);
+            myTransactionService.saveTransaction(myTransaction3);
         }
 
     }

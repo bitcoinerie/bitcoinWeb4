@@ -42,7 +42,7 @@ public class AdminController {
 
         myTrans.setDate_temps(new Date());
 
-        myTransactionService.save(myTrans);
+        myTransactionService.saveTransaction(myTrans);
 
         return "redirect:/";
     }
@@ -67,7 +67,7 @@ public class AdminController {
 
         model.addAttribute("name", student.getName());
 
-        myTransactionService.save(myTransaction);
+        myTransactionService.saveTransaction(myTransaction);
 
         return "index";
     }
@@ -83,7 +83,7 @@ public class AdminController {
             return "edit";
         }
 
-        taskService.save(task);
+        taskService.saveTransaction(task);
 
         return "redirect:/";
     }

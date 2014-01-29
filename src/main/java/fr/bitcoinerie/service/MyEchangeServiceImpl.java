@@ -86,19 +86,19 @@ public class MyEchangeServiceImpl implements MyEchangeService {
     @Transactional
     public void saveMyUser(MyUser user) {
         Session session = sessionFactory.getCurrentSession();
-        List<MyEchange> existe= findByQuery( user);
-        List<MyEchange>echanges=findAll();
+        List<MyEchange> existe= findByQueryTransaction( user);
+        List<MyEchange>echanges=findAllTransaction();
         int n=echanges.size();
 
         for (int j=1;j<= n;j++){
             MyUser myuser=echanges.get(j).getEmetteur();
 
             MyEchange myEchange= new MyEchange((double) 0,user,myuser);
-            save(myEchange) ;
+            saveTransaction(myEchange) ;
             MyEchange monEchange= new MyEchange((double) 0,user,user);
-            save(monEchange) ;
+            saveTransaction(monEchange) ;
             MyEchange tonEchange= new MyEchange((double) 0,myuser,user);
-            save(tonEchange) ;
+            saveTransaction(tonEchange) ;
         }
     }    */
     @Transactional
