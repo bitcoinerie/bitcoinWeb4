@@ -45,6 +45,12 @@ public class MyUser {
         setListe_recettes(null);
     }
 
+    public MyUser(String prenom, String nom, double montant){
+        this.prenom = prenom;
+        this.nom = nom;
+        this.montant_compte = montant;
+    }
+
     public Long getId_user() {
         return id_user;
     }
