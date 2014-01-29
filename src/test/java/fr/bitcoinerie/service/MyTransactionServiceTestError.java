@@ -156,13 +156,13 @@ public class MyTransactionServiceTestError {
     }
 
     @Test
-    public void count() {
+    public void countTransaction() {
 
 
         taskService.saveTransaction(task());
         taskService.saveTransaction(task());
 
-        Assert.assertEquals(2, taskService.count());
+        Assert.assertEquals(2, taskService.countTransaction());
     }
     */
 }

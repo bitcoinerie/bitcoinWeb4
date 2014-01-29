@@ -50,7 +50,7 @@ public class AdminController {
 
     @RequestMapping("/edit/{id_transaction}")
     public String edit(@PathVariable Long id_transaction, Model model) {
-        model.addAttribute("transaction", myTransactionService.findById(id_transaction));
+        model.addAttribute("transaction", myTransactionService.findByIdTransaction(id_transaction));
 
 
         return "edit";

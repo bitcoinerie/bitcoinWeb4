@@ -1,6 +1,7 @@
 package fr.bitcoinerie.hibernate;
 
 import fr.bitcoinerie.domain.Transaction.MyTransaction;
+import fr.bitcoinerie.domain.User.MyUser;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

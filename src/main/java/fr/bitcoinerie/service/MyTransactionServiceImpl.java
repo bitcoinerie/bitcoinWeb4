@@ -89,7 +89,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
     @Transactional
     @Override
-    public MyTransaction findById(Long id) {
+    public MyTransaction findByIdTransaction(Long id) {
         Session session = sessionFactory.getCurrentSession();
 
         //Criteria criteria = session.createCriteria(MyTransaction.class);
@@ -112,7 +112,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public int count() {
+    public int countTransaction() {
         // TODO
         return findAllTransaction().size();
     }
@@ -125,7 +125,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
     @Override
     @Transactional
-    public void update(MyTransaction myTransaction) {
+    public void updateTransaction(MyTransaction myTransaction) {
 
         Session session = sessionFactory.getCurrentSession();
 

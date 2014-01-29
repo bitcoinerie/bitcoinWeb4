@@ -23,11 +23,11 @@ public interface MyTransactionService {
     //@Transactional
     List<MyTransaction> findByQueryTransaction(String query);
 
-    MyTransaction findById(Long id);
+    MyTransaction findByIdTransaction(Long id);
 
     //@Override
     //@Transactional
-    int count();
+    int countTransaction();
 
-    void update(MyTransaction myTransaction);
+    void updateTransaction(MyTransaction myTransaction);
 }

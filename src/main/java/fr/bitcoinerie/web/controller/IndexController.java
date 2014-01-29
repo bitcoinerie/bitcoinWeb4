@@ -52,7 +52,7 @@ public class IndexController {
 
     @PostConstruct
     public void bootstrap() {
-        if (myTransactionService.count()== 0) {
+        if (myTransactionService.countTransaction()== 0) {
 
             MyTransaction myTransaction = new MyTransaction();
 

@@ -106,7 +106,7 @@ public class MyTransactionServiceTest {
 
         myTransactionService.saveTransaction(myTransaction);
 
-        Assert.assertEquals("Paul", myTransactionService.findById(myTransaction.getId_transaction()).getEmetteur());
+        Assert.assertEquals("Paul", myTransactionService.findByIdTransaction(myTransaction.getId_transaction()).getEmetteur());
 
     }
 
@@ -116,18 +116,22 @@ public class MyTransactionServiceTest {
         myTransactionService.saveTransaction(myTransaction());
         myTransactionService.saveTransaction(myTransaction());
 
-        Assert.assertEquals(2, myTransactionService.count());
+        Assert.assertEquals(2, myTransactionService.countTransaction());
     }
 
     /*
     @Test
     public void udpate() {
+<<<<<<< HEAD
         MyTransaction myTransaction = new MyTransaction();
+=======
+        MyTransaction myTransaction = myTransaction();
+>>>>>>> 0d22225a29cb189f664d2c3da323390d1071d0c7
 
-        myTransactionService.update(myTransaction);
-        myTransactionService.update(myTransaction);
+        myTransactionService.save(myTransaction);
+        myTransactionService.updateTransaction(myTransaction);
 
-        Assert.assertEquals(1, myTransactionService.count());
+        Assert.assertEquals(1, myTransactionService.countTransaction());
     }
     */
 
