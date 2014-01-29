@@ -36,6 +36,7 @@
             </bean>
         </property>
         <property name="packagesToScan" value="fr.bitcoinerie.domain.Transaction"/>
+
     </bean>
 
     <!-- ajoute un gestionnaire de transactions lié à la sessionFactory -->
