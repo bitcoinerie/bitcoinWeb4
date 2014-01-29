@@ -1,0 +1,19 @@
+----------------------------------------------------------------
+Mon Jan 27 16:35:01 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0143-d456-e56f-0000035554d0 
+on database directory /home/marjolaine/Bureau/bitcoinWeb/target/taskdb with class loader WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.1, parent: sun.misc.Launcher$AppClassLoader@16f0472]
+ 
+Loaded from file:/home/marjolaine/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
+java.vendor=Sun Microsystems Inc.
+java.runtime.version=1.6.0_30-b12
+user.dir=/home/marjolaine/Bureau/bitcoinWeb
+os.name=Linux
+os.arch=i386
+os.version=3.2.0-54-generic-pae
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

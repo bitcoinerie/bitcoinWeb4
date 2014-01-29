@@ -14,13 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.inject.Inject;
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: marjolaine
- * Date: 17/12/13
- * Time: 21:43
- * To change this template use File | Settings | File Templates.
- */
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
