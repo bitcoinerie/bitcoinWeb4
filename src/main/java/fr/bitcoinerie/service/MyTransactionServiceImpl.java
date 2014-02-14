@@ -12,13 +12,7 @@ import java.util.List;
 
 
 
-/**
- * Created with IntelliJ IDEA.
- * User: marjolaine
- * Date: 06/12/13
- * Time: 21:10
- * To change this template use File | Settings | File Templates.
- */
+
 
 @Service
 public class MyTransactionServiceImpl implements MyTransactionService {
@@ -28,7 +22,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
     @Override
     @Transactional
-    public void save(MyTransaction myTransaction) {
+    public void saveTransaction(MyTransaction myTransaction) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -38,7 +32,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
         Transaction transaction = session.beginTransaction();
 
-        session.save(myTransaction);
+        session.saveTransaction(myTransaction);
 
         transaction.commit();
 
@@ -52,7 +46,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public void delete(Long id) {
+    public void deleteTransaction(Long id) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -66,7 +60,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public List<MyTransaction> findAll() {
+    public List<MyTransaction> findAllTransaction() {
         Session session = sessionFactory.getCurrentSession();
 
         Query query = session.createQuery("from MyTransaction");
@@ -80,7 +74,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public List<MyTransaction> findByQuery(String query) {
+    public List<MyTransaction> findByQueryTransaction(String query) {
         Session session = sessionFactory.getCurrentSession();
 
         Criteria criteria = session.createCriteria(MyTransaction.class);
@@ -95,7 +89,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
     @Transactional
     @Override
-    public MyTransaction findById(Long id) {
+    public MyTransaction findByIdTransaction(Long id) {
         Session session = sessionFactory.getCurrentSession();
 
         //Criteria criteria = session.createCriteria(MyTransaction.class);
@@ -118,9 +112,9 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public int count() {
+    public int countTransaction() {
         // TODO
-        return findAll().size();
+        return findAllTransaction().size();
     }
 
     /*
@@ -131,7 +125,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
     @Override
     @Transactional
-    public void update(MyTransaction myTransaction) {
+    public void updateTransaction(MyTransaction myTransaction) {
 
         Session session = sessionFactory.getCurrentSession();
 

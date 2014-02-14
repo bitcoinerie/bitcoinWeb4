@@ -10,13 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-/**
- * Created with IntelliJ IDEA.
- * User: marjolaine
- * Date: 06/12/13
- * Time: 21:12
- * To change this template use File | Settings | File Templates.
- */
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -52,7 +46,7 @@ public class MyTransactionServiceTestError {
 
         Transaction transaction = session.beginTransaction();
 
-        session.createQuery("delete from MyTransaction").executeUpdate();
+        session.createQuery("deleteTransaction from MyTransaction").executeUpdate();
 
         transaction.commit();
 
@@ -67,8 +61,8 @@ public class MyTransactionServiceTestError {
 
         myTransactionService.setSessionFactory(sessionFactory);
 
-        myTransactionService.save(myTransaction());
-        //myTransactionService.save(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
+        //myTransactionService.saveTransaction(myTransaction());
 
     }
 
@@ -89,9 +83,9 @@ public class MyTransactionServiceTestError {
     public void testDelete() throws Exception {
         MyTransaction myTransaction = new MyTransaction();
 
-        myTransactionService.save(myTransaction);
+        myTransactionService.saveTransaction(myTransaction);
 
-        myTransactionService.delete(myTransaction.getId_transaction());
+        myTransactionService.deleteTransaction(myTransaction.getId_transaction());
 
         Session session = sessionFactory.openSession();
 
@@ -123,14 +117,14 @@ public class MyTransactionServiceTestError {
     /*
 
     @Test
-    public void delete() {
+    public void deleteTransaction() {
 
 
         Task task = task();
 
-        taskService.save(task);
+        taskService.saveTransaction(task);
 
-        taskService.delete(task.getId());
+        taskService.deleteTransaction(task.getId());
 
         Session session = sessionFactory.openSession();
 
@@ -140,35 +134,35 @@ public class MyTransactionServiceTestError {
     }
 
     @Test
-    public void findAll() {
+    public void findAllTransaction() {
 
 
-        taskService.save(task());
-        taskService.save(task());
+        taskService.saveTransaction(task());
+        taskService.saveTransaction(task());
 
-        Assert.assertEquals(2, taskService.findAll().size());
+        Assert.assertEquals(2, taskService.findAllTransaction().size());
     }
 
     @Test
-    public void findByQuery() {
+    public void findByQueryTransaction() {
 
 
-        taskService.save(task());
-        taskService.save(task());
+        taskService.saveTransaction(task());
+        taskService.saveTransaction(task());
 
-        Assert.assertEquals(2, taskService.findByQuery("read").size());
-        Assert.assertEquals(2, taskService.findByQuery("java").size());
-        Assert.assertEquals(0, taskService.findByQuery("driven").size());
+        Assert.assertEquals(2, taskService.findByQueryTransaction("read").size());
+        Assert.assertEquals(2, taskService.findByQueryTransaction("java").size());
+        Assert.assertEquals(0, taskService.findByQueryTransaction("driven").size());
     }
 
     @Test
-    public void count() {
+    public void countTransaction() {
 
 
-        taskService.save(task());
-        taskService.save(task());
+        taskService.saveTransaction(task());
+        taskService.saveTransaction(task());
 
-        Assert.assertEquals(2, taskService.count());
+        Assert.assertEquals(2, taskService.countTransaction());
     }
     */
 }

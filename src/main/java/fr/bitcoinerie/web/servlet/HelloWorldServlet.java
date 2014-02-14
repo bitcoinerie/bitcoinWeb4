@@ -1,12 +1,5 @@
 package fr.bitcoinerie.web.servlet;
 
-/**
- * Created with IntelliJ IDEA.
- * User: bphan-luong
- * Date: 02/12/13
- * Time: 11:05
- * To change this template use File | Settings | File Templates.
- */
 
 
 import java.io.IOException;

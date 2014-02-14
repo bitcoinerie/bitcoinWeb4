@@ -14,13 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.inject.Inject;
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: marjolaine
- * Date: 17/12/13
- * Time: 21:43
- * To change this template use File | Settings | File Templates.
- */
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -53,7 +47,7 @@ public class MyTransactionServiceTest {
     @Test
     public void testSave() throws Exception {
 
-        myTransactionService.save(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
 
     }
 
@@ -71,9 +65,9 @@ public class MyTransactionServiceTest {
 
         MyTransaction myTransaction = myTransaction();
 
-        myTransactionService.save(myTransaction);
+        myTransactionService.saveTransaction(myTransaction);
 
-        myTransactionService.delete(myTransaction.getId_transaction());
+        myTransactionService.deleteTransaction(myTransaction.getId_transaction());
 
         Session session = sessionFactory.openSession();
 
@@ -86,21 +80,21 @@ public class MyTransactionServiceTest {
     @Test
     public void testFindAll() throws Exception {
 
-        myTransactionService.save(myTransaction());
-        myTransactionService.save(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
 
-        Assert.assertEquals(2, myTransactionService.findAll().size());
+        Assert.assertEquals(2, myTransactionService.findAllTransaction().size());
 
     }
 
     @Test
     public void testFindByQuery() throws Exception {
 
-        myTransactionService.save(myTransaction());
-        myTransactionService.save(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
 
-        Assert.assertEquals(2, myTransactionService.findByQuery("Paul").size());
-        Assert.assertEquals(0, myTransactionService.findByQuery("Pierre").size());
+        Assert.assertEquals(2, myTransactionService.findByQueryTransaction("Paul").size());
+        Assert.assertEquals(0, myTransactionService.findByQueryTransaction("Pierre").size());
 
     }
 
@@ -110,29 +104,35 @@ public class MyTransactionServiceTest {
 
         MyTransaction myTransaction = myTransaction();
 
-        myTransactionService.save(myTransaction);
+        myTransactionService.saveTransaction(myTransaction);
 
-        Assert.assertEquals("Paul", myTransactionService.findById(myTransaction.getId_transaction()).getEmetteur());
+        Assert.assertEquals("Paul", myTransactionService.findByIdTransaction(myTransaction.getId_transaction()).getEmetteur());
 
     }
 
     @Test
     public void testCount() throws Exception {
 
-        myTransactionService.save(myTransaction());
-        myTransactionService.save(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
+        myTransactionService.saveTransaction(myTransaction());
 
-        Assert.assertEquals(2, myTransactionService.count());
+        Assert.assertEquals(2, myTransactionService.countTransaction());
     }
 
+    /*
     @Test
     public void udpate() {
-        MyTransaction myTransaction = MyTransaction();
+<<<<<<< HEAD
+        MyTransaction myTransaction = new MyTransaction();
+=======
+        MyTransaction myTransaction = myTransaction();
+>>>>>>> 0d22225a29cb189f664d2c3da323390d1071d0c7
 
-        myTransactionService.update(myTransaction);
-        myTransactionService.update(myTransaction);
+        myTransactionService.save(myTransaction);
+        myTransactionService.updateTransaction(myTransaction);
 
-        Assert.assertEquals(1, myTransactionService.count());
+        Assert.assertEquals(1, myTransactionService.countTransaction());
     }
+    */
 
 }

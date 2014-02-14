@@ -1,6 +1,7 @@
 package fr.bitcoinerie.hibernate;
 
 import fr.bitcoinerie.domain.Transaction.MyTransaction;
+import fr.bitcoinerie.domain.User.MyUser;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -13,13 +14,7 @@ import org.junit.Test;
 
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: bphan-luong
- * Date: 04/12/13
- * Time: 16:29
- * To change this template use File | Settings | File Templates.
- */
+
 public class HibernateTest {
     private SessionFactory sessionFactory;
 

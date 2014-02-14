@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.inject.Inject;
 import java.util.Date;
 
-/**
- * Created by marjolaine on 07/01/14.
- */
 
 @Controller
 public class AdminController {
@@ -43,7 +40,7 @@ public class AdminController {
 
         myTrans.setDate_temps(new Date());
 
-        myTransactionService.save(myTrans);
+        myTransactionService.saveTransaction(myTrans);
 
         return "redirect:/";
     }
@@ -51,7 +48,7 @@ public class AdminController {
 
     @RequestMapping("/edit/{id_transaction}")
     public String edit(@PathVariable Long id_transaction, Model model) {
-        model.addAttribute("transaction", myTransactionService.findById(id_transaction));
+        model.addAttribute("transaction", myTransactionService.findByIdTransaction(id_transaction));
 
         return "edit";
     }
@@ -67,7 +64,7 @@ public class AdminController {
 
         model.addAttribute("name", student.getName());
 
-        myTransactionService.save(myTransaction);
+        myTransactionService.saveTransaction(myTransaction);
 
         return "index";
     }
@@ -83,7 +80,7 @@ public class AdminController {
             return "edit";
         }
 
-        taskService.save(task);
+        taskService.saveTransaction(task);
 
         return "redirect:/";
     }
