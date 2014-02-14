@@ -41,8 +41,6 @@ public class AdminController {
             return "edit";
         }
 
-
-
         myTrans.setDate_temps(new Date());
 
         myTransactionService.save(myTrans);
@@ -54,7 +52,6 @@ public class AdminController {
     @RequestMapping("/edit/{id_transaction}")
     public String edit(@PathVariable Long id_transaction, Model model) {
         model.addAttribute("transaction", myTransactionService.findById(id_transaction));
-
 
         return "edit";
     }
