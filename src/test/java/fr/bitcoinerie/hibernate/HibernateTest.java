@@ -51,7 +51,7 @@ public class HibernateTest {
 
     @Test
     public void saveMyTransaction() {
-        MyTransaction myTransaction = new MyTransaction(20, new Date(),"A","B");
+        MyTransaction myTransaction = new MyTransaction(20, new Date(),new MyUser(),new MyUser());
 
         Session session = sessionFactory.openSession();
 

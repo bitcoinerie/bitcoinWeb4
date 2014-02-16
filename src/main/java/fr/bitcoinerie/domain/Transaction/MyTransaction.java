@@ -1,5 +1,7 @@
 package fr.bitcoinerie.domain.Transaction;
 
+import fr.bitcoinerie.domain.User.MyUser;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,18 +13,15 @@ public class MyTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_transaction;
-    /*
-    @Column
+
+
+    @ManyToOne
+    @JoinColumn(name="id_user")
     private MyUser emetteur;
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name="id_user")
     private MyUser recepteur;
-*/
-    @Column
-    private String emetteur;
-
-    @Column
-    private String recepteur;
 
     @Column
     private double montant;
@@ -31,7 +30,7 @@ public class MyTransaction {
     @Column
     private Date date_temps;
 
-    public MyTransaction(double montant, Date date_temps, String emetteur, String recepteur) {
+    public MyTransaction(double montant, Date date_temps, MyUser emetteur, MyUser recepteur) {
 
         this.montant = montant;
         this.date_temps = date_temps;
@@ -47,8 +46,8 @@ public class MyTransaction {
     public String toString() {
         return "MyTransaction{" +
                 "id_transaction=" + id_transaction +
-                ", emetteur='" + emetteur + '\'' +
-                ", recepteur='" + recepteur + '\'' +
+                ", emetteur='" + emetteur.getPrenom() + '\'' +
+                ", recepteur='" + recepteur.getPrenom() + '\'' +
                 ", montant=" + montant +
                 ", date_temps=" + date_temps +
                 '}';
@@ -76,19 +75,19 @@ public class MyTransaction {
         this.date_temps = date_temps;
     }
 
-    public String getRecepteur() {
+    public MyUser getRecepteur() {
         return recepteur;
     }
 
-    public String getEmetteur() {
+    public MyUser getEmetteur() {
         return emetteur;
     }
 
-    public void setRecepteur(String recepteur) {
+    public void setRecepteur(MyUser recepteur) {
         this.recepteur = recepteur;
     }
 
-    public void setEmetteur(String emetteur) {
+    public void setEmetteur(MyUser emetteur) {
         this.emetteur = emetteur;
     }
 

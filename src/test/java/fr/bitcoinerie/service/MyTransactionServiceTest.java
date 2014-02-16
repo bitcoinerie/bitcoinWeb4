@@ -1,6 +1,7 @@
 package fr.bitcoinerie.service;
 
 import fr.bitcoinerie.domain.Transaction.MyTransaction;
+import fr.bitcoinerie.domain.User.MyUser;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -25,6 +26,8 @@ public class MyTransactionServiceTest {
 
     @Inject
     private MyTransactionService myTransactionService;
+    private MyUser Paul;
+    private MyUser Jean;
 
     @After
     public void cleanDb() {
@@ -55,8 +58,11 @@ public class MyTransactionServiceTest {
         MyTransaction myTransaction = new MyTransaction();
         myTransaction.setMontant(24);
         myTransaction.setDate_temps(new Date());
-        myTransaction.setEmetteur("Paul");
-        myTransaction.setRecepteur("Jean");
+
+        Jean =  new MyUser("Jean", "Kevin", 100);
+        Paul =  new MyUser("Paul", "Hidalgo", 200);
+        myTransaction.setEmetteur(Paul);
+        myTransaction.setRecepteur(Jean);
         return myTransaction;
     }
 
@@ -106,7 +112,7 @@ public class MyTransactionServiceTest {
 
         myTransactionService.saveTransaction(myTransaction);
 
-        Assert.assertEquals("Paul", myTransactionService.findByIdTransaction(myTransaction.getId_transaction()).getEmetteur());
+        Assert.assertEquals(Paul, myTransactionService.findByIdTransaction(myTransaction.getId_transaction()).getEmetteur());
 
     }
 
@@ -122,11 +128,10 @@ public class MyTransactionServiceTest {
     /*
     @Test
     public void udpate() {
-<<<<<<< HEAD
         MyTransaction myTransaction = new MyTransaction();
-=======
+
         MyTransaction myTransaction = myTransaction();
->>>>>>> 0d22225a29cb189f664d2c3da323390d1071d0c7
+
 
         myTransactionService.save(myTransaction);
         myTransactionService.updateTransaction(myTransaction);

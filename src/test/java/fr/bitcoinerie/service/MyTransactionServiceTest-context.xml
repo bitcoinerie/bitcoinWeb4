@@ -28,7 +28,8 @@
                 </property>
             </bean>
         </property>
-        <property name="packagesToScan" value="fr.bitcoinerie.domain.Transaction"/>
+        <property name="packagesToScan" value="fr.bitcoinerie.domain"/>
+
     </bean>
     <bean class="fr.bitcoinerie.service.MyTransactionServiceImpl" />
 

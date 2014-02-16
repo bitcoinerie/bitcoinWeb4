@@ -26,19 +26,6 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
         Session session = sessionFactory.getCurrentSession();
 
-        /*
-
-        Session session = sessionFactory.openSession();
-
-        Transaction transaction = session.beginTransaction();
-
-        session.saveTransaction(myTransaction);
-
-        transaction.commit();
-
-        session.close();
-
-        */
         session.save(myTransaction);
 
     }
@@ -117,11 +104,6 @@ public class MyTransactionServiceImpl implements MyTransactionService {
         return findAllTransaction().size();
     }
 
-    /*
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-    */
 
     @Override
     @Transactional

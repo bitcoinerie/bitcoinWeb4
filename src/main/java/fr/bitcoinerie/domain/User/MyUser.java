@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.Set;
 
 
-
 @Entity
 @Table(name="userTab")
 public class MyUser {
@@ -32,10 +31,13 @@ public class MyUser {
     private String email;
     @Column
     private String userStatus;
-    @Column
-    private String liste_dépenses;
-    @Column
-    private String liste_recettes;
+
+    //@Column
+    @OneToMany(mappedBy="emetteur")
+    private Set<MyTransaction> liste_dépenses;
+
+    @OneToMany(mappedBy="recepteur")
+    private Set<MyTransaction> liste_recettes;
 
     public MyUser(){
         setDate_inscription(new Date());
@@ -123,19 +125,19 @@ public class MyUser {
         this.userStatus = userStatus;
     }
 
-    public String getListe_dépenses() {
+    public Set<MyTransaction> getListe_dépenses() {
         return liste_dépenses;
     }
 
-    public void setListe_dépenses(String liste_dépenses) {
+    public void setListe_dépenses(Set<MyTransaction> liste_dépenses) {
         this.liste_dépenses = liste_dépenses;
     }
 
-    public String getListe_recettes() {
+    public Set<MyTransaction> getListe_recettes() {
         return liste_recettes;
     }
 
-    public void setListe_recettes(String liste_recettes) {
+    public void setListe_recettes(Set<MyTransaction> liste_recettes) {
         this.liste_recettes = liste_recettes;
     }
 }

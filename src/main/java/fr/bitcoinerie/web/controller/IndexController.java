@@ -1,6 +1,7 @@
 package fr.bitcoinerie.web.controller;
 
 import fr.bitcoinerie.domain.Transaction.MyTransaction;
+import fr.bitcoinerie.domain.User.MyUser;
 import fr.bitcoinerie.service.MyTransactionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +18,18 @@ import java.util.Date;
 public class IndexController {
     @Inject
     private MyTransactionService myTransactionService;
+    private MyUser Anabelle;
+    private MyUser Bernard;
+    private MyUser Arnold;
+    private MyUser Fabien;
+    private MyUser Henri;
+    private MyUser Julie;
 
     @RequestMapping({"/", "/index"})
     public String index(Model model) {
-        model.addAttribute("transaction", new MyTransaction(45, new Date(),"Anabelle","Bernard") );
+        Anabelle = new MyUser("Anabelle","Anabelle",100);
+        Bernard =  new MyUser("Bernard","Bernard",100);
+        model.addAttribute("transaction", new MyTransaction(45, new Date(),Anabelle,Bernard) );
         model.addAttribute("transactions", myTransactionService.findAllTransaction());
 
         return "index";
@@ -55,28 +64,24 @@ public class IndexController {
         if (myTransactionService.countTransaction()== 0) {
 
             MyTransaction myTransaction = new MyTransaction();
-
+            Arnold = new MyUser("Arnold","Schwarz",120);
+            Fabien = new MyUser("Fabien","Bart", 250);
             myTransaction.setDate_temps(new Date());
-            myTransaction.setEmetteur("Arnold");
-            myTransaction.setRecepteur("Fabien");
+            myTransaction.setEmetteur(Arnold);
+            myTransaction.setRecepteur(Fabien);
             myTransaction.setMontant(24);
             myTransactionService.saveTransaction(myTransaction);
 
             MyTransaction myTransaction2 = new MyTransaction();
+            Henri = new MyUser("Henri","Fayol", 300);
+            Julie = new MyUser("Julie","Poitou",220);
 
             myTransaction2.setDate_temps(new Date());
-            myTransaction2.setEmetteur("Henri");
-            myTransaction2.setRecepteur("Jo");
+            myTransaction2.setEmetteur(Henri);
+            myTransaction2.setRecepteur(Julie);
             myTransaction2.setMontant(241);
             myTransactionService.saveTransaction(myTransaction2);
 
-            MyTransaction myTransaction3 = new MyTransaction();
-
-            myTransaction3.setDate_temps(new Date());
-            myTransaction3.setEmetteur("Clement");
-            myTransaction3.setRecepteur("Pascal");
-            myTransaction3.setMontant(58);
-            myTransactionService.saveTransaction(myTransaction3);
         }
 
     }
