@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Fri Feb 21 09:45:54 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-539f-530a-000002fce990 
-on database directory /home/marjolaine/Bureau/bitcoinWeb/target/testdb with class loader sun.misc.Launcher$AppClassLoader@16f0472 
-Loaded from file:/home/marjolaine/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
-java.vendor=Sun Microsystems Inc.
-java.runtime.version=1.6.0_30-b12
-user.dir=/home/marjolaine/Bureau/bitcoinWeb
-os.name=Linux
-os.arch=i386
-os.version=3.2.0-54-generic-pae
+Fri Feb 21 11:04:22 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-53e7-29bd-000004143f38 
+on database directory /Users/pnicolas/Documents/projetcom/bitcoinWeb3/target/testdb with class loader sun.misc.Launcher$AppClassLoader@558fe7c3 
+Loaded from file:/Users/pnicolas/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
+java.vendor=Apple Inc.
+java.runtime.version=1.6.0_65-b14-462-11M4609
+user.dir=/Users/pnicolas/Documents/projetcom/bitcoinWeb3
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.7.5
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
