@@ -1,13 +1,16 @@
 package fr.bitcoinerie.service;
 
-import fr.bitcoinerie.domain.Transaction.MyTransaction;
-import org.hibernate.*;
-import org.hibernate.criterion.MatchMode;
+import fr.bitcoinerie.domain.MyTransaction;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.List;
 
 
@@ -61,12 +64,57 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public List<MyTransaction> findByQueryTransaction(String query) {
+    public List<MyTransaction> findByDateTransaction(Date query) {
         Session session = sessionFactory.getCurrentSession();
 
         Criteria criteria = session.createCriteria(MyTransaction.class);
 
-        criteria.add(Restrictions.ilike("emetteur", query, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.eq("date_temps", query ));
+
+        List<MyTransaction> myTransactions = criteria.list();
+
+        return myTransactions;
+
+    }
+
+    @Transactional
+    @Override
+    public List<MyTransaction> findByAmountLargerTransaction(double query) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Criteria criteria = session.createCriteria(MyTransaction.class);
+
+        criteria.add(Restrictions.gt("montant", query));
+
+        List<MyTransaction> myTransactions = criteria.list();
+
+        return myTransactions;
+
+    }
+
+    @Transactional
+    @Override
+    public List<MyTransaction> findByAmountSmallerTransaction(double query) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Criteria criteria = session.createCriteria(MyTransaction.class);
+
+        criteria.add(Restrictions.lt("montant", query));
+
+        List<MyTransaction> myTransactions = criteria.list();
+
+        return myTransactions;
+
+    }
+
+    @Transactional
+    @Override
+    public List<MyTransaction> findByAmountEqualsTransaction(double query) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Criteria criteria = session.createCriteria(MyTransaction.class);
+
+        criteria.add(Restrictions.eq("montant", query));
 
         List<MyTransaction> myTransactions = criteria.list();
 

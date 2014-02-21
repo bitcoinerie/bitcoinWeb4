@@ -1,9 +1,8 @@
-package fr.bitcoinerie.domain.User;
-
-import fr.bitcoinerie.domain.Transaction.MyTransaction;
+package fr.bitcoinerie.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -13,7 +12,6 @@ public class MyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_user;
-
 
     @Column
     private String nom;
@@ -43,14 +41,18 @@ public class MyUser {
         setDate_inscription(new Date());
         setMontant_compte(10.);
         setReputation(1.);
-        setListe_dépenses(null);
-        setListe_recettes(null);
+
+        liste_dépenses = new HashSet<MyTransaction>();
+        liste_recettes = new HashSet<MyTransaction>();
     }
 
     public MyUser(String prenom, String nom, double montant){
         this.prenom = prenom;
         this.nom = nom;
         this.montant_compte = montant;
+
+        liste_dépenses = new HashSet<MyTransaction>();
+        liste_recettes = new HashSet<MyTransaction>();
     }
 
     public Long getId_user() {

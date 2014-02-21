@@ -1,17 +1,11 @@
 package fr.bitcoinerie.service;
 
-import fr.bitcoinerie.domain.Transaction.MyTransaction;
-import fr.bitcoinerie.domain.User.MyUser;
-import org.hibernate.Query;
+import fr.bitcoinerie.domain.MyUser;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

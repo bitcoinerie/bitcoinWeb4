@@ -1,7 +1,7 @@
 package fr.bitcoinerie.service;
 
-import fr.bitcoinerie.domain.Transaction.MyTransaction;
-import fr.bitcoinerie.domain.User.MyUser;
+import fr.bitcoinerie.domain.MyTransaction;
+import fr.bitcoinerie.domain.MyUser;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,7 +16,6 @@ import javax.inject.Inject;
 import java.util.Date;
 
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class MyTransactionServiceTest {
@@ -26,8 +25,10 @@ public class MyTransactionServiceTest {
 
     @Inject
     private MyTransactionService myTransactionService;
+
     private MyUser Paul;
     private MyUser Jean;
+    private Date dateTest = new Date();
 
     @After
     public void cleanDb() {
@@ -49,27 +50,46 @@ public class MyTransactionServiceTest {
 
     @Test
     public void testSave() throws Exception {
-
-        myTransactionService.saveTransaction(myTransaction());
+        System.out.println("1 >>>>>>>>");
+        myTransactionService.saveTransaction(myTransaction((double) 100));
 
     }
 
-    private MyTransaction myTransaction() {
+    private MyTransaction myTransaction(double amount) {
+        System.out.println("2 >>>>>>>>");
         MyTransaction myTransaction = new MyTransaction();
-        myTransaction.setMontant(24);
-        myTransaction.setDate_temps(new Date());
+        myTransaction.setMontant(amount);
+        myTransaction.setDate_temps(dateTest);
 
         Jean =  new MyUser("Jean", "Kevin", 100);
+        Jean.getListe_dépenses().add(myTransaction);
+
+
         Paul =  new MyUser("Paul", "Hidalgo", 200);
+        Paul.getListe_recettes().add(myTransaction);
+
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction = session.beginTransaction();
+
+        session.save(Jean);
+        session.save(Paul);
+
+        transaction.commit();
+
+        session.close();
+
         myTransaction.setEmetteur(Paul);
         myTransaction.setRecepteur(Jean);
+
+        System.out.println("3 >>>>>>>>");
         return myTransaction;
     }
 
     @Test
     public void testDelete() throws Exception {
 
-        MyTransaction myTransaction = myTransaction();
+        MyTransaction myTransaction = myTransaction((double) 200);
 
         myTransactionService.saveTransaction(myTransaction);
 
@@ -86,8 +106,8 @@ public class MyTransactionServiceTest {
     @Test
     public void testFindAll() throws Exception {
 
-        myTransactionService.saveTransaction(myTransaction());
-        myTransactionService.saveTransaction(myTransaction());
+        myTransactionService.saveTransaction(myTransaction((double) 230));
+        myTransactionService.saveTransaction(myTransaction((double) 400));
 
         Assert.assertEquals(2, myTransactionService.findAllTransaction().size());
 
@@ -96,11 +116,16 @@ public class MyTransactionServiceTest {
     @Test
     public void testFindByQuery() throws Exception {
 
-        myTransactionService.saveTransaction(myTransaction());
-        myTransactionService.saveTransaction(myTransaction());
+        myTransactionService.saveTransaction(myTransaction((double) 300));
+        myTransactionService.saveTransaction(myTransaction((double) 450));
 
-        Assert.assertEquals(2, myTransactionService.findByQueryTransaction("Paul").size());
-        Assert.assertEquals(0, myTransactionService.findByQueryTransaction("Pierre").size());
+        System.out.println(dateTest.toString());
+
+        Assert.assertEquals(2, myTransactionService.findByDateTransaction(dateTest ).size());
+        Assert.assertEquals(1, myTransactionService.findByAmountLargerTransaction((double) 300).size());
+        Assert.assertEquals(1, myTransactionService.findByAmountSmallerTransaction((double) 400).size());
+        Assert.assertEquals(1, myTransactionService.findByAmountEqualsTransaction((double) 300).size());
+        //Assert.assertEquals(0, myTransactionService.findByDateTransaction(dateTest ).size());
 
     }
 
@@ -108,19 +133,20 @@ public class MyTransactionServiceTest {
     @Test
     public void testFindById() throws Exception {
 
-        MyTransaction myTransaction = myTransaction();
+        MyTransaction myTransaction = myTransaction((double)340);
 
         myTransactionService.saveTransaction(myTransaction);
 
-        Assert.assertEquals(Paul, myTransactionService.findByIdTransaction(myTransaction.getId_transaction()).getEmetteur());
+        Assert.assertEquals(myTransaction, myTransactionService.findByIdTransaction(myTransaction.getId_transaction()) );
+        //Assert.assertEquals(Paul, myTransactionService.findByIdTransaction(myTransaction.getId_transaction()).getEmetteur());
 
     }
 
     @Test
     public void testCount() throws Exception {
 
-        myTransactionService.saveTransaction(myTransaction());
-        myTransactionService.saveTransaction(myTransaction());
+        myTransactionService.saveTransaction(myTransaction((double) 390));
+        myTransactionService.saveTransaction(myTransaction((double) 280));
 
         Assert.assertEquals(2, myTransactionService.countTransaction());
     }

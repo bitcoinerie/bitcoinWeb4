@@ -1,6 +1,6 @@
 package fr.bitcoinerie.web.controller;
 
-import fr.bitcoinerie.domain.Transaction.MyTransaction;
+import fr.bitcoinerie.domain.MyTransaction;
 import fr.bitcoinerie.service.MyTransactionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

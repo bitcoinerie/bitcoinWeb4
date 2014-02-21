@@ -1,6 +1,4 @@
-package fr.bitcoinerie.domain.Transaction;
-
-import fr.bitcoinerie.domain.User.MyUser;
+package fr.bitcoinerie.domain;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,11 +14,11 @@ public class MyTransaction {
 
 
     @ManyToOne
-    @JoinColumn(name="id_user")
+    @JoinColumn(name="id_user_emetteur")
     private MyUser emetteur;
 
     @ManyToOne
-    @JoinColumn(name="id_user")
+    @JoinColumn(name="id_user_recepteur")
     private MyUser recepteur;
 
     @Column

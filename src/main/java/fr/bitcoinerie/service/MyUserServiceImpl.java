@@ -1,6 +1,6 @@
 package fr.bitcoinerie.service;
 
-import fr.bitcoinerie.domain.User.MyUser;
+import fr.bitcoinerie.domain.MyUser;
 import org.hibernate.*;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;

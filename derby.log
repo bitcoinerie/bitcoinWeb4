@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Sat Feb 15 22:46:09 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-3783-7fa9-000002fce688 
+Fri Feb 21 09:45:54 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-539f-530a-000002fce990 
 on database directory /home/marjolaine/Bureau/bitcoinWeb/target/testdb with class loader sun.misc.Launcher$AppClassLoader@16f0472 
 Loaded from file:/home/marjolaine/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
 java.vendor=Sun Microsystems Inc.

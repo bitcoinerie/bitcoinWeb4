@@ -1,7 +1,7 @@
 package fr.bitcoinerie.web.servlet;
 
-import fr.bitcoinerie.domain.Transaction.MyTransaction;
-import fr.bitcoinerie.domain.User.MyUser;
+import fr.bitcoinerie.domain.MyTransaction;
+import fr.bitcoinerie.domain.MyUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

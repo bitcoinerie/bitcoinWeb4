@@ -25,7 +25,9 @@
                         <prop key="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</prop>
                         <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
                     </props>
+
                 </property>
+
             </bean>
         </property>
         <property name="packagesToScan" value="fr.bitcoinerie.domain"/>
@@ -37,7 +39,6 @@
     <!-- ajoute un gestionnaire de transactions lié à la sessionFactory -->
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
-
     </bean>
 
 

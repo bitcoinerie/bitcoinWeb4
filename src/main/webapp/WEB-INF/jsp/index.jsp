@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/myStyle.css" rel="stylesheet" media="screen">
 
     <style type="text/css">
         body {
@@ -27,6 +28,7 @@
         <div class="col-lg-7 col-lg-offset-1">
             <legend>All tasks</legend>
             <br>
+
             <c:forEach var="transaction" items="${transactions}">
                 <widget:myTransactionTag transaction="${transaction}" />
             </c:forEach>
