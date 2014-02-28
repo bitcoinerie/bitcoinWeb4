@@ -75,6 +75,26 @@ public class MyUserServiceImpl implements MyUserService {
 
     @Transactional
     @Override
+    public List<MyUser> findByQueryWithRelations(String query) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Criteria criteria = session.createCriteria(MyUser.class);
+
+        criteria.add(Restrictions.ilike("prenom", query, MatchMode.ANYWHERE));
+
+        List<MyUser> myUsers = criteria.list();
+
+        for (int i=0; i < myUsers.size(); i++){
+            Hibernate.initialize(myUsers.get(i).getListe_dépenses());
+            Hibernate.initialize(myUsers.get(i).getListe_recettes());
+        }
+
+        return myUsers;
+
+    }
+
+    @Transactional
+    @Override
     public List<MyUser> findUser(String login) {
         Session session = sessionFactory.getCurrentSession();
 

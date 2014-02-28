@@ -31,10 +31,10 @@ public class MyUser {
     private String userStatus;
 
     //@Column
-    @OneToMany(mappedBy="emetteur")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="emetteur")
     private Set<MyTransaction> liste_dépenses;
 
-    @OneToMany(mappedBy="recepteur")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="recepteur")
     private Set<MyTransaction> liste_recettes;
 
     public MyUser(){

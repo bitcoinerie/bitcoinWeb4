@@ -129,6 +129,16 @@ public class MyTransactionServiceTest {
 
     }
 
+//    @Test
+//    public void updateMontant() throws Exception {
+//        MyTransaction myTransaction = myTransaction((double)300);
+//        myTransactionService.saveTransaction(myTransaction);
+//
+//        Assert.assertEquals(-200, myTransactionService.findByIdTransaction(myTransaction.getId_transaction()));
+//        myTransactionService.saveTransaction(myTransaction((double) 300));
+//
+//    }
+
 
     @Test
     public void testFindById() throws Exception {

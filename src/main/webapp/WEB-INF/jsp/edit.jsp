@@ -35,28 +35,35 @@
         <div class="col-lg-7 col-lg-offset-1">
 
             <form:form cssClass="form-horizontal" commandName="myTransac" action="/edit" method="post">
-                <div class="form-group">
-                    <label for="emetteur" class="col-lg-2 control-label">Emetteur</label>
-                    <div class="col-lg-8">
+                <div class="form-group myUser" commandName="myEmetteur">
+                    <div class="col-lg-8">  <b>Emetteur </b></div>
+                    <!-- label for="emetteur" class="col-lg-2 control-label" commandName="myEmetteur">Emetteur : >Emetteur : Nom ${myEmetteur.nom}</label -->
+                    <div class="col-lg-8">  Nom : ${myEmetteur.nom}
 
-                        <form:input cssClass="form-control" type="text" path="emetteur" id="emetteur" placeholder="Enter emitter's name"/>
+                        <!-- form:input cssClass="form-control" type="text" path="emetteur" id="emetteur" placeholder="Enter emitter's name"/ -->
                         <!--input type="text" class="form-control" path="emetteur" id="emetteur" placeholder="Enter emitter's name"-->
                     </div>
+                    <div class="col-lg-8">  Prenom : ${myEmetteur.prenom}</div>
                 </div>
 
-                <div class="form-group">
-                    <label for="recepteur" class="col-lg-2 control-label">Recepteur</label>
-                    <div class="col-lg-8">
-                        <form:input type="text" class="form-control" path="recepteur" id="recepteur" placeholder="Enter recipient's name"/>
+                <div class="form-group myUser"commandName="myRecepteur">
+                    <div class="col-lg-8">  <b>Recepteur </b></div>
+                    <!-- label for="recepteur" class="col-lg-2 control-label" commandName="myRecepteur">Recepteur</label-->
+                    <div class="col-lg-8">   Nom : ${myRecepteur.nom}
+                        <!--form:input type="text" class="form-control" path="recepteur" id="recepteur" placeholder="Enter recipient's name"/-->
                     </div>
+                    <div class="col-lg-8">  Prenom : ${myEmetteur.prenom}</div>
                 </div>
+
                 <div class="form-group">
                     <label for="montant" class="col-lg-2 control-label">Montant</label>
                     <div class="col-lg-8">
                         <form:input type="number" class="form-control" path="montant" id="montant" placeholder="Enter amount of transaction"/>
                     </div>
+
                 </div>
                 <form:hidden path="id_transaction"/>
+
 
                 <button type="submit" class="btn btn-default">Submit</button>
             </form:form>

@@ -9,7 +9,7 @@
 
         <form action="/searchByDate" class="navbar-form navbar-center " role="search">
             <div class="form-group ">
-                <input name="query" type="datetime" class="form-control" placeholder="Search Transaction by Date">
+                <input name="query" type="datetime" datetime="YYYY-MM-DDThh:mm:ssTZD" class="form-control" placeholder="Search Transaction by Date">
             </div>
             <button type="submit" class="btn">Search</button>
         </form>

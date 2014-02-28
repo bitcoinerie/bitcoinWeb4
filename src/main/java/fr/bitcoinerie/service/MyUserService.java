@@ -14,9 +14,13 @@ public interface MyUserService {
 
     List<MyUser> findByQuery(String query);
 
+    List<MyUser> findByQueryWithRelations(String query);
+
     List<MyUser> findUser(String login);
 
     int count();
 
     void update(MyUser myUser);
+
+
 }

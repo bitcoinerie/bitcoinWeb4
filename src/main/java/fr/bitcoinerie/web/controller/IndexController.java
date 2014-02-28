@@ -3,6 +3,7 @@ package fr.bitcoinerie.web.controller;
 import fr.bitcoinerie.domain.MyTransaction;
 import fr.bitcoinerie.domain.MyUser;
 import fr.bitcoinerie.service.MyTransactionService;
+import fr.bitcoinerie.service.MyUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,10 @@ import java.util.Date;
 public class IndexController {
     @Inject
     private MyTransactionService myTransactionService;
+
+    @Inject
+    private MyUserService myUserService;
+
     private MyUser Anabelle;
     private MyUser Bernard;
     private MyUser Arnold;
@@ -86,25 +91,31 @@ public class IndexController {
             Fabien = new MyUser("Fabien","Bart", 250);
             myTransaction.setDate_temps(new Date());
 
-            Arnold.getListe_dépenses().add(myTransaction);
-            Fabien.getListe_dépenses().add(myTransaction);
-
             myTransaction.setEmetteur(Arnold);
             myTransaction.setRecepteur(Fabien);
             myTransaction.setMontant(24);
+
+            Arnold.getListe_dépenses().add(myTransaction);
+            Fabien.getListe_dépenses().add(myTransaction);
+
+            myUserService.save(Arnold);
+            myUserService.save(Fabien);
             myTransactionService.saveTransaction(myTransaction);
 
             MyTransaction myTransaction2 = new MyTransaction();
             Henri = new MyUser("Henri","Fayol", 300);
             Julie = new MyUser("Julie","Poitou",220);
 
-            Henri.getListe_dépenses().add(myTransaction2);
-            Julie.getListe_dépenses().add(myTransaction2);
-
             myTransaction2.setDate_temps(new Date());
             myTransaction2.setEmetteur(Henri);
             myTransaction2.setRecepteur(Julie);
             myTransaction2.setMontant(241);
+
+            Henri.getListe_dépenses().add(myTransaction2);
+            Julie.getListe_dépenses().add(myTransaction2);
+
+            myUserService.save(Henri);
+            myUserService.save(Julie);
             myTransactionService.saveTransaction(myTransaction2);
 
         }

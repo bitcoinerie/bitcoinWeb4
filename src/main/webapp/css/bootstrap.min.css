@@ -36,7 +36,19 @@ output{display:block;padding-top:7px;font-size:14px;line-height:1.428571429;colo
     float: center;
     width: 350px;
     height: 34px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-right: 10px;
+
+}
+
+.myUser{
+    display: inline-block;
 }
 .navbar-header{
     float: none;
+}
+
+label{
+    margin-right: 15px;
 }

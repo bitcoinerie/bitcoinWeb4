@@ -7,11 +7,11 @@
 
 <%@ attribute name="transaction" required="true" type="fr.bitcoinerie.domain.MyTransaction" %>
 
-<span class="lead"><a href="/edit/${transaction.id_transaction}">Transaction ${transaction.id_transaction}: ${fn:escapeXml(transaction.emetteur.prenom)},${fn:escapeXml(transaction.recepteur.prenom)}</a></span>
+<span class="lead"><a href="/edit/${transaction.id_transaction}">Transaction ${transaction.id_transaction} : ${fn:escapeXml(transaction.emetteur.prenom)} , ${fn:escapeXml(transaction.recepteur.prenom)}</a></span>
 <div>
     <p><fmt:formatDate value="${transaction.date_temps}" pattern="dd MMM yyyy kk:mm:ss.SSS"/></p>
-    <span class="lead">Emetteur : ${transaction.emetteur.prenom}</span>
-    <code>Recepteur : ${transaction.recepteur.nom}</code>
+    <span class="lead">Emetteur : ${transaction.emetteur.prenom} ${transaction.emetteur.nom}</span>
+    <code>Recepteur : ${transaction.recepteur.prenom} ${transaction.recepteur.nom}</code>
     <p>Montant : ${transaction.montant}</p>
 
 </div>
