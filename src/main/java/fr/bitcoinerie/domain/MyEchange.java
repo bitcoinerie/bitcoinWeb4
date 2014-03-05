@@ -10,6 +10,8 @@ public class MyEchange {
     @JoinColumn(name="id_user_emetteur")
     private MyUser emetteur;
 
+
+
     @ManyToOne
     @JoinColumn(name="id_user_recepteur")
     private MyUser recepteur;
@@ -17,18 +19,21 @@ public class MyEchange {
     @Column
     private Float montant;
     @Column
-    private double probabilite;
+    private Float probabilite;
     @Column
     private Date date_derniere_modification;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_echange;
-    public Long getId() {
+
+    public Long getId_echange() {
         return id_echange;
     }
 
-    public void setId(Long id) {
-        this.id_echange = id;
+
+
+    public void setId_echange(Long id_echange) {
+        this.id_echange = id_echange;
     }
 
 
@@ -67,8 +72,15 @@ public class MyEchange {
     public MyUser getRecepteur() {
         return recepteur;
     }
+    public void setEmetteur(MyUser emetteur) {
+        this.emetteur = emetteur;
+    }
 
-    public double getMontant() {
+    public void setRecepteur(MyUser recepteur) {
+        this.recepteur = recepteur;
+    }
+
+    public float getMontant() {
         return montant;
     }
 
@@ -76,7 +88,7 @@ public class MyEchange {
         this.montant = montant;
     }
 
-    public double getProbabilite() {
+    public Float getProbabilite() {
         return probabilite;
     }
 

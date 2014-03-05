@@ -1,8 +1,10 @@
 package fr.bitcoinerie.web.controller;
 
+import fr.bitcoinerie.domain.MyEchange;
 import fr.bitcoinerie.domain.MyTransaction;
 import fr.bitcoinerie.domain.MyUser;
 import fr.bitcoinerie.service.MyTransactionService;
+import fr.bitcoinerie.service.MyEchangeService;
 import fr.bitcoinerie.service.MyUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,8 @@ import java.util.List;
 
 @Controller
 public class AdminController {
+    @Inject
+    private MyEchangeService myEchangeService;
 
     @Inject
     private MyTransactionService myTransactionService;

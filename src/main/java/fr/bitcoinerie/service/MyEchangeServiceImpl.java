@@ -52,19 +52,40 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         return myEchanges;
     }
 
+    @Transactional
     @Override
-    @Transactional(readOnly = true)
-    public List<MyEchange> findByEmetteurEchange(String emetteur) {
+    public List<MyEchange> findByEmetteurEchange(Long id) {
         Session session = sessionFactory.getCurrentSession();
 
-        Criteria criteria = session.createCriteria(MyEchange.class);
+        //Criteria criteria = session.createCriteria(MyTransaction.class);
 
-        criteria.add(Restrictions.ilike("emetteur", emetteur, MatchMode.ANYWHERE));
+        //criteria.add(Restrictions.ilike("emetteur", query, MatchMode.ANYWHERE));
 
-        List<MyEchange> myEchanges = criteria.list();
+        Query query = session.createQuery("from MyEchange where id_user_emetteur =:id");
+        query.setLong("id", id);
+
+        //System.out.println(query.list().size());
+
+        List<MyEchange> myEchanges =   query.list();
 
         return myEchanges;
     }
+        @Transactional
+        @Override
+        public List<MyEchange> findByRecepteurEchange(Long id) {
+            Session session = sessionFactory.getCurrentSession();
+
+
+
+            Query query = session.createQuery("from MyEchange where id_user_recepteur =:id");
+            query.setLong("id", id);
+
+            //System.out.println(query.list().size());
+
+            List<MyEchange> myEchanges =   query.list();
+
+            return myEchanges;
+        }
     @Transactional
     public MyEchange findOneEchange (MyUser emetteur,MyUser recepteur){
         Long emet =emetteur.getId_user();
@@ -80,20 +101,33 @@ public class MyEchangeServiceImpl implements MyEchangeService {
 
         return echange;
     }
-
+    @Transactional
     @Override
     public void majEchange (Float montant, Date date_temps, MyUser emetteur, MyUser recepteur) {
 
         MyEchange echange=findOneEchange(emetteur,recepteur );
         echange.setDate_derniere_modification(date_temps);
         echange.setMontant(montant) ;
+        saveEchange(echange);
+        MyEchange echangeemet=findOneEchange(emetteur,emetteur );
+        echangeemet.setDate_derniere_modification(date_temps);
+        echangeemet.setMontant(montant) ;
+        saveEchange(echangeemet);
+        MyEchange echangerecep=findOneEchange(emetteur,recepteur );
+        echangerecep.setDate_derniere_modification(date_temps);
+        echangerecep.setMontant(montant) ;
+        saveEchange(echangerecep);
+
+
 
     }
 
     @Override
-   public void nouvuser( Date date_temps, MyUser nouveau){
+   public void nouvuser( Date date_temps, MyUser nouveau, Float montant){
      List<MyUser> users= myUserService.findAll();
         int i;
+        MyEchange echange3 = new MyEchange( montant, nouveau,nouveau);
+        saveEchange(echange3);
         for (i=0; i< users.size();i++){
             MyEchange echange = new MyEchange( 0.F, users.get(i),nouveau);
             saveEchange(echange);
@@ -102,12 +136,36 @@ public class MyEchangeServiceImpl implements MyEchangeService {
 
         }
     }
-    @Transactional
+
     @Override
     public void majproba(MyUser emetteur, MyUser recepteur){
-      // List<MyEchange>
+        Long id= recepteur.getId_user();
+       MyEchange echange=  findOneEchange(emetteur, recepteur);
+       calculproba(echange);
+        MyEchange echangeemetteur=  findOneEchange(emetteur, recepteur);
+        calculproba(echangeemetteur);
+        List<MyEchange> echanges= findByEmetteurEchange(id);
+        int i;
+        for (i=0; i< echanges.size();i++){
+            calculproba(echanges.get(i));
+        }
 
     }
+    @Transactional
+    @Override
+    public void calculproba(MyEchange echange){
+        int i;
+        float s=0.F;
+    Long id= (echange.getEmetteur()).getId_user();
+     List<MyEchange> echanges =  findByEmetteurEchange( id);
+        for (i=0; i< echanges.size();i++){
+            s=s+(echanges.get(i)).getMontant();
+         }
+        echange.setProbabilite(echange.getMontant()/s);
+        saveEchange(echange);
+    }
+
+
 
     @Transactional
     @Override
@@ -116,24 +174,21 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         return findAllEchange().size();
     }
 
-    /*@Override
+    @Override
     @Transactional
-    public void saveMyUser(MyUser user) {
+    public void updateEchange(MyEchange myEchange) {
+
         Session session = sessionFactory.getCurrentSession();
-        List<MyEchange> existe= findByQueryTransaction( user);
-        List<MyEchange>echanges=findAllTransaction();
-        int n=echanges.size();
 
-        for (int j=1;j<= n;j++){
-            MyUser myuser=echanges.get(j).getEmetteur();
+        Long id = myEchange.getId_echange();
 
-            MyEchange myEchange= new MyEchange((double) 0,user,myuser);
-            saveTransaction(myEchange) ;
-            MyEchange monEchange= new MyEchange((double) 0,user,user);
-            saveTransaction(monEchange) ;
-            MyEchange tonEchange= new MyEchange((double) 0,myuser,user);
-            saveTransaction(tonEchange) ;
+        Query query = session.createQuery("from MyEchange where id =:id");
+        query.setLong("id", id);
+
+
+        if ( query.list().get(0) == null){
+            session.save(myEchange);
         }
-    }    */
+    }
 
 }

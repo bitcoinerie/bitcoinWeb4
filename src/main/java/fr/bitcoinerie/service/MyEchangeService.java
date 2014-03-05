@@ -16,21 +16,27 @@ import java.util.List;
 public interface MyEchangeService {
     //@Transactional
     void saveEchange(MyEchange echange);
+    void updateEchange(MyEchange myEchange);
 
-   // @Transactional
     void deleteEchange(Long id);
 
-   // @Transactional(readOnly = true)
     List<MyEchange> findAllEchange();
 
-   // @Transactional(readOnly = true)
-    List<MyEchange> findByEmetteurEchange(String query);
+    List<MyEchange> findByEmetteurEchange(Long id);
+
+    List<MyEchange> findByRecepteurEchange(Long id);
+
+    void nouvuser( Date date_temps, MyUser nouveau, Float montant);
 
     MyEchange findOneEchange(MyUser emetteur, MyUser recepteur) ;
-    //@Transactional(readOnly = true)
+
     int countEchange();
+
     void majEchange(Float montant, Date date_temps, MyUser emetteur, MyUser recepteur) ;
-    public void nouvuser(Date date_temps, MyUser nouveau) ;
+
+
+
+    void calculproba(MyEchange echange);
 
     public void majproba(MyUser emetteur, MyUser recepteur);
 
