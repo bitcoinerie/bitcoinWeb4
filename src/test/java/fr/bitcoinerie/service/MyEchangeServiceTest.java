@@ -24,7 +24,7 @@ public class MyEchangeServiceTest {
     private SessionFactory sessionFactory;
 
     @Inject
-    private MyTransactionService myEchangeService;
+    private MyEchangeService myEchangeService;
 
     private MyUser Paul;
     private MyUser Jean;
@@ -97,7 +97,7 @@ public class MyEchangeServiceTest {
 
         Session session = sessionFactory.openSession();
 
-        Assert.assertEquals(0, session.createQuery("from MyTransaction").list().size());
+        Assert.assertEquals(0, session.createQuery("from MyEchange").list().size());
 
         session.close();
 
@@ -109,7 +109,7 @@ public class MyEchangeServiceTest {
         myEchangeService.saveEchange(myEchange( 230.F));
         myEchangeService.saveEchange(myEchange( 400.F));
 
-        Assert.assertEquals(2, myEchangeService.findAllTransaction().size());
+        Assert.assertEquals(2, myEchangeService.findAllEchange().size());
 
     }
 
