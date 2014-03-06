@@ -25,6 +25,8 @@ public class MyEchangeServiceTest {
 
     @Inject
     private MyEchangeService myEchangeService;
+    @Inject
+    private MyUserService myUserService;
 
     private MyUser Paul;
     private MyUser Jean;
@@ -48,48 +50,23 @@ public class MyEchangeServiceTest {
     }
 
 
- /*   @Test
+   @Test
     public void testSave() throws Exception {
         System.out.println("1 >>>>>>>>");
-        myEchangeService.saveEchange(myEchange(( 100.F,Paul, Jean));
-
-    } */
-
-    private MyEchange myEchange (Float amount) {
-        System.out.println("2 >>>>>>>>");
-        MyEchange myEchange = new MyEchange();
-        myEchange.setMontant(amount);
-        myEchange.setDate_derniere_modification(dateTest);
-
-        Jean =  new MyUser("Jean", "Kevin", 100);
+        myEchangeService.saveEchange( new MyEchange( 100.F, Paul , Jean));
+       Session session = sessionFactory.openSession();
+       Assert.assertEquals(1, session.createQuery("from MyEchange").list().size());
+       session.close();
 
 
-
-        Paul =  new MyUser("Paul", "Hidalgo", 200);
-
-
-        Session session = sessionFactory.openSession();
-
-        Transaction transaction = session.beginTransaction();
-
-        session.save(Jean);
-        session.save(Paul);
-
-        transaction.commit();
-
-        session.close();
-
-        myEchange.setEmetteur(Paul);
-        myEchange.setRecepteur(Jean);
-
-        System.out.println("3 >>>>>>>>");
-        return myEchange;
     }
+
+
 
     @Test
     public void testDelete() throws Exception {
 
-        MyEchange myEchange = myEchange( 200.F);
+        MyEchange myEchange = new MyEchange( 200.F, Paul , Jean);
 
         myEchangeService.saveEchange(myEchange);
 
@@ -106,22 +83,29 @@ public class MyEchangeServiceTest {
     @Test
     public void testFindAll() throws Exception {
 
-        myEchangeService.saveEchange(myEchange( 230.F));
-        myEchangeService.saveEchange(myEchange( 400.F));
+
+        myEchangeService.saveEchange( new MyEchange( 230.F, Paul , Jean));
+        myEchangeService.saveEchange( new MyEchange( 400.F, Paul , Paul));
 
         Assert.assertEquals(2, myEchangeService.findAllEchange().size());
 
     }
 
     @Test
-    public void testFindByQuery() throws Exception {
+    public void testFindByEmetteur() throws Exception {
+        Jean =  new MyUser("Jean", "Kevin", 100);
+        Paul =  new MyUser("Paul", "Hidalgo", 200);
 
-        myEchangeService.saveEchange(myEchange( 300.F));
-        myEchangeService.saveEchange(myEchange( 450.F));
+        myUserService.save(Jean);
+        myUserService.save(Paul);
 
-        System.out.println(dateTest.toString());
+        myEchangeService.saveEchange( new MyEchange( 300.F, Paul , Jean));
+        myEchangeService.saveEchange( new MyEchange( 450.F, Paul , Paul));
+        Long id_jean =Jean.getId_user();
+        Long id_paul =Paul.getId_user();
 
-        //Assert.assertEquals(0, myTransactionService.findBEmetteur(dateTest ).size());
+        Assert.assertEquals(2, myEchangeService.findByEmetteurEchange(id_paul ).size());
+        Assert.assertEquals(0, myEchangeService.findByEmetteurEchange(id_jean ).size());
 
     }
 }

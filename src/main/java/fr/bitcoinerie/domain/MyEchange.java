@@ -55,15 +55,7 @@ public class MyEchange {
     }
 
 
-    public void majproba(MyUser emetteur, MyUser recepteur){
-        /** doit moidifier la proba émetteur-recepteur */
 
-    }
-
-    public void nouvuser( Date date_temps, MyUser nouveau){
-
-
-    }
     public MyUser getEmetteur() {
         return emetteur;
     }

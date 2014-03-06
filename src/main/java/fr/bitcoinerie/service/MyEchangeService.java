@@ -3,16 +3,11 @@ package fr.bitcoinerie.service;
 import fr.bitcoinerie.domain.MyEchange;
 import fr.bitcoinerie.domain.MyUser;
 
+
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: philippe
- * Date: 20/01/14
- * Time: 12:46
- * To change this template use File | Settings | File Templates.
- */
+
 public interface MyEchangeService {
     //@Transactional
     void saveEchange(MyEchange echange);
@@ -26,7 +21,7 @@ public interface MyEchangeService {
 
     List<MyEchange> findByRecepteurEchange(Long id);
 
-    void nouvuser( Date date_temps, MyUser nouveau, Float montant);
+   // void nouvuser( Date date_temps, MyUser nouveau, Float montant);
 
     MyEchange findOneEchange(MyUser emetteur, MyUser recepteur) ;
 

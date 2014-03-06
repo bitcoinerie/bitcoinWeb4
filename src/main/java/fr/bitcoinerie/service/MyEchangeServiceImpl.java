@@ -2,23 +2,26 @@ package fr.bitcoinerie.service;
 
 import fr.bitcoinerie.domain.MyEchange;
 import fr.bitcoinerie.domain.MyUser;
+import fr.bitcoinerie.service.MyUserService;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 
+
+
 public class MyEchangeServiceImpl implements MyEchangeService {
     @Inject
     private SessionFactory sessionFactory;
-    @Inject
-    private MyUserServiceImpl myUserService;
+   private MyUserService myUserService;
+
 
     @Override
     @Transactional
@@ -122,7 +125,7 @@ public class MyEchangeServiceImpl implements MyEchangeService {
 
     }
 
-    @Override
+
    public void nouvuser( Date date_temps, MyUser nouveau, Float montant){
      List<MyUser> users= myUserService.findAll();
         int i;

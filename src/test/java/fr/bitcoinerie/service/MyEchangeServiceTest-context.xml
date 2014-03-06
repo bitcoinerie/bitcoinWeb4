@@ -34,6 +34,7 @@
 
     </bean>
     <bean class="fr.bitcoinerie.service.MyEchangeServiceImpl" />
+    <bean class="fr.bitcoinerie.service.MyUserServiceImpl" />
 
 
     <!-- ajoute un gestionnaire de transactions lié à la sessionFactory -->
