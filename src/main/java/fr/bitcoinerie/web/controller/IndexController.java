@@ -99,8 +99,8 @@ public class IndexController {
             myTransaction.setRecepteur(Fabien);
             myTransaction.setMontant(24);
 
-            Arnold.getListe_dépenses().add(myTransaction);
-            Fabien.getListe_dépenses().add(myTransaction);
+            Arnold.getListe_depenses().add(myTransaction);
+            Fabien.getListe_depenses().add(myTransaction);
 
             myUserService.save(Arnold);
             myUserService.save(Fabien);
@@ -115,8 +115,8 @@ public class IndexController {
             myTransaction2.setRecepteur(Julie);
             myTransaction2.setMontant(241);
 
-            Henri.getListe_dépenses().add(myTransaction2);
-            Julie.getListe_dépenses().add(myTransaction2);
+            Henri.getListe_depenses().add(myTransaction2);
+            Julie.getListe_depenses().add(myTransaction2);
 
             myUserService.save(Henri);
             myUserService.save(Julie);

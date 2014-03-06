@@ -69,7 +69,7 @@ public class AdminController {
         myTrans.setEmetteur(emetteur.get(0));
         myTrans.setRecepteur(recepteur.get(0));
 
-        emetteur.get(0).getListe_dépenses().add(myTrans);
+        emetteur.get(0).getListe_depenses().add(myTrans);
         recepteur.get(0).getListe_recettes().add(myTrans);
 
         // Doit faire un update au lieu d'un save      sur  myUserService

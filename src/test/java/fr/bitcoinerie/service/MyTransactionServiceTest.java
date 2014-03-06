@@ -62,7 +62,7 @@ public class MyTransactionServiceTest {
         myTransaction.setDate_temps(dateTest);
 
         Jean =  new MyUser("Jean", "Kevin", 100);
-        Jean.getListe_dépenses().add(myTransaction);
+        Jean.getListe_depenses().add(myTransaction);
 
 
         Paul =  new MyUser("Paul", "Hidalgo", 200);
