@@ -85,7 +85,7 @@ public class MyUserServiceImpl implements MyUserService {
         List<MyUser> myUsers = criteria.list();
 
         for (int i=0; i < myUsers.size(); i++){
-            Hibernate.initialize(myUsers.get(i).getListe_dépenses());
+            Hibernate.initialize(myUsers.get(i).getListe_depenses());
             Hibernate.initialize(myUsers.get(i).getListe_recettes());
         }
 

@@ -32,7 +32,7 @@ public class MyUser {
 
     //@Column
     @OneToMany(fetch = FetchType.LAZY, mappedBy="emetteur")
-    private Set<MyTransaction> liste_dépenses;
+    private Set<MyTransaction> liste_depenses;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy="recepteur")
     private Set<MyTransaction> liste_recettes;
@@ -42,7 +42,7 @@ public class MyUser {
         setMontant_compte(10.);
         setReputation(1.);
 
-        liste_dépenses = new HashSet<MyTransaction>();
+        liste_depenses = new HashSet<MyTransaction>();
         liste_recettes = new HashSet<MyTransaction>();
     }
 
@@ -51,7 +51,7 @@ public class MyUser {
         this.nom = nom;
         this.montant_compte = montant;
 
-        liste_dépenses = new HashSet<MyTransaction>();
+        liste_depenses = new HashSet<MyTransaction>();
         liste_recettes = new HashSet<MyTransaction>();
     }
 
@@ -127,12 +127,12 @@ public class MyUser {
         this.userStatus = userStatus;
     }
 
-    public Set<MyTransaction> getListe_dépenses() {
-        return liste_dépenses;
+    public Set<MyTransaction> getListe_depenses() {
+        return liste_depenses;
     }
 
-    public void setListe_dépenses(Set<MyTransaction> liste_dépenses) {
-        this.liste_dépenses = liste_dépenses;
+    public void setListe_depenses(Set<MyTransaction> liste_depenses) {
+        this.liste_depenses = liste_depenses;
     }
 
     public Set<MyTransaction> getListe_recettes() {
@@ -141,5 +141,17 @@ public class MyUser {
 
     public void setListe_recettes(Set<MyTransaction> liste_recettes) {
         this.liste_recettes = liste_recettes;
+    }
+
+    public void addRecette(MyTransaction trans){
+        liste_recettes.add(trans);
+    }
+
+    public void addDepense(MyTransaction trans){
+        liste_depenses.add(trans);
+    }
+
+    public void addMontant(Double somme){
+        montant_compte = montant_compte + somme;
     }
 }
