@@ -21,18 +21,18 @@ public interface MyEchangeService {
 
     List<MyEchange> findByRecepteurEchange(Long id);
 
-   // void nouvuser( Date date_temps, MyUser nouveau, Float montant);
+    void nouvuser( Date date_temps, MyUser nouveau, Float montant);
 
-    MyEchange findOneEchange(MyUser emetteur, MyUser recepteur) ;
+    MyEchange findOneEchange(Long emet, Long recept) ;
 
     int countEchange();
 
-    void majEchange(Float montant, Date date_temps, MyUser emetteur, MyUser recepteur) ;
+    void majEchange(Float montant, Date date_temps, Long emet, Long recept) ;
 
 
 
-    void calculproba(MyEchange echange);
+    void calculproba(Long emet, Long recept);
 
-    public void majproba(MyUser emetteur, MyUser recepteur);
+    public void majproba(Long emetteur, Long recepteur);
 
 }
