@@ -1,5 +1,6 @@
 package fr.bitcoinerie.service;
 
+import fr.bitcoinerie.domain.MyTransaction;
 import fr.bitcoinerie.domain.MyUser;
 import org.hibernate.*;
 import org.hibernate.criterion.MatchMode;
@@ -132,6 +133,21 @@ public class MyUserServiceImpl implements MyUserService {
             session.save(myUser);
         }
 
+
+    }
+
+    @Override
+    @Transactional
+    public void doTransaction(MyTransaction trans){
+        MyUser emetteur = trans.getEmetteur();
+        MyUser recepteur = trans.getRecepteur();
+        Double somme = trans.getMontant();
+
+
+        emetteur.addDepense(trans);
+        emetteur.addMontant(- somme);
+        recepteur.addRecette(trans);
+        emetteur.addMontant(somme);
 
     }
 }
