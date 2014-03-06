@@ -1,9 +1,8 @@
 package fr.bitcoinerie.service;
 
 import fr.bitcoinerie.domain.MyUser;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import fr.bitcoinerie.domain.MyTransaction;
+import org.hibernate.*;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -24,12 +25,15 @@ public class MyUserServiceTest {
     @Inject
     private MyUserService myUserService;
 
+    @Inject MyTransactionService myTransactionService;
+
     @After
     public void cleanDb() {
         Session session = sessionFactory.openSession();
 
         Transaction transaction = session.beginTransaction();
 
+        session.createQuery("delete from MyTransaction").executeUpdate();
         session.createQuery("delete from MyUser").executeUpdate();
 
         transaction.commit();
@@ -50,10 +54,26 @@ public class MyUserServiceTest {
         return myUser;
     }
 
+    private MyUser myUser2(){
+        MyUser myUser2 = new MyUser();
+
+        myUser2.setPrenom("Christophe");
+        myUser2.setNom("Dechavanne");
+        myUser2.setEmail("cdechavanne@tf1.fr");
+        myUser2.setLogin("cdechavanne");
+        myUser2.setUserStatus("normal_user");
+
+        return myUser2;
+    }
+
+    private MyUser myUser1 = myUser();
+    private MyUser myUser2 = myUser2();
+    private MyTransaction trans =  new MyTransaction(100., new Date(), myUser1, myUser2);
+
     @Test
     public void saveUser() {
 
-        myUserService.save(myUser());
+        myUserService.save(myUser1);
 
 
     }
@@ -62,11 +82,9 @@ public class MyUserServiceTest {
     @Test
     public void testDelete(){
 
-        MyUser myUser = myUser();
+        myUserService.save(myUser1);
 
-        myUserService.save(myUser);
-
-        myUserService.delete(myUser.getId_user());
+        myUserService.delete(myUser1.getId_user());
 
         Session session = sessionFactory.openSession();
 
@@ -80,7 +98,7 @@ public class MyUserServiceTest {
 
     @Test
     public void findUser() {
-        myUserService.save(myUser());
+        myUserService.save(myUser1);
 
         List<MyUser> users = myUserService.findUser("tbeccaro");
 
@@ -102,8 +120,8 @@ public class MyUserServiceTest {
     @Test
     public void testFindByQuery() {
 
-        myUserService.save(myUser());
-        myUserService.save(myUser());
+        myUserService.save(myUser1);
+        myUserService.save(myUser1);
 
         Assert.assertEquals(2, myUserService.findByQuery("Thierry").size());
         Assert.assertEquals(0, myUserService.findByQuery("Beccaro").size());
@@ -113,22 +131,53 @@ public class MyUserServiceTest {
     @Test
     public void testCount() {
 
-        MyUser myUser = new MyUser();
-
-        myUserService.save(myUser);
-        myUserService.save(myUser);
+        myUserService.save(myUser1);
+        myUserService.save(myUser1);
 
         Assert.assertEquals(2, myUserService.count());
     }
 
     @Test
     public void update() {
-        MyUser myUser = new MyUser();
-
-        myUserService.save(myUser);
-        myUserService.update(myUser);
+        myUserService.save(myUser1);
+        myUserService.update(myUser1);
 
         Assert.assertEquals(1, myUserService.count());
+    }
+
+
+    @Test
+    public void testDoTransaction(){
+        myUserService.save(myUser1);
+        myUserService.save(myUser2);
+        myTransactionService.saveTransaction(trans);
+        myUserService.doTransaction(trans);
+
+        myUserService.update(myUser1);
+        myUserService.update(myUser2);
+
+        MyUser myUser1bis = myUserService.findUser("tbeccaro").get(0);
+        MyUser myUser2bis = myUserService.findUser("cdechavanne").get(0);
+
+        Session session = sessionFactory.openSession();
+        session.lock(myUser1bis, LockMode.NONE);
+        Hibernate.initialize(myUser1bis.getListe_depenses());
+        Hibernate.initialize(myUser1bis.getListe_recettes());
+        session.close();
+        Assert.assertEquals(1, myUser1bis.getListe_depenses().size());
+        Assert.assertEquals(0, myUser1bis.getListe_recettes().size());
+
+        session = sessionFactory.openSession();
+        session.lock(myUser2bis, LockMode.NONE);
+        Hibernate.initialize(myUser2bis.getListe_depenses());
+        Hibernate.initialize(myUser2bis.getListe_recettes());
+        session.close();
+
+        Assert.assertEquals(0, myUser2bis.getListe_depenses().size());
+        Assert.assertEquals(1, myUser2bis.getListe_recettes().size());
+
+
+
     }
 
 

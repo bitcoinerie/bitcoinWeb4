@@ -1,5 +1,6 @@
 package fr.bitcoinerie.service;
 
+import fr.bitcoinerie.domain.MyTransaction;
 import fr.bitcoinerie.domain.MyUser;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public interface MyUserService {
     int count();
 
     void update(MyUser myUser);
+
+    void doTransaction(MyTransaction trans);
 
 
 }
