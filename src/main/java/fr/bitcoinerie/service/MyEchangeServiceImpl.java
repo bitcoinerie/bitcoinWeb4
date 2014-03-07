@@ -44,6 +44,24 @@ public class MyEchangeServiceImpl implements MyEchangeService {
     }
 
     @Override
+    public MyEchange findByIdEchange(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+
+
+
+        Query query = session.createQuery("from MyEchange where id_echange =:id");
+        query.setLong("id", id);
+
+
+
+        MyEchange myEchange =  (MyEchange) query.list().get(0);
+
+        return myEchange;
+
+
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<MyEchange> findAllEchange() {
         Session session = sessionFactory.getCurrentSession();
@@ -114,31 +132,31 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         MyEchange echange=findOneEchange(emet,recept );
         echange.setDate_derniere_modification(date_temps);
         echange.setMontant(echange.getMontant()+montant) ;
-        saveEchange(echange);
+        updateEchange(echange);
         MyEchange echangeemet=findOneEchange(emet,emet );
         echangeemet.setDate_derniere_modification(date_temps);
         echangeemet.setMontant(echangeemet.getMontant()-montant) ;
-        saveEchange(echangeemet);
+        updateEchange(echangeemet);
         MyEchange echangerecep=findOneEchange(recept,recept );
         echangerecep.setDate_derniere_modification(date_temps);
         echangerecep.setMontant(echangerecep.getMontant()+montant) ;
-        saveEchange(echangerecep);
+        updateEchange(echangerecep);
 
 
 
     }
-
+    @Transactional
     @Override
    public void nouvuser( Date date_temps, MyUser nouveau, Float montant){
      List<MyUser> users= myUserService.findAll();
         int i;
         MyEchange echange3 = new MyEchange( montant, nouveau,nouveau);
-        saveEchange(echange3);
+        updateEchange(echange3);
         for (i=0; i< users.size();i++){
             MyEchange echange = new MyEchange( 0.F, users.get(i),nouveau);
-            saveEchange(echange);
+            updateEchange(echange);
             MyEchange echange2 = new MyEchange( 0.F, nouveau,users.get(i));
-            saveEchange(echange2);
+            updateEchange(echange2);
 
         }
     }
@@ -173,7 +191,7 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         float proba =ech.getMontant()/s;
         System.out.println(proba);
         ech.setProbabilite(proba);
-        saveEchange(ech);
+        updateEchange(ech);
     }
 
 
@@ -185,21 +203,23 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         return findAllEchange().size();
     }
 
+
+
     @Override
     @Transactional
     public void updateEchange(MyEchange myEchange) {
+          Long id =myEchange.getId_echange();
+       MyEchange echangebase=findByIdEchange(id);
 
-        Session session = sessionFactory.getCurrentSession();
-
-        Long id = myEchange.getId_echange();
-
-        Query query = session.createQuery("from MyEchange where id =:id");
-        query.setLong("id", id);
-
-
-        if ( query.list().get(0) == null){
-            session.save(myEchange);
+        if (echangebase==null){
+            saveEchange(myEchange);
         }
-    }
+        else{
+            deleteEchange(id);
+            saveEchange(myEchange);
+        }
+
+
+        }
 
 }

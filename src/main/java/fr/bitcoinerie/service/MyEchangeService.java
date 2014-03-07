@@ -16,6 +16,7 @@ public interface MyEchangeService {
     void deleteEchange(Long id);
 
     List<MyEchange> findAllEchange();
+    MyEchange findByIdEchange(Long id) ;
 
     List<MyEchange> findByEmetteurEchange(Long id);
 

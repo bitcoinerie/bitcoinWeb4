@@ -140,9 +140,12 @@ public class MyUserServiceTest {
     @Test
     public void update() {
         myUserService.save(myUser1);
+        List<MyUser> users = myUserService.findUser("tbeccaro");
+        users.get(0).setPrenom("Jordan");
+
         myUserService.update(myUser1);
 
-        Assert.assertEquals(1, myUserService.count());
+        Assert.assertEquals(1, myUserService.findByQuery("Jordan").size());
     }
 
 

@@ -123,7 +123,23 @@ public class MyEchangeServiceTest {
         Assert.assertEquals(300.F, myEchangeService.findOneEchange(id_paul, id_jean).getMontant(),0.F);
 
     }
+
     @Test
+    public void testfindByIdEchange(){
+        Jean =  new MyUser("Jean", "Kevin", 100);
+        Paul =  new MyUser("Paul", "Hidalgo", 200);
+
+        myUserService.save(Jean);
+        myUserService.save(Paul);
+
+        myEchangeService.saveEchange( new MyEchange( 300.F, Paul , Jean));
+        myEchangeService.saveEchange( new MyEchange( 450.F, Paul , Paul));
+        Long id_jean =Jean.getId_user();
+        Long id_paul =Paul.getId_user();
+        Long id_echange =myEchangeService.findOneEchange(id_paul,id_jean).getId_echange();
+        Assert.assertEquals(300.F, myEchangeService.findByIdEchange(id_echange).getMontant(),0.F);
+    }
+   /* @Test
     public void testmajEchange(){
         Jean =  new MyUser("Jean", "Kevin", 100);
         Paul =  new MyUser("Paul", "Hidalgo", 200);
@@ -143,8 +159,8 @@ public class MyEchangeServiceTest {
         Assert.assertEquals(100.F, myEchangeService.findOneEchange(id_paul, id_paul ).getMontant(),0.F);
         Assert.assertEquals(200.F, myEchangeService.findOneEchange(id_jean, id_jean ).getMontant(),0.F);
 
-    }
-    @Test
+    }   */
+  /*  @Test
      public void testmajproba(){
         Jean =  new MyUser("Jean", "Kevin", 100);
         Paul =  new MyUser("Paul", "Hidalgo", 200);
@@ -165,8 +181,8 @@ public class MyEchangeServiceTest {
         Assert.assertEquals(0.5, myEchangeService.findOneEchange(id_paul, id_paul ).getProbabilite(),0.F);
         Assert.assertEquals(1.F, myEchangeService.findOneEchange(id_jean, id_jean ).getProbabilite(),0.F);
 
-    }
-    @Test
+    }      */
+    /*@Test
     public void testcalculproba(){
         Jean =  new MyUser("Jean", "Kevin", 100);
         Paul =  new MyUser("Paul", "Hidalgo", 200);
@@ -189,5 +205,44 @@ public class MyEchangeServiceTest {
         Assert.assertEquals(0.5, myEchangeService.findOneEchange(id_paul, id_jean ).getProbabilite(),0.F);
 
 
+    } */
+    @Test
+    public void testupdateEchange(){
+        Jean =  new MyUser("Jean", "Kevin", 100);
+        Paul =  new MyUser("Paul", "Hidalgo", 200);
+
+        myUserService.save(Jean);
+        myUserService.save(Paul);
+        Long id_jean =Jean.getId_user();
+        Long id_paul =Paul.getId_user();
+        MyEchange myEchange= new MyEchange( 100.F, Paul , Jean);
+        myEchangeService.updateEchange( myEchange);
+
+
+         MyEchange echange = myEchangeService.findOneEchange(id_paul , id_jean);
+        echange.setMontant(200.F);
+        myEchangeService.updateEchange(echange);
+
+        Assert.assertEquals(200, myEchangeService.findOneEchange(id_paul , id_jean).getMontant(), 0.F);
+        Assert.assertEquals(1, myEchangeService.findAllEchange().size());
+
     }
+   /* @Test
+    public void testnouvuser(){
+        Jean =  new MyUser("Jean", "Kevin", 100);
+        myUserService.save(Jean);
+        myEchangeService.nouvuser(dateTest, Jean,100.F);
+        Paul =  new MyUser("Paul", "Hidalgo", 200);
+        myUserService.save(Paul);
+        myEchangeService.nouvuser(dateTest, Paul,200.F);
+        Long id_jean =Jean.getId_user();
+        Long id_paul =Paul.getId_user();
+
+        //Assert.assertEquals(0.F, myEchangeService.findOneEchange(id_paul, id_jean ).getMontant(),0.F);
+        Assert.assertEquals(200.F, myEchangeService.findOneEchange(id_paul, id_paul ).getMontant(),0.F);
+        Assert.assertEquals(100.F, myEchangeService.findOneEchange(id_jean, id_jean ).getMontant(),0.F);
+
+
+
+    }   */
 }
