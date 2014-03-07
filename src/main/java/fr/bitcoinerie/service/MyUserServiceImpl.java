@@ -149,5 +149,7 @@ public class MyUserServiceImpl implements MyUserService {
         recepteur.addRecette(trans);
         emetteur.addMontant(somme);
 
+        update(emetteur);
+        update(recepteur);
     }
 }

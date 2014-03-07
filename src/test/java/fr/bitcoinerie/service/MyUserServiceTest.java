@@ -153,9 +153,6 @@ public class MyUserServiceTest {
         myTransactionService.saveTransaction(trans);
         myUserService.doTransaction(trans);
 
-        myUserService.update(myUser1);
-        myUserService.update(myUser2);
-
         MyUser myUser1bis = myUserService.findUser("tbeccaro").get(0);
         MyUser myUser2bis = myUserService.findUser("cdechavanne").get(0);
 
