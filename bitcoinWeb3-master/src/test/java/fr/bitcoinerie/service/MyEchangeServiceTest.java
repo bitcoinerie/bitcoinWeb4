@@ -71,6 +71,26 @@ public class MyEchangeServiceTest {
 
 
     }
+    @Test
+    public void updateEchange() throws Exception {
+        Jean =  new MyUser("Jean", "Kevin", 100);
+        Paul =  new MyUser("Paul", "Hidalgo", 200);
+
+        myUserService.save(Jean);
+        myUserService.save(Paul);
+        myEchangeService.saveEchange( new MyEchange( 100.F, Paul , Jean));
+
+        Long id_jean =Jean.getId_user();
+        Long id_paul =Paul.getId_user();
+        MyEchange echange = myEchangeService.findOneEchange(id_paul, id_jean);
+        echange.setMontant(200.F);
+        myEchangeService.updateEchange(echange);
+        Assert.assertEquals(200.F, myEchangeService.findOneEchange(id_paul, id_jean ).getMontant(),0.F);
+        Assert.assertEquals(1, myEchangeService.findByEmetteurEchange(id_paul ).size());
+
+
+
+    }
 
 
 

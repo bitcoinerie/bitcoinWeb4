@@ -234,8 +234,12 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         query.setLong("id", id);
 
 
-        if ( query.list().get(0) == null){
+        if ( query.list() == null){
             session.save(myEchange);
+        }
+        else {
+            deleteEchange(id);
+            saveEchange(myEchange);
         }
     }
 
