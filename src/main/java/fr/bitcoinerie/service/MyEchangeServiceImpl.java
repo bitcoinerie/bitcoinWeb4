@@ -3,10 +3,7 @@ package fr.bitcoinerie.service;
 import fr.bitcoinerie.domain.MyEchange;
 import fr.bitcoinerie.domain.MyUser;
 import fr.bitcoinerie.service.MyUserService;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 
-
+@Service
 public class MyEchangeServiceImpl implements MyEchangeService {
     @Inject
     private SessionFactory sessionFactory;
@@ -130,7 +127,7 @@ public class MyEchangeServiceImpl implements MyEchangeService {
     }
     @Transactional
     @Override
-    public void majEchange (Float montant, Date date_temps, Long emet, Long recept) {
+    public void majEchange (Double montant, Date date_temps, Long emet, Long recept) {
 
         MyEchange echange=findOneEchange(emet,recept );
         echange.setDate_derniere_modification(date_temps);
@@ -150,16 +147,16 @@ public class MyEchangeServiceImpl implements MyEchangeService {
     }
     @Transactional
     @Override
-   public void nouvuser( Date date_temps, MyUser nouveau, Float montant){
+   public void nouvuser( Date date_temps, MyUser nouveau, Double montant){
         List<MyUser> users= myUserService.findAll();
         int i;
         MyEchange echange3 = new MyEchange( montant, nouveau,nouveau);
         saveEchange(echange3);
 
         for (i=0; i< users.size();i++){
-            MyEchange echange = new MyEchange( 0.F, users.get(i),nouveau);
+            MyEchange echange = new MyEchange( 0., users.get(i),nouveau);
             saveEchange(echange);
-            MyEchange echange2 = new MyEchange( 0.F, nouveau,users.get(i));
+            MyEchange echange2 = new MyEchange( 0., nouveau,users.get(i));
             saveEchange(echange2);
 
 
@@ -181,11 +178,44 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         }
 
     }
+
+    @Transactional
+    @Override
+    public void majreput(Double alpha){
+        List<MyUser> users= myUserService.findAll();
+        int i;
+        int j;
+        for (i=0; i< users.size();i++)
+        {
+             Double reputvoisin;
+            Double reputvoisins=0.;
+            Double proba=0.;
+            Double miseajour;
+            Long id=users.get(i).getId_user();
+            List<MyEchange> echanges= findByRecepteurEchange(id);
+            for (j=0;j< echanges.size();j++)
+            {
+                MyUser myUser=echanges.get(j).getEmetteur();
+                Hibernate.initialize(myUser.getReputation());
+                reputvoisin=myUser.getReputation();
+                 proba=echanges.get(j).getProbabilite();
+
+                  miseajour=proba*1 ;
+                 reputvoisins= reputvoisins+ miseajour;
+            }
+             Double reput=alpha+(1-alpha)*reputvoisins ;
+
+              users.get(i).setReputation(reput);
+              myUserService.update(users.get(i));
+
+        }
+
+    }
     @Transactional
     @Override
     public void calculproba(Long emet, Long recept){
         int i;
-        float s=0.F;
+        Double s=0.;
         MyEchange ech= findOneEchange(emet,recept);
      List<MyEchange> echanges =  findByEmetteurEchange( emet);
         for (i=0; i< echanges.size();i++){
@@ -193,7 +223,7 @@ public class MyEchangeServiceImpl implements MyEchangeService {
          }
         System.out.println(ech.getMontant());
         System.out.println(s);
-        float proba =ech.getMontant()/s;
+        Double proba =ech.getMontant()/s;
         System.out.println(proba);
         ech.setProbabilite(proba);
         updateEchange(ech);

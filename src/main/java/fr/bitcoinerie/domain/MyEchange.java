@@ -17,9 +17,9 @@ public class MyEchange {
     private MyUser recepteur;
 
     @Column
-    private Float montant;
+    private Double montant;
     @Column
-    private Float probabilite;
+    private Double probabilite;
     @Column
     private Date date_derniere_modification;
     @Id
@@ -38,19 +38,19 @@ public class MyEchange {
 
 
 
-    public MyEchange(Float montant, MyUser emetteur, MyUser recepteur) {
+    public MyEchange(Double montant, MyUser emetteur, MyUser recepteur) {
         this.emetteur= emetteur;
         this.recepteur=recepteur;
         this.montant= montant;
         /**this.date_derniere_modification=; */
-        this.probabilite= 0.F;
+        this.probabilite= 0.;
     }
 
     public MyEchange(){
-        MyUser banque = new MyUser( "banque","banque", 1000000.f );
+        MyUser banque = new MyUser( "banque","banque", 1000000. );
         this.emetteur=banque;
         this.recepteur=banque;
-        this.montant=1000000.f;
+        this.montant=1000000.;
 
     }
 
@@ -72,19 +72,19 @@ public class MyEchange {
         this.recepteur = recepteur;
     }
 
-    public float getMontant() {
+    public Double getMontant() {
         return montant;
     }
 
-    public void setMontant(Float montant) {
+    public void setMontant(Double montant) {
         this.montant = montant;
     }
 
-    public Float getProbabilite() {
+    public Double getProbabilite() {
         return probabilite;
     }
 
-    public void setProbabilite(Float probabilite) {
+    public void setProbabilite(Double probabilite) {
         this.probabilite = probabilite;
     }
 
