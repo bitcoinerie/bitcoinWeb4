@@ -21,6 +21,7 @@ import java.util.Date;
 public class IndexController {
     @Inject
     private MyEchangeService myEchangeService;
+
     @Inject
     private MyTransactionService myTransactionService;
 
