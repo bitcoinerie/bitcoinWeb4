@@ -143,7 +143,7 @@ public class MyUserServiceTest {
         List<MyUser> users = myUserService.findUser("tbeccaro");
         users.get(0).setPrenom("Jordan");
 
-        myUserService.update(myUser1);
+        myUserService.update(users.get(0));
 
         Assert.assertEquals(1, myUserService.findByQuery("Jordan").size());
     }

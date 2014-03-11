@@ -20,6 +20,7 @@ import java.util.List;
 public class MyEchangeServiceImpl implements MyEchangeService {
     @Inject
     private SessionFactory sessionFactory;
+    @Inject
    private MyUserService myUserService;
 
 
@@ -44,6 +45,7 @@ public class MyEchangeServiceImpl implements MyEchangeService {
     }
 
     @Override
+    @Transactional
     public MyEchange findByIdEchange(Long id) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -108,6 +110,7 @@ public class MyEchangeServiceImpl implements MyEchangeService {
             return myEchanges;
         }
     @Transactional
+    @Override
     public MyEchange findOneEchange (Long emet,Long recept){
 
 
@@ -148,17 +151,19 @@ public class MyEchangeServiceImpl implements MyEchangeService {
     @Transactional
     @Override
    public void nouvuser( Date date_temps, MyUser nouveau, Float montant){
-     List<MyUser> users= myUserService.findAll();
+        List<MyUser> users= myUserService.findAll();
         int i;
         MyEchange echange3 = new MyEchange( montant, nouveau,nouveau);
-        updateEchange(echange3);
+        saveEchange(echange3);
+
         for (i=0; i< users.size();i++){
             MyEchange echange = new MyEchange( 0.F, users.get(i),nouveau);
-            updateEchange(echange);
+            saveEchange(echange);
             MyEchange echange2 = new MyEchange( 0.F, nouveau,users.get(i));
-            updateEchange(echange2);
+            saveEchange(echange2);
 
-        }
+
+       }
     }
     @Transactional
     @Override
@@ -208,16 +213,11 @@ public class MyEchangeServiceImpl implements MyEchangeService {
     @Override
     @Transactional
     public void updateEchange(MyEchange myEchange) {
-          Long id =myEchange.getId_echange();
-       MyEchange echangebase=findByIdEchange(id);
+        Session session = sessionFactory.getCurrentSession();
 
-        if (echangebase==null){
-            saveEchange(myEchange);
-        }
-        else{
-            deleteEchange(id);
-            saveEchange(myEchange);
-        }
+                    session.saveOrUpdate(myEchange);
+
+
 
 
         }

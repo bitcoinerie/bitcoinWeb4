@@ -123,7 +123,7 @@ public class MyUserServiceImpl implements MyUserService {
 
         Session session = sessionFactory.getCurrentSession();
 
-        Long id = myUser.getId_user();
+      /*  Long id = myUser.getId_user();
 
         Query query = session.createQuery("from MyUser where id =:id");
         query.setLong("id", id);
@@ -132,6 +132,10 @@ public class MyUserServiceImpl implements MyUserService {
         if ((MyUser) query.list().get(0) == null){
             session.save(myUser);
         }
+        else{
+            session.update(myUser);
+        }   */
+        session.saveOrUpdate(myUser);
 
 
     }
