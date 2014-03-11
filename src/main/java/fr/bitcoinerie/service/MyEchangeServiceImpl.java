@@ -12,13 +12,12 @@ import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 
-
 @Service
 public class MyEchangeServiceImpl implements MyEchangeService {
     @Inject
     private SessionFactory sessionFactory;
     @Inject
-   private MyUserService myUserService;
+    private MyUserService myUserService;
 
 
     @Override
