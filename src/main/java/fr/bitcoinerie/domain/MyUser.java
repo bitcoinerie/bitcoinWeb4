@@ -50,6 +50,7 @@ public class MyUser {
         this.prenom = prenom;
         this.nom = nom;
         this.montant_compte = montant;
+        this.reputation=1.;
 
         liste_depenses = new HashSet<MyTransaction>();
         liste_recettes = new HashSet<MyTransaction>();
