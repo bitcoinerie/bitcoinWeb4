@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Wed Mar 12 15:15:37 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-b6a6-02df-00000092d2a0 
-on database directory C:\Users\Philippe\Documents\intellij\bitcoinweb3\target\testdb with class loader sun.misc.Launcher$AppClassLoader@1f12c4e 
+Wed Mar 12 15:49:11 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-b6c4-bf4a-000000920fc0 
+on database directory C:\Users\Philippe\Documents\intellij\bitcoinweb3\target\testdb with class loader sun.misc.Launcher$AppClassLoader@1a7bf11 
 Loaded from file:/C:/Users/Philippe/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_51-b13

@@ -271,7 +271,7 @@ public class MyEchangeServiceTest {
         Double alpha ;
         alpha= 0.15;
         myEchangeService.majreput(alpha) ;
-        Double rep=Paul.getReputation();
+        Double rep=myUserService.findByQuery("Jean").get(0).getReputation();
 
         Assert.assertEquals((Double)0.15, rep);
 
