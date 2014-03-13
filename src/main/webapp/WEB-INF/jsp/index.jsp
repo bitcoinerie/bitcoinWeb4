@@ -26,7 +26,7 @@
 
     <div class="row">
         <div class="col-lg-7 col-lg-offset-1">
-            <legend>All tasks</legend>
+            <legend>All Transaction</legend>
             <br>
 
             <c:forEach var="transaction" items="${transactions}">

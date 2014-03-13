@@ -1,10 +1,8 @@
 package fr.bitcoinerie.web.controller;
 
-import fr.bitcoinerie.domain.MyEchange;
 import fr.bitcoinerie.domain.MyTransaction;
 import fr.bitcoinerie.domain.MyUser;
 import fr.bitcoinerie.service.MyTransactionService;
-import fr.bitcoinerie.service.MyEchangeService;
 import fr.bitcoinerie.service.MyUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +19,6 @@ import java.util.List;
 
 @Controller
 public class AdminController {
-    @Inject
-    private MyEchangeService myEchangeService;
 
     @Inject
     private MyTransactionService myTransactionService;
@@ -33,8 +29,8 @@ public class AdminController {
     private MyUser myEmet;
     private MyUser myRecept;
 
-    @RequestMapping("/add")
-    public String add(Model model) {
+    @RequestMapping("/addTransaction/add")
+    public String addTransactionToViews(Model model) {
 
         MyTransaction myTransaction = new MyTransaction();
 
@@ -69,12 +65,11 @@ public class AdminController {
         myTrans.setEmetteur(emetteur.get(0));
         myTrans.setRecepteur(recepteur.get(0));
 
-        emetteur.get(0).getListe_depenses().add(myTrans);
-        recepteur.get(0).getListe_recettes().add(myTrans);
+        myUserService.doTransaction(myTrans);
 
         // Doit faire un update au lieu d'un save      sur  myUserService
-        //myUserService.save(myEmet);
-        //myUserService.save(myRecept);
+        //myUserService.update(myEmet);
+        //myUserService.update(myRecept);
 
 
         myTransactionService.saveTransaction(myTrans);
@@ -85,41 +80,10 @@ public class AdminController {
 
     @RequestMapping("/edit/{id_transaction}")
     public String edit(@PathVariable Long id_transaction, Model model) {
-        model.addAttribute("transaction", myTransactionService.findByIdTransaction(id_transaction));
+        model.addAttribute("myTransac", myTransactionService.findByIdTransaction(id_transaction));
 
         return "edit";
     }
 
-    /*
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String post(@ModelAttribute("SpringWeb")MyTransaction myTransaction,
-                       ModelMap model) {
-
-        MyTransaction myTransaction = new MyTransaction();
-
-
-        model.addAttribute("name", student.getName());
-
-        myTransactionService.saveTransaction(myTransaction);
-
-        return "index";
-    }
-
-    */
-
-
-    /*
-
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String post(Task task, BindingResult result) {
-        if (result.hasErrors()) {
-            return "edit";
-        }
-
-        taskService.saveTransaction(task);
-
-        return "redirect:/";
-    }
-    */
 }

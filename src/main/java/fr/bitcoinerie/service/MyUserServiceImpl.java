@@ -140,20 +140,17 @@ public class MyUserServiceImpl implements MyUserService {
 
     }
 
-    @Override
     @Transactional
     public void doTransaction(MyTransaction trans){
+
         MyUser emetteur = trans.getEmetteur();
         MyUser recepteur = trans.getRecepteur();
         Double somme = trans.getMontant();
-
 
         emetteur.addDepense(trans);
         emetteur.addMontant(- somme);
         recepteur.addRecette(trans);
         emetteur.addMontant(somme);
 
-        update(emetteur);
-        update(recepteur);
     }
 }

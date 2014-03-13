@@ -1,7 +1,7 @@
 package fr.bitcoinerie.service;
 
-import fr.bitcoinerie.domain.MyUser;
 import fr.bitcoinerie.domain.MyTransaction;
+import fr.bitcoinerie.domain.MyUser;
 import org.hibernate.*;
 import org.junit.After;
 import org.junit.Assert;
@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -50,6 +49,7 @@ public class MyUserServiceTest {
         myUser.setEmail("tbeccaro@francetv.fr");
         myUser.setLogin("tbeccaro");
         myUser.setUserStatus("normal_user");
+        myUser.setMontant_compte(340.);
 
         return myUser;
     }
@@ -62,6 +62,7 @@ public class MyUserServiceTest {
         myUser2.setEmail("cdechavanne@tf1.fr");
         myUser2.setLogin("cdechavanne");
         myUser2.setUserStatus("normal_user");
+        myUser2.setMontant_compte(280.);
 
         return myUser2;
     }
@@ -153,7 +154,9 @@ public class MyUserServiceTest {
     public void testDoTransaction(){
         myUserService.save(myUser1);
         myUserService.save(myUser2);
+
         myTransactionService.saveTransaction(trans);
+
         myUserService.doTransaction(trans);
 
         MyUser myUser1bis = myUserService.findUser("tbeccaro").get(0);
@@ -164,8 +167,12 @@ public class MyUserServiceTest {
         Hibernate.initialize(myUser1bis.getListe_depenses());
         Hibernate.initialize(myUser1bis.getListe_recettes());
         session.close();
+
         Assert.assertEquals(1, myUser1bis.getListe_depenses().size());
         Assert.assertEquals(0, myUser1bis.getListe_recettes().size());
+        System.out.println("myUser1bis.getMontant_compte() :"+myUser1bis.getMontant_compte());
+        System.out.println("myUser1bis.getMontant_compte() :"+myUser1bis.getListe_recettes());
+        System.out.println("myUser1bis.getMontant_compte() :"+myUser1bis.getListe_depenses());
 
         session = sessionFactory.openSession();
         session.lock(myUser2bis, LockMode.NONE);
@@ -175,8 +182,9 @@ public class MyUserServiceTest {
 
         Assert.assertEquals(0, myUser2bis.getListe_depenses().size());
         Assert.assertEquals(1, myUser2bis.getListe_recettes().size());
-
-
+        System.out.println("myUser2bis.getMontant_compte() : "+myUser2bis.getMontant_compte());
+        System.out.println("myUser2bis.getMontant_compte() :"+myUser2bis.getListe_depenses());
+        System.out.println("myUser1bis.getMontant_compte() :"+myUser2bis.getListe_recettes());
 
     }
 

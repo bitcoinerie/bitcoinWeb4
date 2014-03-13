@@ -44,6 +44,7 @@
                         <!--input type="text" class="form-control" path="emetteur" id="emetteur" placeholder="Enter emitter's name"-->
                     </div>
                     <div class="col-lg-8">  Prenom : ${myEmetteur.prenom}</div>
+                    <div class="col-lg-8">  Montant du compte : ${myEmetteur.montant_compte}</div>
                 </div>
 
                 <div class="form-group myUser"commandName="myRecepteur">
@@ -52,7 +53,8 @@
                     <div class="col-lg-8">   Nom : ${myRecepteur.nom}
                         <!--form:input type="text" class="form-control" path="recepteur" id="recepteur" placeholder="Enter recipient's name"/-->
                     </div>
-                    <div class="col-lg-8">  Prenom : ${myEmetteur.prenom}</div>
+                    <div class="col-lg-8">  Prenom : ${myRecepteur.prenom}</div>
+                    <div class="col-lg-8">  Montant du compte : ${myRecepteur.montant_compte}</div>
                 </div>
 
                 <div class="form-group">

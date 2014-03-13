@@ -121,10 +121,16 @@ public class MyTransactionServiceTest {
 
         System.out.println(dateTest.toString());
 
-        Assert.assertEquals(2, myTransactionService.findByDateTransaction(dateTest ).size());
+        Assert.assertEquals(2, myTransactionService.findByDateTransaction(dateTest, dateTest).size());
         Assert.assertEquals(1, myTransactionService.findByAmountLargerTransaction((double) 300).size());
         Assert.assertEquals(1, myTransactionService.findByAmountSmallerTransaction((double) 400).size());
         Assert.assertEquals(1, myTransactionService.findByAmountEqualsTransaction((double) 300).size());
+
+        System.out.println(myTransactionService.findByRecepterTransaction("Jean"));
+        System.out.println(myTransactionService.findByEmetterTransaction("Paul"));
+
+        Assert.assertEquals(2, myTransactionService.findByRecepterTransaction("Jean").size());
+        Assert.assertEquals(2, myTransactionService.findByEmetterTransaction("Paul").size());
         //Assert.assertEquals(0, myTransactionService.findByDateTransaction(dateTest ).size());
 
     }

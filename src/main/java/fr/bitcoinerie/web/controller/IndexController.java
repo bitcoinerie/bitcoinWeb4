@@ -2,8 +2,6 @@ package fr.bitcoinerie.web.controller;
 
 import fr.bitcoinerie.domain.MyTransaction;
 import fr.bitcoinerie.domain.MyUser;
-import fr.bitcoinerie.domain.MyEchange;
-import fr.bitcoinerie.service.MyEchangeService;
 import fr.bitcoinerie.service.MyTransactionService;
 import fr.bitcoinerie.service.MyUserService;
 import org.springframework.stereotype.Controller;
@@ -13,15 +11,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 
 @Controller
 public class IndexController {
-    @Inject
-    private MyEchangeService myEchangeService;
-
     @Inject
     private MyTransactionService myTransactionService;
 
@@ -51,41 +48,59 @@ public class IndexController {
         return "Hello world Transaction BitCoin!";
     }
 
-    /*
-    @RequestMapping("/search")
-    public List<String> search(String query, Model model) {
-        List<MyTransaction> myTransactionList = myTransactionService.findByDateTransaction(query);
-        List<String> transactionEmetteur = null;
-        for (MyTransaction t: myTransactionList){
-            transactionEmetteur.add(t.getEmetteur());
-        }
-        return transactionEmetteur;
-    }
-    */
 
-    @RequestMapping("/searchByDate")
-    public String searchByDate(Date query, Model model) {
-        model.addAttribute("transactionsByQuery", myTransactionService.findByDateTransaction(query));
+    @RequestMapping("/historique/searchByDate")
+    public String searchByDate(String queryStart, String queryEnd, Model model) {
+        //System.out.println("Date : "+query);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+        try {
+
+            Date dateStart = formatter.parse(queryStart);
+            Date dateEnd = formatter.parse(queryEnd);
+            model.addAttribute("transactionsByQuery", myTransactionService.findByDateTransaction(dateStart, dateEnd));
+            //System.out.println(date);
+            //System.out.println(formatter.format(date));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return "index";
     }
 
-    @RequestMapping("/searchByAmountLarger")
+    @RequestMapping("/historique/searchByAmountLarger")
     public String searchByAmountLarger(double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountLargerTransaction(query));
         return "index";
     }
 
-    @RequestMapping("/searchByAmountSmaller")
+    @RequestMapping("/historique/searchByAmountSmaller")
     public String searchByAmountSmaller(double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountSmallerTransaction(query));
         return "index";
     }
 
-    @RequestMapping("/searchByAmountEquals")
+    @RequestMapping("/historique/searchByAmountEquals")
     public String searchByAmountEquals(double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountEqualsTransaction(query));
         return "index";
     }
+
+    @RequestMapping("/historique/searchByRecepterTransaction")
+    public String searchByRecepterTransactionEquals(String query, Model model) {
+        model.addAttribute("transactionsByQuery", myTransactionService.findByRecepterTransaction(query));
+        return "index";
+    }
+
+
+    @RequestMapping("/historique/searchByEmetterTransaction")
+    public String searchByEmetterTransactionEquals(String query, Model model) {
+        model.addAttribute("transactionsByQuery", myTransactionService.findByEmetterTransaction(query));
+        return "index";
+    }
+
 
     @PostConstruct
     public void bootstrap() {
@@ -100,11 +115,20 @@ public class IndexController {
             myTransaction.setRecepteur(Fabien);
             myTransaction.setMontant(24);
 
-            Arnold.getListe_depenses().add(myTransaction);
-            Fabien.getListe_depenses().add(myTransaction);
+//            Arnold.getListe_depenses().add(myTransaction);
+//            Fabien.getListe_depenses().add(myTransaction);
+//
+//            myUserService.save(Arnold);
+//            myUserService.save(Fabien);
 
-            myUserService.save(Arnold);
-            myUserService.save(Fabien);
+            myUserService.doTransaction(myTransaction);
+
+            myTransaction.setEmetteur(myUserService.findByQuery("Arnold").get(0));
+            myTransaction.setRecepteur(myUserService.findByQuery("Fabien").get(0));
+
+            System.out.println(" >>>>>>>>>>> emeteur "+myTransaction.getEmetteur().getMontant_compte());
+            System.out.println(" >>>>>>>>>>> reepteur "+myTransaction.getRecepteur().getMontant_compte());
+
             myTransactionService.saveTransaction(myTransaction);
 
             MyTransaction myTransaction2 = new MyTransaction();

@@ -1,10 +1,9 @@
 package fr.bitcoinerie.service;
 
 import fr.bitcoinerie.domain.MyTransaction;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import fr.bitcoinerie.domain.MyUser;
+
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,12 +63,13 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public List<MyTransaction> findByDateTransaction(Date query) {
+    public List<MyTransaction> findByDateTransaction(Date queryStart, Date queryEnd) {
         Session session = sessionFactory.getCurrentSession();
 
         Criteria criteria = session.createCriteria(MyTransaction.class);
 
-        criteria.add(Restrictions.eq("date_temps", query ));
+
+        criteria.add(Restrictions.between("date_temps", queryStart, queryEnd));
 
         List<MyTransaction> myTransactions = criteria.list();
 
@@ -120,7 +120,83 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
         return myTransactions;
 
+
     }
+
+
+    @Transactional
+    @Override
+    public List<MyTransaction> findByEmetterTransaction(String query) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Criteria criteria = session.createCriteria(MyTransaction.class);
+
+        Criteria critUser = session.createCriteria(MyUser.class);
+
+        critUser.add(Restrictions.eq("prenom", query));
+
+        List<MyUser> myEmetters = critUser.list();
+
+        for (int i=0; i < myEmetters.size(); i++){
+            System.out.println(myEmetters.get(i).getPrenom());
+        }
+
+
+        //List<MyUser> myEmetters = myUserService.findByQuery(query);
+
+        //criteria.add(Restrictions.eq("id_user_emetteur", myEmetters.get(0).getId_user() ));
+
+/*        Long id_user_emetteur =  myEmetters.get(0).getId_user();
+        Query queryTr = session.createQuery("from MyTransaction where id_user_emetteur = :id_user_emetteur");
+        queryTr.setLong("id_user_emetteur", id_user_emetteur );
+        queryTr.executeUpdate();*/
+
+
+        List<MyTransaction> myTransactions = session.createCriteria(MyTransaction.class)
+                                                    .setFetchMode("id_user_recepteur", FetchMode.JOIN)
+                                                    .list();
+
+        return myTransactions;
+
+    }
+
+    @Transactional
+    @Override
+    public List<MyTransaction> findByRecepterTransaction(String query) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Criteria criteria = session.createCriteria(MyTransaction.class);
+
+        Criteria critUser = session.createCriteria(MyUser.class);
+
+        critUser.add(Restrictions.eq("prenom", query));
+
+        List<MyUser> myRecepters = critUser.list();
+
+        for (int i=0; i < myRecepters.size(); i++){
+            System.out.println(myRecepters.get(i).getPrenom());
+        }
+
+        //List<MyUser> myRecepters = myUserService.findByQuery(query);
+
+        //criteria.add(Restrictions.eq("id_user_recepteur", myRecepters.get(0).getId_user() ));
+
+/*        Long  id_user= myRecepters.get(0).getId_user();
+        Query queryTr = session.createQuery("from MyTransaction where MyTransaction.id_user_recepteur = :id_user left join fetch MyTransaction.id_user_recepteur");
+        queryTr.setLong("id_user_recepteur", id_user);
+        queryTr.executeUpdate();
+        */
+
+
+        List<MyTransaction> myTransactions = session.createCriteria(MyTransaction.class)
+                                                    .setFetchMode("id_user_recepteur", FetchMode.JOIN)
+                                                    .list();
+
+
+        return myTransactions;
+
+    }
+
 
     @Transactional
     @Override
