@@ -108,7 +108,7 @@ public class MyEchangeServiceImpl implements MyEchangeService {
     @Transactional
     @Override
     public MyEchange findOneEchange (Long emet,Long recept){
-
+        MyEchange echange = null;
 
         Session session = sessionFactory.getCurrentSession();
        /* Criteria criteria = session.createCriteria(MyEchange.class);
@@ -121,8 +121,11 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         query.setLong("recept", recept);
         query.setLong("emet", emet);
         List<MyEchange> myEchanges =   query.list();
-        MyEchange echange = myEchanges.get(0);
+        if(myEchanges.size()!=0){
+         echange = myEchanges.get(0);
+        }
         return echange;
+
     }
     @Transactional
     @Override
@@ -150,13 +153,20 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         List<MyUser> users= myUserService.findAll();
         int i;
         MyEchange echange3 = new MyEchange( montant, nouveau,nouveau);
-        saveEchange(echange3);
-
+        updateEchange(echange3);
+        Long idnouv= nouveau.getId_user();
         for (i=0; i< users.size();i++){
-            MyEchange echange = new MyEchange( 0., users.get(i),nouveau);
-            saveEchange(echange);
-            MyEchange echange2 = new MyEchange( 0., nouveau,users.get(i));
-            saveEchange(echange2);
+            Long id= users.get(i).getId_user();
+            MyEchange ech= findOneEchange(id,idnouv);
+            //MyEchange echange = new MyEchange( 0., users.get(i),nouveau);
+            if(ech==null){
+             saveEchange(new MyEchange( 0., users.get(i),nouveau));
+            }
+            if(ech==null){
+                MyEchange echange2 = findOneEchange(idnouv,id);
+                saveEchange(new MyEchange( 0., nouveau, users.get(i)));
+            }
+
 
 
        }
@@ -186,26 +196,27 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         int j;
         for (i=0; i< users.size();i++)
         {
-             Double reputvoisin;
             Double reputvoisins=0.;
-            Double proba=0.;
+            Double proba;
             Double miseajour;
             Long id=users.get(i).getId_user();
             List<MyEchange> echanges= findByRecepteurEchange(id);
             for (j=0;j< echanges.size();j++)
             {
                 MyUser myUser=echanges.get(j).getEmetteur();
-                Hibernate.initialize(myUser.getReputation());
-                reputvoisin=myUser.getReputation();
+
+                 Double reputvoisin=myUser.getReputation();
                  proba=echanges.get(j).getProbabilite();
 
-                  miseajour=proba*1 ;
+                  miseajour=proba*reputvoisin ;
                  reputvoisins= reputvoisins+ miseajour;
             }
              Double reput=alpha+(1-alpha)*reputvoisins ;
 
               users.get(i).setReputation(reput);
-              myUserService.update(users.get(i));
+
+            myUserService.update(users.get(i));
+
 
         }
 
@@ -225,6 +236,7 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         Double proba =ech.getMontant()/s;
         System.out.println(proba);
         ech.setProbabilite(proba);
+        Session session = sessionFactory.getCurrentSession();
         updateEchange(ech);
     }
 

@@ -187,6 +187,17 @@ public class MyUserServiceTest {
         System.out.println("myUser1bis.getMontant_compte() :"+myUser2bis.getListe_recettes());
 
     }
+    @Test
+    public void setreput() {
 
+        myUserService.save(myUser1);
+        List<MyUser> users = myUserService.findAll();
+        users.get(0).setReputation(0.15);
+
+        myUserService.update(users.get(0));
+        List<MyUser> users2 = myUserService.findAll();
+
+        Assert.assertEquals((Double)0.15, users2.get(0).getReputation());
+    }
 
 }

@@ -43,6 +43,11 @@ public class MyEchangeServiceTest {
         session.createQuery("delete from MyEchange").executeUpdate();
 
         transaction.commit();
+        Transaction transaction2 = session.beginTransaction();
+
+        session.createQuery("delete from MyUser").executeUpdate();
+
+        transaction2.commit();
 
         session.close();
 
@@ -245,17 +250,20 @@ public class MyEchangeServiceTest {
     }
     @Test
     public void testmajreput(){
+
         Jean =  new MyUser("Jean", "Kevin", 100);
         Paul =  new MyUser("Paul", "Hidalgo", 200);
-
+        Assert.assertEquals( (Double)0.,Jean.getReputation());
         myUserService.save(Jean);
+        Assert.assertEquals(1, myUserService.findAll().size());
+
         myEchangeService.nouvuser(dateTest, Jean,100.);
+        Assert.assertEquals(1, myEchangeService.findAllEchange().size());
         myUserService.save(Paul);
+        Assert.assertEquals(2, myUserService.findAll().size());
         myEchangeService.nouvuser(dateTest, Paul,200.);
 
-        myEchangeService.saveEchange( new MyEchange( 200., Paul , Paul));
-        myEchangeService.saveEchange( new MyEchange( 100., Jean , Jean));
-
+        Assert.assertEquals(4, myEchangeService.findAllEchange().size());
         Long id_jean =Jean.getId_user();
         Long id_paul =Paul.getId_user();
         myEchangeService.majEchange(100., dateTest,id_paul, id_jean) ;
@@ -263,9 +271,14 @@ public class MyEchangeServiceTest {
         Double alpha ;
         alpha= 0.15;
         myEchangeService.majreput(alpha) ;
-        Double rep=Jean.getReputation();
+        Double rep=myUserService.findByQuery("Jean").get(0).getReputation();
 
         Assert.assertEquals((Double)0.15, rep);
+
+        myEchangeService.majreput(alpha) ;
+        Double rep2=myUserService.findByQuery("Jean").get(0).getReputation();
+
+        Assert.assertEquals((Double)0.15, rep2);
 
     }
 }
