@@ -197,25 +197,24 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         for (i=0; i< users.size();i++)
         {
             Double reputvoisins=0.;
-            Double proba=0.;
+            Double proba;
             Double miseajour;
             Long id=users.get(i).getId_user();
-           // List<MyEchange> echanges= findByRecepteurEchange(id);
-           /* for (j=0;j< echanges.size();j++)
+            List<MyEchange> echanges= findByRecepteurEchange(id);
+            for (j=0;j< echanges.size();j++)
             {
                 MyUser myUser=echanges.get(j).getEmetteur();
 
                  Double reputvoisin=myUser.getReputation();
                  proba=echanges.get(j).getProbabilite();
 
-                  miseajour=proba*1 ;
+                  miseajour=proba*reputvoisin ;
                  reputvoisins= reputvoisins+ miseajour;
-            }*/
-             Double reput=0.15;//alpha+(1-alpha)*reputvoisins ;
+            }
+             Double reput=alpha+(1-alpha)*reputvoisins ;
 
-              users.get(i).setReputation(0.15);
+              users.get(i).setReputation(reput);
 
-            System.out.println(users.get(i).getReputation());
             myUserService.update(users.get(i));
 
 

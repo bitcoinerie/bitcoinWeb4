@@ -40,7 +40,7 @@ public class MyUser {
     public MyUser(){
         setDate_inscription(new Date());
         setMontant_compte(10.);
-        setReputation(1.);
+        setReputation(0.);
 
         liste_depenses = new HashSet<MyTransaction>();
         liste_recettes = new HashSet<MyTransaction>();
@@ -50,7 +50,7 @@ public class MyUser {
         this.prenom = prenom;
         this.nom = nom;
         this.montant_compte = montant;
-        this.reputation=1.;
+        this.reputation=0.;
 
         liste_depenses = new HashSet<MyTransaction>();
         liste_recettes = new HashSet<MyTransaction>();

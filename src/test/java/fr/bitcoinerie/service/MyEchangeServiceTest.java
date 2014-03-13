@@ -253,7 +253,7 @@ public class MyEchangeServiceTest {
 
         Jean =  new MyUser("Jean", "Kevin", 100);
         Paul =  new MyUser("Paul", "Hidalgo", 200);
-        Assert.assertEquals( (Double)1.,Jean.getReputation());
+        Assert.assertEquals( (Double)0.,Jean.getReputation());
         myUserService.save(Jean);
         Assert.assertEquals(1, myUserService.findAll().size());
 
@@ -274,6 +274,11 @@ public class MyEchangeServiceTest {
         Double rep=myUserService.findByQuery("Jean").get(0).getReputation();
 
         Assert.assertEquals((Double)0.15, rep);
+
+        myEchangeService.majreput(alpha) ;
+        Double rep2=myUserService.findByQuery("Jean").get(0).getReputation();
+
+        Assert.assertEquals((Double)0.15, rep2);
 
     }
 }
