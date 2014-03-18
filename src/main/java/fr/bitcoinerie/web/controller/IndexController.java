@@ -109,6 +109,9 @@ public class IndexController {
             MyTransaction myTransaction = new MyTransaction();
             Arnold = new MyUser("Arnold","Schwarz",120);
             Fabien = new MyUser("Fabien","Bart", 250);
+            myUserService.save(Arnold);
+            myUserService.save(Fabien);
+
             myTransaction.setDate_temps(new Date());
 
             myTransaction.setEmetteur(Arnold);
@@ -126,8 +129,8 @@ public class IndexController {
             myTransaction.setEmetteur(myUserService.findByQuery("Arnold").get(0));
             myTransaction.setRecepteur(myUserService.findByQuery("Fabien").get(0));
 
-            System.out.println(" >>>>>>>>>>> emeteur "+myTransaction.getEmetteur().getMontant_compte());
-            System.out.println(" >>>>>>>>>>> reepteur "+myTransaction.getRecepteur().getMontant_compte());
+            System.out.println(" >>>>>>>>>>> emetteur "+myTransaction.getEmetteur().getMontant_compte());
+            System.out.println(" >>>>>>>>>>> recepteur "+myTransaction.getRecepteur().getMontant_compte());
 
             myTransactionService.saveTransaction(myTransaction);
 
@@ -140,12 +143,13 @@ public class IndexController {
             myTransaction2.setRecepteur(Julie);
             myTransaction2.setMontant(241);
 
-            Henri.getListe_depenses().add(myTransaction2);
-            Julie.getListe_depenses().add(myTransaction2);
+//            Henri.getListe_depenses().add(myTransaction2);
+//            Julie.getListe_depenses().add(myTransaction2);
 
             myUserService.save(Henri);
             myUserService.save(Julie);
             myTransactionService.saveTransaction(myTransaction2);
+            myUserService.doTransaction(myTransaction2);
 
         }
 

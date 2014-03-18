@@ -38,6 +38,7 @@
                 <version>2.1</version>
                 <configuration>
                     <path>/</path>
+                    <port>8081</port>
                 </configuration>
 
             </plugin>
@@ -94,6 +95,15 @@
             <version>4.2.5.Final</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- hibernate validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.0.1.Final</version>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>

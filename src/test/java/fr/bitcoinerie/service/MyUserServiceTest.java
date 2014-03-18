@@ -24,7 +24,8 @@ public class MyUserServiceTest {
     @Inject
     private MyUserService myUserService;
 
-    @Inject MyTransactionService myTransactionService;
+    @Inject
+    MyTransactionService myTransactionService;
 
     @After
     public void cleanDb() {
@@ -41,7 +42,7 @@ public class MyUserServiceTest {
 
     }
 
-    private MyUser myUser(){
+    private MyUser myUser() {
         MyUser myUser = new MyUser();
 
         myUser.setPrenom("Thierry");
@@ -54,7 +55,7 @@ public class MyUserServiceTest {
         return myUser;
     }
 
-    private MyUser myUser2(){
+    private MyUser myUser2() {
         MyUser myUser2 = new MyUser();
 
         myUser2.setPrenom("Christophe");
@@ -69,7 +70,7 @@ public class MyUserServiceTest {
 
     private MyUser myUser1 = myUser();
     private MyUser myUser2 = myUser2();
-    private MyTransaction trans =  new MyTransaction(100., new Date(), myUser1, myUser2);
+    private MyTransaction trans = new MyTransaction(100., new Date(), myUser1, myUser2);
 
     @Test
     public void saveUser() {
@@ -81,7 +82,7 @@ public class MyUserServiceTest {
 
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
 
         myUserService.save(myUser1);
 
@@ -94,7 +95,6 @@ public class MyUserServiceTest {
         session.close();
 
     }
-
 
 
     @Test
@@ -151,7 +151,7 @@ public class MyUserServiceTest {
 
 
     @Test
-    public void testDoTransaction(){
+    public void testDoTransaction() {
         myUserService.save(myUser1);
         myUserService.save(myUser2);
 
@@ -170,9 +170,8 @@ public class MyUserServiceTest {
 
         Assert.assertEquals(1, myUser1bis.getListe_depenses().size());
         Assert.assertEquals(0, myUser1bis.getListe_recettes().size());
-        System.out.println("myUser1bis.getMontant_compte() :"+myUser1bis.getMontant_compte());
-        System.out.println("myUser1bis.getMontant_compte() :"+myUser1bis.getListe_recettes());
-        System.out.println("myUser1bis.getMontant_compte() :"+myUser1bis.getListe_depenses());
+        Assert.assertEquals((Double) 340., myUser1.getMontant_compte());
+        Assert.assertEquals((Double) 240., myUser1bis.getMontant_compte());
 
         session = sessionFactory.openSession();
         session.lock(myUser2bis, LockMode.NONE);
@@ -182,11 +181,9 @@ public class MyUserServiceTest {
 
         Assert.assertEquals(0, myUser2bis.getListe_depenses().size());
         Assert.assertEquals(1, myUser2bis.getListe_recettes().size());
-        System.out.println("myUser2bis.getMontant_compte() : "+myUser2bis.getMontant_compte());
-        System.out.println("myUser2bis.getMontant_compte() :"+myUser2bis.getListe_depenses());
-        System.out.println("myUser1bis.getMontant_compte() :"+myUser2bis.getListe_recettes());
-
+        Assert.assertEquals((Double) 280., myUser2bis.getMontant_compte());
     }
+
     @Test
     public void setreput() {
 
@@ -197,7 +194,7 @@ public class MyUserServiceTest {
         myUserService.update(users.get(0));
         List<MyUser> users2 = myUserService.findAll();
 
-        Assert.assertEquals((Double)0.15, users2.get(0).getReputation());
+        Assert.assertEquals((Double) 0.15, users2.get(0).getReputation());
     }
 
 }
