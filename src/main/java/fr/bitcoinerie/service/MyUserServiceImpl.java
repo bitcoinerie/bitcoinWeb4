@@ -147,10 +147,20 @@ public class MyUserServiceImpl implements MyUserService {
         MyUser recepteur = trans.getRecepteur();
         Double somme = trans.getMontant();
 
+        Session session = sessionFactory.openSession();
+        session.lock(emetteur, LockMode.NONE);
+        Hibernate.initialize(emetteur.getListe_depenses());
+        session.close();
+
+        session = sessionFactory.openSession();
+        session.lock(recepteur, LockMode.NONE);
+        Hibernate.initialize(recepteur.getListe_recettes());
+        session.close();
+
         emetteur.addDepense(trans);
         emetteur.addMontant(- somme);
         recepteur.addRecette(trans);
-        emetteur.addMontant(somme);
+        recepteur.addMontant(somme);
 
         update(emetteur);
         update(recepteur);
