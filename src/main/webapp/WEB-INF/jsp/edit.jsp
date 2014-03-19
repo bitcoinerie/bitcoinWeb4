@@ -45,6 +45,7 @@
                     </div>
                     <div class="col-lg-8">  Prenom : ${myEmetteur.prenom}</div>
                     <div class="col-lg-8">  Montant du compte : ${myEmetteur.montant_compte}</div>
+                    <div class="col-lg-8">  Réputation : ${myEmetteur.reputation}</div>
                 </div>
 
                 <div class="form-group myUser"commandName="myRecepteur">
@@ -55,9 +56,14 @@
                     </div>
                     <div class="col-lg-8">  Prenom : ${myRecepteur.prenom}</div>
                     <div class="col-lg-8">  Montant du compte : ${myRecepteur.montant_compte}</div>
+                    <div class="col-lg-8">  Réputation : ${myRecepteur.reputation}</div>
+
                 </div>
 
+
                 <div class="form-group">
+                    <br>
+                    <br>
                     <label for="montant" class="col-lg-2 control-label">Montant</label>
                     <div class="col-lg-8">
                         <form:input type="number" class="form-control" path="montant" id="montant" placeholder="Enter amount of transaction"/>
@@ -66,6 +72,7 @@
                 </div>
                 <form:hidden path="id_transaction"/>
 
+                <br>
 
                 <button type="submit" class="btn btn-default">Submit</button>
             </form:form>
