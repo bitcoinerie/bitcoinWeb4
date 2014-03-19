@@ -4,8 +4,9 @@
     <div class="panel-heading">Quick links</div>
     <div class="panel-body">
         <ul>
-            <li><a href="/today">Today's</a></li>
-            <li><a href="/tomorrow">Tomorrow's</a></li>
+            <li><a href="/index">Accueil</a></li>
+            <li><a href="/index">Nouvelle Transaction</a></li>
+            <li><a href="/index">Historique</a></li>
         </ul>
     </div>
 </div>

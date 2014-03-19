@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -67,9 +66,9 @@ public class AdminController {
 
         myUserService.doTransaction(myTrans);
 
-        // Doit faire un update au lieu d'un save      sur  myUserService
-        //myUserService.update(myEmet);
-        //myUserService.update(myRecept);
+        // Doit faire un updateUser au lieu d'un save      sur  myUserService
+        //myUserService.updateUser(myEmet);
+        //myUserService.updateUser(myRecept);
 
 
         myTransactionService.saveTransaction(myTrans);
@@ -77,13 +76,6 @@ public class AdminController {
         return "redirect:/";
     }
 
-
-    @RequestMapping("/edit/{id_transaction}")
-    public String edit(@PathVariable Long id_transaction, Model model) {
-        model.addAttribute("myTransac", myTransactionService.findByIdTransaction(id_transaction));
-
-        return "edit";
-    }
 
 
 }

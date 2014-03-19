@@ -2,9 +2,7 @@ package fr.bitcoinerie.service;
 
 import fr.bitcoinerie.domain.MyEchange;
 import fr.bitcoinerie.domain.MyUser;
-import fr.bitcoinerie.service.MyUserService;
 import org.hibernate.*;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -215,7 +213,7 @@ public class MyEchangeServiceImpl implements MyEchangeService {
 
               users.get(i).setReputation(reput);
 
-            myUserService.update(users.get(i));
+            myUserService.updateUser(users.get(i));
 
 
         }

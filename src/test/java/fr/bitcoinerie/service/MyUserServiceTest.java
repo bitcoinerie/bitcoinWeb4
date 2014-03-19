@@ -144,7 +144,7 @@ public class MyUserServiceTest {
         List<MyUser> users = myUserService.findUser("tbeccaro");
         users.get(0).setPrenom("Jordan");
 
-        myUserService.update(users.get(0));
+        myUserService.updateUser(users.get(0));
 
         Assert.assertEquals(1, myUserService.findByQuery("Jordan").size());
     }
@@ -170,6 +170,8 @@ public class MyUserServiceTest {
 
         Assert.assertEquals(1, myUser1bis.getListe_depenses().size());
         Assert.assertEquals(0, myUser1bis.getListe_recettes().size());
+
+
         System.out.println("myUser1bis.getMontant_compte() :"+myUser1bis.getMontant_compte());
         System.out.println("myUser1bis.getMontant_compte() :"+myUser1bis.getListe_recettes());
         System.out.println("myUser1bis.getMontant_compte() :"+myUser1bis.getListe_depenses());
@@ -180,11 +182,15 @@ public class MyUserServiceTest {
         Hibernate.initialize(myUser2bis.getListe_recettes());
         session.close();
 
-        Assert.assertEquals(0, myUser2bis.getListe_depenses().size());
-        Assert.assertEquals(1, myUser2bis.getListe_recettes().size());
+
+
         System.out.println("myUser2bis.getMontant_compte() : "+myUser2bis.getMontant_compte());
         System.out.println("myUser2bis.getMontant_compte() :"+myUser2bis.getListe_depenses());
         System.out.println("myUser1bis.getMontant_compte() :"+myUser2bis.getListe_recettes());
+
+        Assert.assertEquals(0, myUser2bis.getListe_depenses().size());
+        Assert.assertEquals(10, myUser2bis.getListe_recettes().size());
+
 
     }
     @Test
@@ -194,7 +200,7 @@ public class MyUserServiceTest {
         List<MyUser> users = myUserService.findAll();
         users.get(0).setReputation(0.15);
 
-        myUserService.update(users.get(0));
+        myUserService.updateUser(users.get(0));
         List<MyUser> users2 = myUserService.findAll();
 
         Assert.assertEquals((Double)0.15, users2.get(0).getReputation());

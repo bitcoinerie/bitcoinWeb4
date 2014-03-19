@@ -6,6 +6,7 @@ import fr.bitcoinerie.service.MyTransactionService;
 import fr.bitcoinerie.service.MyUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -89,15 +90,24 @@ public class IndexController {
     }
 
     @RequestMapping("/historique/searchByRecepterTransaction")
-    public String searchByRecepterTransactionEquals(String query, Model model) {
+    public String searchByRecepterTransaction(String query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByRecepterTransaction(query));
         return "index";
     }
 
 
     @RequestMapping("/historique/searchByEmetterTransaction")
-    public String searchByEmetterTransactionEquals(String query, Model model) {
+    public String searchByEmetterTransaction(String query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByEmetterTransaction(query));
+        return "index";
+    }
+
+    @RequestMapping("/transaction/{id_transaction}")
+    public String viewTransaction(@PathVariable Long id_transaction, Model model) {
+        model.addAttribute("transactionById", myTransactionService.findByIdTransaction(id_transaction));
+
+        System.out.println("transaction by id : "+myTransactionService.findByIdTransaction(id_transaction));
+
         return "index";
     }
 

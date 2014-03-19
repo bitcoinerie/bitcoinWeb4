@@ -16,7 +16,7 @@ public class MyUser {
     @Column
     private String nom;
     @Column
-    private String prenom;
+    public String prenom;
     @Column
     private Double reputation;
     @Column
@@ -54,6 +54,18 @@ public class MyUser {
 
         liste_depenses = new HashSet<MyTransaction>();
         liste_recettes = new HashSet<MyTransaction>();
+    }
+
+    @Override
+    public String toString() {
+        return "MyUser{" +
+                "nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", reputation=" + reputation +
+                ", montant_compte=" + montant_compte +
+                ", liste_depenses=" + liste_depenses +
+                ", liste_recettes=" + liste_recettes +
+                '}';
     }
 
     public Long getId_user() {

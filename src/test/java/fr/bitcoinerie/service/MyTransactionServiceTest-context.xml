@@ -24,14 +24,12 @@
                         <prop key="hibernate.connection.url">jdbc:derby:target/testdb;create=true</prop>
                         <prop key="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</prop>
                         <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+                        <prop key="show_sql">true</prop>
                     </props>
-
                 </property>
-
             </bean>
         </property>
         <property name="packagesToScan" value="fr.bitcoinerie.domain"/>
-
     </bean>
     <bean class="fr.bitcoinerie.service.MyTransactionServiceImpl" />
 
