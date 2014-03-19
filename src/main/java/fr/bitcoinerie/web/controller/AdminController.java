@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -76,6 +78,32 @@ public class AdminController {
         return "redirect:/";
     }
 
+
+    @RequestMapping("/edit/{id_transaction}")
+    public String edit(@PathVariable Long id_transaction, Model model) {
+        model.addAttribute("myTransac", myTransactionService.findByIdTransaction(id_transaction));
+
+        return "edit";
+    }
+
+    @RequestMapping("/new_user")
+    public String add(Model model) {
+        // on injecte un utilisateur vierge dans le modèle
+        model.addAttribute("user", new MyUser());
+
+        return "new_user";
+    }
+
+    @RequestMapping(value = "/new_user", method = RequestMethod.POST)
+    public String post(@ModelAttribute @Valid MyUser user, BindingResult result) {
+        if (result.hasErrors()) {
+            return "new_user";
+        }
+
+        myUserService.save(user);
+
+        return "redirect:/";
+    }
 
 
 }

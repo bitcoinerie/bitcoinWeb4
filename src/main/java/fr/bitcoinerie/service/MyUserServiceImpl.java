@@ -147,18 +147,33 @@ public class MyUserServiceImpl implements MyUserService {
         MyUser recepteur = trans.getRecepteur();
         Double somme = trans.getMontant();
 
+
         System.out.println("transaction montant : "+somme);
+
+        Session session = sessionFactory.openSession();
+        session.lock(emetteur, LockMode.NONE);
+        Hibernate.initialize(emetteur.getListe_depenses());
+        session.close();
+
+        session = sessionFactory.openSession();
+        session.lock(recepteur, LockMode.NONE);
+        Hibernate.initialize(recepteur.getListe_recettes());
+        session.close();
+
 
         emetteur.addDepense(trans);
         emetteur.addMontant(- somme);
         System.out.println("montant emetteur: "+emetteur.getMontant_compte());
         recepteur.addRecette(trans);
         recepteur.addMontant(somme);
+
         System.out.println("montant : "+recepteur.getMontant_compte());
 
         updateUser(emetteur);
         updateUser(recepteur);
         System.out.println("do transaction user : "+findAll());
+
+
 
     }
 }

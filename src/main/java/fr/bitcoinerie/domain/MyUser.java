@@ -1,6 +1,9 @@
 package fr.bitcoinerie.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,19 +17,38 @@ public class MyUser {
     private Long id_user;
 
     @Column
+    @NotBlank
+    @Size(min = 1, max = 50)
     private String nom;
-    @Column
-    public String prenom;
+
+
+    @NotBlank
+    @Size(min = 1, max = 50)
+    private String prenom;
+
+
     @Column
     private Double reputation;
+
     @Column
     private Double montant_compte;
+
     @Column
+    @NotBlank
+    @Size(min = 5, max = 16)
     private String login;
+
+/*    @Column
+    @NotBlank
+    @Size(min = 8, max = 16)
+    private String mot_de_passe;*/
+
     @Column
     private Date date_inscription;
+
     @Column
     private String email;
+
     @Column
     private String userStatus;
 
@@ -41,6 +63,8 @@ public class MyUser {
         setDate_inscription(new Date());
         setMontant_compte(10.);
         setReputation(0.);
+        setUserStatus("normal_user");
+//        setMot_de_passe("user_created");
 
         liste_depenses = new HashSet<MyTransaction>();
         liste_recettes = new HashSet<MyTransaction>();
@@ -50,7 +74,11 @@ public class MyUser {
         this.prenom = prenom;
         this.nom = nom;
         this.montant_compte = montant;
-        this.reputation=0.;
+        setDate_inscription(new Date());
+        setReputation(0.);
+        setUserStatus("normal_user");
+        setLogin("user_created");
+//        setMot_de_passe("user_created");
 
         liste_depenses = new HashSet<MyTransaction>();
         liste_recettes = new HashSet<MyTransaction>();
@@ -156,6 +184,10 @@ public class MyUser {
         this.liste_recettes = liste_recettes;
     }
 
+/*    public void setMot_de_passe(String mot_de_passe) {this.mot_de_passe = mot_de_passe;}
+
+    public String getMot_de_passe() {return mot_de_passe;}*/
+
     public void addRecette(MyTransaction trans){
         liste_recettes.add(trans);
     }
@@ -165,6 +197,6 @@ public class MyUser {
     }
 
     public void addMontant(Double somme){
-        montant_compte = montant_compte + somme;
+        setMontant_compte(montant_compte + somme);
     }
 }
