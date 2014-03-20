@@ -29,11 +29,15 @@ public class MyUserServiceImpl implements MyUserService {
 
         Session session = sessionFactory.getCurrentSession();
 
-
+//        myEchangeService.nouvuser(new Date(),myUser,myUser.getMontant_compte());
+//        myEchangeService.majreput(0.15);
 
         session.save(myUser);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> fc1722855c45e885fce59bba99673bf7b2fbe464
     }
 
 
@@ -175,6 +179,11 @@ public class MyUserServiceImpl implements MyUserService {
         recepteur.addMontant(somme);
 
         System.out.println("montant : "+recepteur.getMontant_compte());
+
+//        myEchangeService.majEchange(somme,new Date(),emetteur.getId_user(),recepteur.getId_user());
+//        myEchangeService.majproba(emetteur.getId_user(),recepteur.getId_user());
+//        myEchangeService.majreput(0.15);
+
 
         updateUser(emetteur);
         updateUser(recepteur);
