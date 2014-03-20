@@ -171,11 +171,9 @@ public class MyEchangeServiceImpl implements MyEchangeService {
                 majproba(idnouv, id2);
 
             }
-
-
-
        }
     }
+
     @Transactional
     @Override
     public void majproba(Long emet, Long recept){
