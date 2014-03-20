@@ -20,8 +20,7 @@ public class MyUserServiceImpl implements MyUserService {
 
     @Inject
     private SessionFactory sessionFactory;
-    @Inject
-    private MyEchangeService myEchangeService;
+
 
     @Override
     @Transactional
@@ -33,12 +32,7 @@ public class MyUserServiceImpl implements MyUserService {
 //        myEchangeService.majreput(0.15);
 
         session.save(myUser);
-<<<<<<< HEAD
-
-
-=======
->>>>>>> fc1722855c45e885fce59bba99673bf7b2fbe464
-    }
+  }
 
 
 
