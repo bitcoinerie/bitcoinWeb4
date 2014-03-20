@@ -7,6 +7,7 @@
             <li><a href="/index">Accueil</a></li>
             <li><a href="/index">Nouvelle Transaction</a></li>
             <li><a href="/index">Historique</a></li>
+            <li><a href="/profile">Profil</a></li>
         </ul>
     </div>
 </div>
