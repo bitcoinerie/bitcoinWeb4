@@ -29,29 +29,37 @@
 
         <div class="col-lg-7 col-lg-offset-1">
 
-            <form:form cssClass="form-horizontal" commandName="user" action="/new_user" method="post">
+            <form:form cssClass="form-horizontal" commandName="user" action="/edit_user" method="post">
                  <div class="form-group">
                     <label for="prenom" class="col-lg-2 control-label">Prénom</label>
                     <div class="col-lg-8">
+                        <c:set var="error1"><form:errors path="prenom"><span style="color:#B94A48" class="help-block">Le prénom doit être compris entre 1 et 50 caractères.</span></form:errors></c:set>
                         <form:input cssClass="form-control" path="prenom" id="prenom" placeholder="Prénom" />
+                            ${error1}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="nom" class="col-lg-2 control-label">Nom</label>
                     <div class="col-lg-6">
+                        <c:set var="error2"><form:errors path="nom"><span style="color:#B94A48" class="help-block">Le nom doit être compris entre 1 et 50 caractères.</span></form:errors></c:set>
                         <form:input cssClass="form-control" path="nom" id="nom" placeholder="Nom" />
+                            ${error2}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email" class="col-lg-2 control-label">Email</label>
                     <div class="col-lg-6">
+                        <c:set var="error3"><form:errors path="email"><span style="color:#B94A48" class="help-block">Email non conforme.</span></form:errors></c:set>
                         <form:input cssClass="form-control" path="email" id="email" placeholder="Email" />
+                            ${error3}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="login" class="col-lg-2 control-label">Login</label>
                     <div class="col-lg-6">
+                        <c:set var="error4"><form:errors path="login"><span style="color:#B94A48" class="help-block">Le login doit être compris entre 5 et 16 caractères.</span></form:errors></c:set>
                         <form:input cssClass="form-control" path="login" id="login" placeholder="Login" />
+                            ${error4}
                     </div>
                 </div>
                 <%--<div class="form-group">
@@ -72,9 +80,6 @@
 
         <div class="col-lg-3">
             <widget:quickLinks/>
-
-            <widget:tagCloud/>
-
         </div>
 
     </div>

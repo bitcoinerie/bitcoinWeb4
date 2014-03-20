@@ -34,6 +34,11 @@ public class AdminController {
     private MyUser myEmet;
     private MyUser myRecept;
 
+    @ModelAttribute("user")
+    private MyUser getUser(){
+        return new MyUser();
+    }
+
     @RequestMapping("/addTransaction/add")
     public String addTransactionToViews(Model model) {
 
@@ -101,13 +106,13 @@ public class AdminController {
         return "new_user";
     }
 
-    @RequestMapping(value = "/new_user", method = RequestMethod.POST)
-    public String post(@ModelAttribute @Valid MyUser user, BindingResult result) {
+    @RequestMapping(value = "/edit_user", method = RequestMethod.POST)
+    public String post(@ModelAttribute("user") @Valid MyUser user, BindingResult result) {
         if (result.hasErrors()) {
             return "new_user";
         }
 
-        myUserService.save(user);
+        myUserService.updateUser(user);
 
         return "redirect:/";
     }

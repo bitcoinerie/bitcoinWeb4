@@ -33,12 +33,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
+=======
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:5.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:0.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:5.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:0.8.0" level="project" />
+<<<<<<< HEAD
+=======
+>>>>>>> ce9453c541d2fcab2b31bc64c614d9fc0722cded
+>>>>>>> 3b9729cbde42905b905e16bb5dc1dea7206bd98a
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:jsp-api:2.0" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
