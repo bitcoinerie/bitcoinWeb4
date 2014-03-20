@@ -156,13 +156,20 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         for (i=0; i< users.size();i++){
             Long id= users.get(i).getId_user();
             MyEchange ech= findOneEchange(id,idnouv);
-            //MyEchange echange = new MyEchange( 0., users.get(i),nouveau);
+
             if(ech==null){
              saveEchange(new MyEchange( 0., users.get(i),nouveau));
             }
-            if(ech==null){
-                MyEchange echange2 = findOneEchange(idnouv,id);
+            MyEchange echange2 = findOneEchange(idnouv,id);
+            if(echange2==null){
+
                 saveEchange(new MyEchange( 0., nouveau, users.get(i)));
+            }
+            for (i=0; i< users.size();i++){
+                Long id2= users.get(i).getId_user();
+                majproba(id2, idnouv);
+                majproba(idnouv, id2);
+
             }
 
 

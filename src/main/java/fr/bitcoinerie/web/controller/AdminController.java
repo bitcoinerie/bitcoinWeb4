@@ -3,6 +3,7 @@ package fr.bitcoinerie.web.controller;
 import fr.bitcoinerie.domain.MyTransaction;
 import fr.bitcoinerie.domain.MyUser;
 import fr.bitcoinerie.service.MyTransactionService;
+import fr.bitcoinerie.service.MyEchangeService;
 import fr.bitcoinerie.service.MyUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,9 @@ public class AdminController {
 
     @Inject
     private MyTransactionService myTransactionService;
+
+    @Inject
+    private MyEchangeService myEchangeService;
 
     @Inject
     private MyUserService myUserService;
@@ -68,12 +72,15 @@ public class AdminController {
 
         myUserService.doTransaction(myTrans);
 
+
         // Doit faire un updateUser au lieu d'un save      sur  myUserService
         //myUserService.updateUser(myEmet);
         //myUserService.updateUser(myRecept);
-
+         Long id_emet= emetteur.get(0).getId_user();
+        Long id_recep= recepteur.get(0).getId_user();
 
         myTransactionService.saveTransaction(myTrans);
+
 
         return "redirect:/";
     }

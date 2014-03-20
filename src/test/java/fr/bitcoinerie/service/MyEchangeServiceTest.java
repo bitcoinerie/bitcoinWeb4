@@ -103,14 +103,21 @@ public class MyEchangeServiceTest {
 
         myUserService.save(Jean);
         myUserService.save(Paul);
+        Long id_paul=  Paul.getId_user();
+        Long id_jean= Jean.getId_user();
+        MyEchange echange = myEchangeService.findOneEchange(id_paul , id_jean);
+        echange.setMontant(300.);
+        myEchangeService.updateEchange(echange);
 
-        myEchangeService.saveEchange( new MyEchange( 300., Paul , Jean));
-        myEchangeService.saveEchange( new MyEchange( 450., Paul , Paul));
-        Long id_jean =Jean.getId_user();
-        Long id_paul =Paul.getId_user();
+        MyEchange echange2 = myEchangeService.findOneEchange(id_paul , id_jean);
+        echange.setMontant(450.);
+        myEchangeService.updateEchange(echange2);
+
+
+
 
         Assert.assertEquals(2, myEchangeService.findByEmetteurEchange(id_paul ).size());
-        Assert.assertEquals(0, myEchangeService.findByEmetteurEchange(id_jean ).size());
+        Assert.assertEquals(2, myEchangeService.findByEmetteurEchange(id_jean ).size());
 
     }
     @Test
@@ -121,10 +128,15 @@ public class MyEchangeServiceTest {
         myUserService.save(Jean);
         myUserService.save(Paul);
 
-        myEchangeService.saveEchange( new MyEchange( 300., Paul , Jean));
-        myEchangeService.saveEchange( new MyEchange( 450., Paul , Paul));
-        Long id_jean =Jean.getId_user();
-        Long id_paul =Paul.getId_user();
+        Long id_paul=  Paul.getId_user();
+        Long id_jean= Jean.getId_user();
+        MyEchange echange = myEchangeService.findOneEchange(id_paul , id_jean);
+        echange.setMontant(300.);
+        myEchangeService.updateEchange(echange);
+
+        MyEchange echange2 = myEchangeService.findOneEchange(id_paul , id_paul);
+        echange.setMontant(450.);
+        myEchangeService.updateEchange(echange2);
         Assert.assertEquals(300.F, myEchangeService.findOneEchange(id_paul, id_jean).getMontant(),0.F);
 
     }
@@ -133,14 +145,16 @@ public class MyEchangeServiceTest {
     public void testfindByIdEchange(){
         Jean =  new MyUser("Jean", "Kevin", 100);
         Paul =  new MyUser("Paul", "Hidalgo", 200);
-        MyEchange echange =  new MyEchange( 300., Paul , Jean);
         myUserService.save(Jean);
         myUserService.save(Paul);
+        Long id_paul=  Paul.getId_user();
+        Long id_jean= Jean.getId_user();
+        MyEchange echange = myEchangeService.findOneEchange(id_paul , id_jean);
+        echange.setMontant(300.);
+        myEchangeService.updateEchange(echange);
 
-        myEchangeService.saveEchange( echange);
 
-        Long id_jean =Jean.getId_user();
-        Long id_paul =Paul.getId_user();
+
         Long id_echange =myEchangeService.findOneEchange(id_paul,id_jean).getId_echange();
         Assert.assertEquals(300.F, myEchangeService.findByIdEchange(id_echange).getMontant(),0.F);
     }
@@ -152,8 +166,6 @@ public class MyEchangeServiceTest {
         myUserService.save(Jean);
         myUserService.save(Paul);
         myEchangeService.saveEchange( new MyEchange( 0., Paul , Jean));
-        myEchangeService.saveEchange( new MyEchange( 200., Paul , Paul));
-        myEchangeService.saveEchange( new MyEchange( 100., Jean , Jean));
         myEchangeService.saveEchange( new MyEchange( 0., Jean , Paul));
 
         Long id_jean =Jean.getId_user();
@@ -172,10 +184,7 @@ public class MyEchangeServiceTest {
 
         myUserService.save(Jean);
         myUserService.save(Paul);
-        myEchangeService.saveEchange( new MyEchange( 0., Paul , Jean));
-        myEchangeService.saveEchange( new MyEchange( 200., Paul , Paul));
-        myEchangeService.saveEchange( new MyEchange( 100., Jean , Jean));
-        myEchangeService.saveEchange( new MyEchange( 0., Jean , Paul));
+
 
         Long id_jean =Jean.getId_user();
         Long id_paul =Paul.getId_user();
@@ -194,10 +203,6 @@ public class MyEchangeServiceTest {
 
         myUserService.save(Jean);
         myUserService.save(Paul);
-        myEchangeService.saveEchange( new MyEchange( 0., Paul , Jean));
-        myEchangeService.saveEchange( new MyEchange( 200., Paul , Paul));
-        myEchangeService.saveEchange( new MyEchange( 100., Jean , Jean));
-        myEchangeService.saveEchange( new MyEchange( 0., Jean , Paul));
 
         Long id_jean =Jean.getId_user();
         Long id_paul =Paul.getId_user();
@@ -220,8 +225,7 @@ public class MyEchangeServiceTest {
         myUserService.save(Paul);
         Long id_jean =Jean.getId_user();
         Long id_paul =Paul.getId_user();
-        MyEchange myEchange= new MyEchange( 100., Paul , Jean);
-        myEchangeService.updateEchange( myEchange);
+
 
 
          MyEchange echange = myEchangeService.findOneEchange(id_paul , id_jean);
@@ -229,7 +233,7 @@ public class MyEchangeServiceTest {
         myEchangeService.updateEchange(echange);
 
         Assert.assertEquals(200, myEchangeService.findOneEchange(id_paul , id_jean).getMontant(), 0.F);
-        Assert.assertEquals(1, myEchangeService.findAllEchange().size());
+        Assert.assertEquals(4, myEchangeService.findAllEchange().size());
 
     }
     @Test
@@ -257,11 +261,11 @@ public class MyEchangeServiceTest {
         myUserService.save(Jean);
         Assert.assertEquals(1, myUserService.findAll().size());
 
-        myEchangeService.nouvuser(dateTest, Jean,100.);
+
         Assert.assertEquals(1, myEchangeService.findAllEchange().size());
         myUserService.save(Paul);
         Assert.assertEquals(2, myUserService.findAll().size());
-        myEchangeService.nouvuser(dateTest, Paul,200.);
+
 
         Assert.assertEquals(4, myEchangeService.findAllEchange().size());
         Long id_jean =Jean.getId_user();

@@ -2,6 +2,7 @@ package fr.bitcoinerie.web.controller;
 
 import fr.bitcoinerie.domain.MyTransaction;
 import fr.bitcoinerie.domain.MyUser;
+import fr.bitcoinerie.service.MyEchangeService;
 import fr.bitcoinerie.service.MyTransactionService;
 import fr.bitcoinerie.service.MyUserService;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ import java.util.Date;
 public class IndexController {
     @Inject
     private MyTransactionService myTransactionService;
+    @Inject
+    private MyEchangeService myEchangeService;
 
     @Inject
     private MyUserService myUserService;
@@ -142,7 +145,6 @@ public class IndexController {
             System.out.println(" >>>>>>>>>>> emetteur "+myTransaction.getEmetteur().getMontant_compte());
             System.out.println(" >>>>>>>>>>> recepteur "+myTransaction.getRecepteur().getMontant_compte());
 
-            myTransactionService.saveTransaction(myTransaction);
 
             MyTransaction myTransaction2 = new MyTransaction();
             Henri = new MyUser("Henri","Fayol", 300);
@@ -157,9 +159,15 @@ public class IndexController {
 //            Julie.getListe_depenses().add(myTransaction2);
 
             myUserService.save(Henri);
+
+            myUserService.save(Fabien);
+
             myUserService.save(Julie);
+
             myTransactionService.saveTransaction(myTransaction2);
             myUserService.doTransaction(myTransaction2);
+
+
 
         }
 

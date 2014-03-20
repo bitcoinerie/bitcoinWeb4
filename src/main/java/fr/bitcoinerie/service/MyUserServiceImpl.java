@@ -1,6 +1,7 @@
 package fr.bitcoinerie.service;
 
 import fr.bitcoinerie.domain.MyTransaction;
+import fr.bitcoinerie.service.MyEchangeService;
 import fr.bitcoinerie.domain.MyUser;
 import org.hibernate.*;
 import org.hibernate.criterion.MatchMode;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,7 +20,8 @@ public class MyUserServiceImpl implements MyUserService {
 
     @Inject
     private SessionFactory sessionFactory;
-
+    @Inject
+    private MyEchangeService myEchangeService;
 
     @Override
     @Transactional
@@ -26,7 +29,11 @@ public class MyUserServiceImpl implements MyUserService {
 
         Session session = sessionFactory.getCurrentSession();
 
+
+
         session.save(myUser);
+        myEchangeService.nouvuser(new Date(),myUser,myUser.getMontant_compte());
+        myEchangeService.majreput(0.15);
 
     }
 
@@ -172,6 +179,10 @@ public class MyUserServiceImpl implements MyUserService {
         updateUser(emetteur);
         updateUser(recepteur);
         System.out.println("do transaction user : "+findAll());
+
+        myEchangeService.majEchange(somme,new Date(),emetteur.getId_user(),recepteur.getId_user());
+        myEchangeService.majproba(emetteur.getId_user(),recepteur.getId_user());
+        myEchangeService.majreput(0.15);
 
 
 
