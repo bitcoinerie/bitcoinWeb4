@@ -35,14 +35,14 @@
 
                         <form action="/historique/searchByEmetterTransaction" class="navbar-form navbar-center input-xlarge" role="search">
                             <div class="form-group">
-                                <input name="query" type="number" class="form-control" placeholder="Search Transaction by Emitter'firstname">
+                                <input name="query" type="text" class="form-control" placeholder="Search Transaction by Emitter'firstname">
                             </div>
                             <button type="submit" class="btn">Search</button>
                         </form>
 
                         <form action="/historique/searchByRecepterTransaction" class="navbar-form navbar-center input-xlarge" role="search">
                             <div class="form-group">
-                                <input name="query" type="number" class="form-control" placeholder="Search Transaction by Recepter'firstname">
+                                <input name="query" type="text" class="form-control" placeholder="Search Transaction by Recepter'firstname">
                             </div>
                             <button type="submit" class="btn">Search</button>
                         </form>

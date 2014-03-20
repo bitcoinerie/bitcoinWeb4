@@ -37,6 +37,16 @@ public class IndexController {
     public String index(Model model) {
         Anabelle = new MyUser("Anabelle","Anabelle",100);
         Bernard =  new MyUser("Bernard","Bernard",100);
+
+        myUserService.save(Anabelle);
+        myUserService.save(Bernard);
+
+        MyTransaction myTransaction =  new MyTransaction(45, new Date(),Anabelle,Bernard);
+
+        myUserService.doTransaction(myTransaction);
+
+        myTransactionService.saveTransaction(myTransaction);
+
         model.addAttribute("transaction", new MyTransaction(45, new Date(),Anabelle,Bernard) );
         model.addAttribute("transactions", myTransactionService.findAllTransaction());
 
