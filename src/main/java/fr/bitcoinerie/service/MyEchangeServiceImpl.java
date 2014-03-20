@@ -2,6 +2,7 @@ package fr.bitcoinerie.service;
 
 import fr.bitcoinerie.domain.MyEchange;
 import fr.bitcoinerie.domain.MyUser;
+import fr.bitcoinerie.domain.MyTransaction;
 import org.hibernate.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,22 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         Session session = sessionFactory.getCurrentSession();
 
         session.save(echange);
+    }
+    @Override
+    @Transactional
+    public void saveuserandmajEchange(MyUser myUser) {
+        Session session = sessionFactory.getCurrentSession();
+
+        session.save(myUser);
+        nouvuser(new Date(),myUser,myUser.getMontant_compte());
+       majreput(0.15);
+    }
+    @Override
+    @Transactional
+    public void dotransactionandmajechange(MyTransaction trans){
+       majEchange(trans.getMontant(),new Date(),trans.getEmetteur().getId_user(),trans.getRecepteur().getId_user());
+        majproba(trans.getEmetteur().getId_user(),trans.getRecepteur().getId_user());
+        majreput(0.15);
     }
 
     @Override

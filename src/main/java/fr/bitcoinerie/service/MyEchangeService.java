@@ -1,6 +1,7 @@
 package fr.bitcoinerie.service;
 
 import fr.bitcoinerie.domain.MyEchange;
+import fr.bitcoinerie.domain.MyTransaction;
 import fr.bitcoinerie.domain.MyUser;
 
 
@@ -14,6 +15,8 @@ public interface MyEchangeService {
     void updateEchange(MyEchange myEchange);
 
     void deleteEchange(Long id);
+     void saveuserandmajEchange(MyUser myUser) ;
+    void dotransactionandmajechange(MyTransaction trans);
 
     List<MyEchange> findAllEchange();
     MyEchange findByIdEchange(Long id) ;
