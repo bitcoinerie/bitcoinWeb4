@@ -21,7 +21,7 @@ public interface MyUserService {
 
     int count();
 
-    void update(MyUser myUser);
+    void updateUser(MyUser myUser);
 
     void doTransaction(MyTransaction trans);
 

@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Thu Mar 20 09:46:24 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-deab-7b1f-000003203728 
+Thu Mar 20 10:20:16 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-deca-7f08-000002d30b80 
 on database directory /Users/bphan-luong/Desktop/bitcoinWeb3/target/taskdb with class loader WebappClassLoader
   context: 
   delegate: false

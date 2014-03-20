@@ -119,7 +119,7 @@ public class MyUserServiceImpl implements MyUserService {
 
     @Override
     @Transactional
-    public void update(MyUser myUser) {
+    public void updateUser(MyUser myUser) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -133,27 +133,47 @@ public class MyUserServiceImpl implements MyUserService {
             session.save(myUser);
         }
         else{
-            session.update(myUser);
+            session.updateUser(myUser);
         }   */
         session.saveOrUpdate(myUser);
 
 
     }
 
-    @Override
     @Transactional
     public void doTransaction(MyTransaction trans){
+
         MyUser emetteur = trans.getEmetteur();
         MyUser recepteur = trans.getRecepteur();
         Double somme = trans.getMontant();
 
 
+        System.out.println("transaction montant : "+somme);
+
+        Session session = sessionFactory.openSession();
+        session.lock(emetteur, LockMode.NONE);
+        Hibernate.initialize(emetteur.getListe_depenses());
+        session.close();
+
+        session = sessionFactory.openSession();
+        session.lock(recepteur, LockMode.NONE);
+        Hibernate.initialize(recepteur.getListe_recettes());
+        session.close();
+
+
         emetteur.addDepense(trans);
         emetteur.addMontant(- somme);
+        System.out.println("montant emetteur: "+emetteur.getMontant_compte());
         recepteur.addRecette(trans);
-        emetteur.addMontant(somme);
+        recepteur.addMontant(somme);
 
-        update(emetteur);
-        update(recepteur);
+        System.out.println("montant : "+recepteur.getMontant_compte());
+
+        updateUser(emetteur);
+        updateUser(recepteur);
+        System.out.println("do transaction user : "+findAll());
+
+
+
     }
 }

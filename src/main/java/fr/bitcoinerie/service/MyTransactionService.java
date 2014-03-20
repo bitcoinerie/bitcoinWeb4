@@ -22,12 +22,14 @@ public interface MyTransactionService {
 
     //@Override
     //@Transactional
-    List<MyTransaction> findByDateTransaction(Date query);
+    List<MyTransaction> findByDateTransaction(Date queryS, Date queryE);
 
     List<MyTransaction> findByAmountLargerTransaction(double query);
     List<MyTransaction> findByAmountSmallerTransaction(double query);
     List<MyTransaction> findByAmountEqualsTransaction(double query);
 
+    List<MyTransaction> findByEmetterTransaction(String query);
+    List<MyTransaction> findByRecepterTransaction(String query);
 
     MyTransaction findByIdTransaction(Long id);
 

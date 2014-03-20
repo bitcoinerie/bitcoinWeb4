@@ -26,23 +26,26 @@
 
     <div class="row">
         <div class="col-lg-7 col-lg-offset-1">
-            <legend>All tasks</legend>
+            <legend>All Transaction</legend>
             <br>
 
             <c:forEach var="transaction" items="${transactions}">
                 <widget:myTransactionTag transaction="${transaction}" />
             </c:forEach>
 
+            <widget:myTransactionTag transaction="${transactionById}" />
+
             <c:forEach var="transaction" items="${transactionsByQuery}">
                 <widget:myTransactionTag transaction="${transaction}" />
             </c:forEach>
 
             <div>
-                <p>20 juillet 2012</p>
-                <span class="lead">Read Effective Java</span>
-                <code>Java</code>
-                <code>Java</code>
-                <p>Read Effective Java before it's too late</p>
+                <p>October 2013 - March 2014</p>
+                <span class="lead">Virtual Monetary System Project</span>
+                <code>Bitcoin</code>
+                <code>Linden</code>
+                <code>SEL</code>
+                <p>Virtual Monetary System Project - Centrale Marseille</p>
             </div>
 
 

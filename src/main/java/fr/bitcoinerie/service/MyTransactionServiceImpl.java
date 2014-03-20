@@ -64,12 +64,13 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     //@Override
     @Transactional
     @Override
-    public List<MyTransaction> findByDateTransaction(Date query) {
+    public List<MyTransaction> findByDateTransaction(Date queryStart, Date queryEnd) {
         Session session = sessionFactory.getCurrentSession();
 
         Criteria criteria = session.createCriteria(MyTransaction.class);
 
-        criteria.add(Restrictions.eq("date_temps", query ));
+
+        criteria.add(Restrictions.between("date_temps", queryStart, queryEnd));
 
         List<MyTransaction> myTransactions = criteria.list();
 
@@ -120,7 +121,57 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
         return myTransactions;
 
+
     }
+
+
+    @Transactional
+    @Override
+    public List<MyTransaction> findByEmetterTransaction(String query) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query queryTr =  session.createSQLQuery("select * from transactionTab T, userTab U  " +
+                "where T.id_user_emetteur = U.id_user " +
+                "and U.prenom = ?").addEntity(MyTransaction.class);
+        queryTr.setParameter(0, query);
+
+        System.out.println(queryTr.list().size());
+
+        List<MyTransaction> myTransactions = queryTr.list();
+
+        for (int i=0; i < myTransactions.size(); i++){
+
+            System.out.println(">>>>>>>>>>   myTr Emetteur "+myTransactions.get(i)+" class : "+myTransactions.getClass());
+        }
+
+
+        return myTransactions;
+
+    }
+
+    @Transactional
+    @Override
+    public List<MyTransaction> findByRecepterTransaction(String query) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query queryTr =  session.createSQLQuery("select * from transactionTab T, userTab U  " +
+                "where T.id_user_recepteur = U.id_user " +
+                "and U.prenom = ?").addEntity(MyTransaction.class);
+        queryTr.setParameter(0, query);
+
+        System.out.println(queryTr.list().size());
+
+        List<MyTransaction> myTransactions = queryTr.list();
+
+        for (int i=0; i < myTransactions.size(); i++){
+            System.out.println(">>>>>>>>>>   myTr "+myTransactions.get(i));
+        }
+
+
+        return myTransactions;
+
+    }
+
 
     @Transactional
     @Override
