@@ -167,13 +167,15 @@ public class MyEchangeServiceImpl implements MyEchangeService {
    public void nouvuser( Date date_temps, MyUser nouveau, Double montant){
         List<MyUser> users= myUserService.findAll();
         int i;
+        double size = users.size();
+        nouveau.setReputation(1./size);
         MyEchange echange3 = new MyEchange( montant, nouveau,nouveau);
         updateEchange(echange3);
         Long idnouv= nouveau.getId_user();
         for (i=0; i< users.size();i++){
             Long id= users.get(i).getId_user();
             MyEchange ech= findOneEchange(id,idnouv);
-
+            users.get(i).setReputation(users.get(i).getReputation()*(size-1)/size);
             if(ech==null){
              saveEchange(new MyEchange( 0., users.get(i),nouveau));
             }
@@ -247,7 +249,7 @@ public class MyEchangeServiceImpl implements MyEchangeService {
                     reputvoisins = reputvoisins + miseajour;
                 }
             }
-             Double reput=alpha+(1-alpha)*0.5*reputvoisins ;
+             Double reput=(alpha/users.size())+(1-alpha)*0.5*reputvoisins ;
 
               users.get(i).setReputation(reput);
 
