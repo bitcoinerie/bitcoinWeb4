@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bitcoinerie</title>
+    <title>Home</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
@@ -22,13 +22,16 @@
 </head>
 <body>
 <div class="container">
-    <widget:navbar />
     <c:if test="${not empty flashMessage}">
         <div class="alert alert-success">${flashMessage}</div>
     </c:if>
     <div class="row">
         <div class="col-lg-7 col-lg-offset-1">
-            <legend>All Transaction</legend>
+            <legend>Mon compte</legend>
+            <widget:myAccount user="${user}" />
+
+
+<%--            <legend>All Transaction</legend>
             <br>
 
             <c:forEach var="transaction" items="${transactions}">
@@ -39,24 +42,16 @@
 
             <c:forEach var="transaction" items="${transactionsByQuery}">
                 <widget:myTransactionTag transaction="${transaction}" />
-            </c:forEach>
+            </c:forEach>&ndash;%&gt;--%>
 
             <div>
                 <p>October 2013 - March 2014</p>
-                <span class="lead">Virtual Monetary System Project</span>
-                <code>Bitcoin</code>
-                <code>Linden</code>
-                <code>SEL</code>
                 <p>Virtual Monetary System Project - Centrale Marseille</p>
             </div>
-
-
         </div>
 
         <div class="col-lg-3">
-            <widget:quickLinks/>
-
-            <widget:tagCloud/>
+            <widget:quickLinks user="${user}"/>
 
         </div>
     </div>

@@ -114,6 +114,33 @@ public class MyUserServiceImpl implements MyUserService {
 
     }
 
+    @Transactional
+    @Override
+    public MyUser findUserById(Long id_user) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("from MyUser where id_user = :id_user");
+
+        query.setLong("id_user", id_user);
+
+        return (MyUser) query.list().get(0);
+    }
+
+    @Transactional
+    @Override
+    public MyUser signIn(String login, String mot_de_passe) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("from MyUser where login = :login and mot_de_passe = :mot_de_passe");
+
+        query.setString("login", login);
+        query.setString("mot_de_passe", mot_de_passe);
+
+        if (query.list().size() == 0) return null;
+
+        return (MyUser) query.list().get(0);
+    }
+
 
     @Transactional
     @Override

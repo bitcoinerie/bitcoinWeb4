@@ -38,7 +38,7 @@
                 <version>2.1</version>
                 <configuration>
                     <path>/</path>
-                    <!--<port>8081</port>-->
+                    <port>8081</port>
                 </configuration>
 
             </plugin>

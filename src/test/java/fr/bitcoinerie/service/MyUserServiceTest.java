@@ -49,6 +49,7 @@ public class MyUserServiceTest {
         myUser.setNom("Beccaro");
         myUser.setEmail("tbeccaro@francetv.fr");
         myUser.setLogin("tbeccaro");
+        myUser.setMot_de_passe("francetvrules");
         myUser.setUserStatus("normal_user");
         myUser.setMontant_compte(340.);
 
@@ -62,6 +63,7 @@ public class MyUserServiceTest {
         myUser2.setNom("Dechavanne");
         myUser2.setEmail("cdechavanne@tf1.fr");
         myUser2.setLogin("cdechavanne");
+        myUser2.setMot_de_passe("tf1rules");
         myUser2.setUserStatus("normal_user");
         myUser2.setMontant_compte(280.);
 
@@ -130,6 +132,20 @@ public class MyUserServiceTest {
     }
 
     @Test
+    public void testFindById() {
+        myUserService.save(myUser1);
+
+        Assert.assertEquals(myUser1.getPrenom(), myUserService.findUserById(myUser1.getId_user()).getPrenom());
+    }
+
+    @Test
+    public void testSignIn() {
+        myUserService.save(myUser1);
+
+        Assert.assertEquals(myUser1.getId_user(), myUserService.signIn("tbeccaro", "francetvrules").getId_user());
+    }
+
+    @Test
     public void testCount() {
 
         myUserService.save(myUser1);
@@ -191,7 +207,7 @@ public class MyUserServiceTest {
         System.out.println("myUser1bis.getMontant_compte() :"+myUser2bis.getListe_recettes());
 
         Assert.assertEquals(0, myUser2bis.getListe_depenses().size());
-        Assert.assertEquals(10, myUser2bis.getListe_recettes().size());
+        Assert.assertEquals(1, myUser2bis.getListe_recettes().size());
 
 
         Assert.assertEquals(0, myUser2bis.getListe_depenses().size());

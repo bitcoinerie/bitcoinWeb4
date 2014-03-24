@@ -19,6 +19,10 @@ public interface MyUserService {
 
     List<MyUser> findUser(String login);
 
+    MyUser findUserById(Long id);
+
+    MyUser signIn(String login, String mot_de_passe);
+
     int count();
 
     void updateUser(MyUser myUser);

@@ -38,10 +38,10 @@ public class MyUser {
     @Size(min = 5, max = 16)
     private String login;
 
-/*    @Column
+    @Column
     @NotBlank
     @Size(min = 8, max = 16)
-    private String mot_de_passe;*/
+    private String mot_de_passe;
 
     @Column
     private Date date_inscription;
@@ -78,7 +78,7 @@ public class MyUser {
         setReputation(0.);
         setUserStatus("normal_user");
         setLogin("user_created");
-//        setMot_de_passe("user_created");
+        setMot_de_passe("user_created");
 
         liste_depenses = new HashSet<MyTransaction>();
         liste_recettes = new HashSet<MyTransaction>();
@@ -184,9 +184,9 @@ public class MyUser {
         this.liste_recettes = liste_recettes;
     }
 
-/*    public void setMot_de_passe(String mot_de_passe) {this.mot_de_passe = mot_de_passe;}
+    public void setMot_de_passe(String mot_de_passe) {this.mot_de_passe = mot_de_passe;}
 
-    public String getMot_de_passe() {return mot_de_passe;}*/
+    public String getMot_de_passe() {return mot_de_passe;}
 
     public void addRecette(MyTransaction trans){
         liste_recettes.add(trans);

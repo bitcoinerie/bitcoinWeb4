@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -99,23 +100,74 @@ public class AdminController {
     }
 
     @RequestMapping("/new_user")
-    public String add(Model model) {
+    public String addUserToView(Model model) {
         // on injecte un utilisateur vierge dans le modèle
         model.addAttribute("user", new MyUser());
 
         return "new_user";
     }
 
-    @RequestMapping(value = "/edit_user", method = RequestMethod.POST)
-    public String post(@ModelAttribute("user") @Valid MyUser user, BindingResult result) {
+    @RequestMapping(value = "/new_user", method = RequestMethod.POST)
+    public String post(@ModelAttribute("user") @Valid MyUser user, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "new_user";
         }
 
-        myUserService.updateUser(user);
+        myUserService.save(user);
 
-        return "redirect:/";
+        redirectAttributes.addFlashAttribute("user", user);
+//        model.addAttribute("user", user);
+        redirectAttributes.addFlashAttribute("flashMessage", "User " + user.getLogin() + " created");
+
+
+        return "redirect:/home";
+    }
+
+    @RequestMapping("/sign_in")
+    public String add(Model model) {
+
+        MyUser myuser = new MyUser();
+        myuser.setPrenom("Total");
+        myuser.setNom("Inconnu");
+        myuser.setEmail("totalinconnu@live.fr");
+
+        model.addAttribute("user", myuser);
+
+        return "sign_in";
+    }
+
+    @RequestMapping(value = "/sign_in", method = RequestMethod.POST)
+    public String signIn(@ModelAttribute("user") @Valid MyUser user, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "sign_in";
+        }
+        MyUser myUser = myUserService.signIn(user.getLogin(), user.getMot_de_passe());
+
+        if (myUser == null) {
+            redirectAttributes.addFlashAttribute("flashMessage", "Login ou mot de passe incorrect ! Veuillez réessayer, ou bien créez un compte.");
+            return "redirect:/sign_in";
+        }
+        redirectAttributes.addFlashAttribute("user", myUser);
+        redirectAttributes.addFlashAttribute("flashMessage", "Connexion réussie");
+
+        return "redirect:/home";
+    }
+
+    @RequestMapping("/home")
+    public String home() {
+        return "home";
+    }
+
+    @RequestMapping("/profile/{id_user}")
+    public String redirectProfile(@PathVariable Long id_user, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("user", myUserService.findUserById(id_user));
+
+        return "redirect:/profile";
     }
 
 
+    @RequestMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
 }
