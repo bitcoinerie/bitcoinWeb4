@@ -34,7 +34,7 @@ public class MyUser {
     private Double montant_compte;
 
     @Column
-    @NotBlank
+    //@NotBlank
     @Size(min = 5, max = 16)
     private String login;
 
