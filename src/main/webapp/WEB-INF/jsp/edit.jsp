@@ -34,7 +34,7 @@
 
         <div class="col-lg-7 col-lg-offset-1">
 
-            <form:form cssClass="form-horizontal" commandName="myTransac" action="/edit" method="post">
+            <form:form cssClass="form-horizontal" commandName="myTransac" action="/transactionHistoric" method="post">
                 <div class="form-group myUser" commandName="myEmetteur">
                     <div class="col-lg-8">  <b>Emetteur </b></div>
                     <!-- label for="emetteur" class="col-lg-2 control-label" commandName="myEmetteur">Emetteur : >Emetteur : Nom ${myEmetteur.nom}</label -->

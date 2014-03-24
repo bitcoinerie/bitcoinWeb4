@@ -57,14 +57,14 @@ public class AdminController {
         model.addAttribute("myEmetteur",myEmet );
         model.addAttribute("myRecepteur", myRecept );
 
-        return "edit";
+        return "transactionHistoric";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/transactionHistoric", method = RequestMethod.POST)
     public String post(@ModelAttribute MyTransaction myTrans, BindingResult result) {
 
         if (result.hasErrors()) {
-            return "edit";
+            return "transactionHistoric";
         }
 
         myTrans.setDate_temps(new Date());
@@ -81,21 +81,21 @@ public class AdminController {
         // Doit faire un updateUser au lieu d'un save      sur  myUserService
         //myUserService.updateUser(myEmet);
         //myUserService.updateUser(myRecept);
-         Long id_emet= emetteur.get(0).getId_user();
+        Long id_emet= emetteur.get(0).getId_user();
         Long id_recep= recepteur.get(0).getId_user();
 
         myTransactionService.saveTransaction(myTrans);
 
 
-        return "redirect:/";
+        return "redirect:/transactionHistoric";
     }
 
 
-    @RequestMapping("/edit/{id_transaction}")
+    @RequestMapping("/transactionHistoric/{id_transaction}")
     public String edit(@PathVariable Long id_transaction, Model model) {
         model.addAttribute("myTransac", myTransactionService.findByIdTransaction(id_transaction));
 
-        return "edit";
+        return "transactionHistoric";
     }
 
     @RequestMapping("/new_user")
@@ -114,7 +114,7 @@ public class AdminController {
 
         myUserService.updateUser(user);
 
-        return "redirect:/";
+        return "redirect:/transactionHistoric";
     }
 
 

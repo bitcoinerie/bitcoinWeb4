@@ -21,7 +21,7 @@
 </head>
 <body>
 <div class="container">
-    <widget:navbar />
+
 
     <div class="row">
 

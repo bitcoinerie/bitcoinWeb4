@@ -36,9 +36,9 @@ public class IndexController {
     private MyUser Henri;
     private MyUser Julie;
 
-    @RequestMapping({"/", "/index"})
-    public String index(Model model) {
-        Anabelle = new MyUser("Anabelle","Anabelle",100);
+    @RequestMapping({"/transactionHistoric"})
+    public String transactionHistoric(Model model) {
+/*        Anabelle = new MyUser("Anabelle","Anabelle",100);
         Bernard =  new MyUser("Bernard","Bernard",100);
 
         myUserService.save(Anabelle);
@@ -50,10 +50,18 @@ public class IndexController {
 
         myTransactionService.saveTransaction(myTransaction);
 
-        model.addAttribute("transaction", new MyTransaction(45, new Date(),Anabelle,Bernard) );
+        model.addAttribute("transaction", new MyTransaction(45, new Date(),Anabelle,Bernard) );*/
         model.addAttribute("transactions", myTransactionService.findAllTransaction());
 
-        return "index";
+        return "transactionHistoric";
+    }
+
+    @RequestMapping({"/", "/index"})
+    public String index(Model model) {
+
+        model.addAttribute("transactions", myTransactionService.findAllTransaction());
+
+        return "transactionHistoric";
     }
 
     @RequestMapping("/hello")
@@ -81,38 +89,38 @@ public class IndexController {
             e.printStackTrace();
         }
 
-        return "index";
+        return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByAmountLarger")
     public String searchByAmountLarger(double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountLargerTransaction(query));
-        return "index";
+        return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByAmountSmaller")
     public String searchByAmountSmaller(double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountSmallerTransaction(query));
-        return "index";
+        return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByAmountEquals")
     public String searchByAmountEquals(double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountEqualsTransaction(query));
-        return "index";
+        return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByRecepterTransaction")
     public String searchByRecepterTransaction(String query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByRecepterTransaction(query));
-        return "index";
+        return "transactionHistoric";
     }
 
 
     @RequestMapping("/historique/searchByEmetterTransaction")
     public String searchByEmetterTransaction(String query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByEmetterTransaction(query));
-        return "index";
+        return "transactionHistoric";
     }
 
     @RequestMapping("/transaction/{id_transaction}")
@@ -121,7 +129,7 @@ public class IndexController {
 
         System.out.println("transaction by id : "+myTransactionService.findByIdTransaction(id_transaction));
 
-        return "index";
+        return "transactionHistoric";
     }
 
 
