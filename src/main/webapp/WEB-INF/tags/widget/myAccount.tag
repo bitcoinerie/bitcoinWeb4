@@ -13,7 +13,7 @@
                 <div class="col-lg-8">Prenom :  ${user.prenom}</div>
                 <div class="col-lg-8">Nom : ${user.nom} </div>
                 <div class="col-lg-8">Montant  : ${user.montant_compte}  </div>
-                <div class="col-lg-8">Réputation  : ${user.reputation}  </div>
+                <%--<div class="col-lg-8">Réputation  : ${user.reputation}  </div>--%>
 
 
             </span>

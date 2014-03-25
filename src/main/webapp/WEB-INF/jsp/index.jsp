@@ -54,9 +54,6 @@
         </div>
 
         <div class="col-lg-3">
-            <widget:quickLinks/>
-
-            <widget:tagCloud/>
 
         </div>
     </div>

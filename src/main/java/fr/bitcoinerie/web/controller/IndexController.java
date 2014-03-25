@@ -77,7 +77,7 @@ public class IndexController {
 
 
     @RequestMapping("/historique/searchByDate")
-    public String searchByDate(String queryStart, String queryEnd, Model model) {
+    public String searchByDate(Long id_user, String queryStart, String queryEnd, Model model) {
         //System.out.println("Date : "+query);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -93,38 +93,43 @@ public class IndexController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByAmountLarger")
-    public String searchByAmountLarger(double query, Model model) {
+    public String searchByAmountLarger(Long id_user, double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountLargerTransaction(query));
+        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByAmountSmaller")
-    public String searchByAmountSmaller(double query, Model model) {
+    public String searchByAmountSmaller(Long id_user, double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountSmallerTransaction(query));
+        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByAmountEquals")
-    public String searchByAmountEquals(double query, Model model) {
+    public String searchByAmountEquals(Long id_user, double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountEqualsTransaction(query));
+        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByRecepterTransaction")
-    public String searchByRecepterTransaction(String query, Model model) {
+    public String searchByRecepterTransaction(Long id_user, String query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByRecepterTransaction(query));
+        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
 
     @RequestMapping("/historique/searchByEmetterTransaction")
-    public String searchByEmetterTransaction(String query, Model model) {
+    public String searchByEmetterTransaction(Long id_user, String query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByEmetterTransaction(query));
+        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 

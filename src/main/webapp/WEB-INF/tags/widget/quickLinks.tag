@@ -9,9 +9,8 @@
     <div class="panel-heading">Quick links</div>
     <div class="panel-body">
         <ul>
-            <li><a href="/index">Accueil</a></li>
-            <li><a href="/index">Nouvelle Transaction</a></li>
-            <li><a href="/index">Historique</a></li>
+            <li><a href="/home/${user.id_user}">Accueil</a></li>
+            <li><a href="/histo/${user.id_user}">Historique</a></li>
             <li><a href="/profile/${user.id_user}">Profil</a></li>
         </ul>
     </div>

@@ -116,7 +116,6 @@ public class AdminController {
         myUserService.save(user);
 
         redirectAttributes.addFlashAttribute("user", user);
-//        model.addAttribute("user", user);
         redirectAttributes.addFlashAttribute("flashMessage", "User " + user.getLogin() + " created");
 
 
@@ -154,6 +153,13 @@ public class AdminController {
 
         return "redirect:/home";
     }
+    @RequestMapping("/home/{id_user}")
+    public String redirectHome(@PathVariable Long id_user, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("user", myUserService.findUserById(id_user));
+        redirectAttributes.addFlashAttribute("transactions", myTransactionService.findByUser(id_user));
+
+        return "redirect:/home";
+    }
 
     @RequestMapping("/home")
     public String home() {
@@ -168,18 +174,39 @@ public class AdminController {
         return "redirect:/profile";
     }
 
-
     @RequestMapping("/profile")
     public String profile() {
         return "profile";
     }
 
+    @RequestMapping("/histo/{id_user}")
+    public String redirectHisto(@PathVariable Long id_user, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("user", myUserService.findUserById(id_user));
+        redirectAttributes.addFlashAttribute("transactions", myTransactionService.findByUser(id_user));
+
+        return "redirect:/mon_historique";
+    }
+
+    @RequestMapping("/mon_historique")
+    public String mon_historique() {
+        return "transactionHistoric";
+    }
+
+
     @RequestMapping("/searchUser")
     public String searchUser(Long id_user, String prenom_dest, String nom_dest, RedirectAttributes redirectAttributes) {
-
         redirectAttributes.addFlashAttribute("user", myUserService.findUserById(id_user));
-        redirectAttributes.addFlashAttribute("user2", myUserService.findUserByPrenomAndNom(prenom_dest, nom_dest));
         redirectAttributes.addFlashAttribute("transactions", myTransactionService.findByUser(id_user));
+
+        MyUser user2 = myUserService.findUserByPrenomAndNom(prenom_dest, nom_dest);
+
+        if (user2 == null) {
+            redirectAttributes.addFlashAttribute("flashMessage2", "Cet utilisateur n'existe pas");
+        }
+
+
+        redirectAttributes.addFlashAttribute("user2", user2);
+
 
         return "redirect:/home";
     }
@@ -198,11 +225,4 @@ public class AdminController {
         return "redirect:/home";
     }
 
-  /*  @RequestMapping(value="/new_transaction", method = RequestMethod.POST)
-    public String new_trans(MyUser user, String prenom_dest, String nom_dest, double montant, Model model) {
-        MyTransaction trans =  new MyTransaction(montant, new Date(), user, myUserService.findUserByPrenomAndNom(prenom_dest, nom_dest))
-        myTransactionService.saveTransaction(trans);
-        myUserService.doTransaction(trans);
-        return "home";
-    }*/
 }

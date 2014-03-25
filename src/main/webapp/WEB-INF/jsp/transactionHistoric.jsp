@@ -33,7 +33,9 @@
                 <widget:myTransactionTag transaction="${transaction}" />
             </c:forEach>
 
-            <widget:myTransactionTag transaction="${transactionById}" />
+            <c:if test="${not empty transactionById}">
+                <widget:myTransactionTag transaction="${transactionById}" />
+            </c:if>
 
             <c:forEach var="transaction" items="${transactionsByQuery}">
                 <widget:myTransactionTag transaction="${transaction}" />
@@ -41,10 +43,6 @@
 
             <div>
                 <p>October 2013 - March 2014</p>
-                <span class="lead">Virtual Monetary System Project</span>
-                <code>Bitcoin</code>
-                <code>Linden</code>
-                <code>SEL</code>
                 <p>Virtual Monetary System Project - Centrale Marseille</p>
             </div>
 
@@ -52,10 +50,9 @@
         </div>
 
         <div class="col-lg-3">
-            <%--<widget:quickLinks user=""/>--%>
-
-            <widget:tagCloud/>
-
+            <c:if test="${not empty user}">
+                <widget:quickLinks user="${user}"/>
+            </c:if>
         </div>
     </div>
 </div>
