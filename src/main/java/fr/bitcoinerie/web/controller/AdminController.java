@@ -149,6 +149,7 @@ public class AdminController {
             return "redirect:/sign_in";
         }
         redirectAttributes.addFlashAttribute("user", myUser);
+        redirectAttributes.addFlashAttribute("transactions", myTransactionService.findByUser(myUser.getId_user()));
         redirectAttributes.addFlashAttribute("flashMessage", "Connexion réussie");
 
         return "redirect:/home";
@@ -162,6 +163,7 @@ public class AdminController {
     @RequestMapping("/profile/{id_user}")
     public String redirectProfile(@PathVariable Long id_user, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("user", myUserService.findUserById(id_user));
+        redirectAttributes.addFlashAttribute("transactions", myTransactionService.findByUser(id_user));
 
         return "redirect:/profile";
     }
@@ -177,6 +179,7 @@ public class AdminController {
 
         redirectAttributes.addFlashAttribute("user", myUserService.findUserById(id_user));
         redirectAttributes.addFlashAttribute("user2", myUserService.findUserByPrenomAndNom(prenom_dest, nom_dest));
+        redirectAttributes.addFlashAttribute("transactions", myTransactionService.findByUser(id_user));
 
         return "redirect:/home";
     }
@@ -190,6 +193,7 @@ public class AdminController {
         myTransactionService.saveTransaction(trans);
         myUserService.doTransaction(trans);
         redirectAttributes.addFlashAttribute("user", user);
+        redirectAttributes.addFlashAttribute("transactions", myTransactionService.findByUser(id_user1));
         redirectAttributes.addFlashAttribute("flashMessage", "Transaction effectuée !");
         return "redirect:/home";
     }

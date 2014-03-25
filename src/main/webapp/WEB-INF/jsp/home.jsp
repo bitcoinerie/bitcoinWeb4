@@ -31,20 +31,6 @@
             <legend>Mon compte</legend>
             <widget:myAccount user="${user}" />
 
-
-<%--            <legend>All Transaction</legend>
-            <br>
-
-            <c:forEach var="transaction" items="${transactions}">
-                <widget:myTransactionTag transaction="${transaction}" />
-            </c:forEach>
-
-            <widget:myTransactionTag transaction="${transactionById}" />
-
-            <c:forEach var="transaction" items="${transactionsByQuery}">
-                <widget:myTransactionTag transaction="${transaction}" />
-            </c:forEach>&ndash;%&gt;--%>
-
             <legend>Nouvelle transaction</legend>
                 <form action="/searchUser" class="navbar-form navbar-center " role="search">
                     <input type="hidden" name="id_user" value="${user.id_user}">
@@ -60,16 +46,23 @@
                 </form>
                 <c:if test="${not empty user2}">
                     <div class="alert alert-success">Utilisateur trouvé : ${user2.prenom} ${user2.nom}</div>
-                </c:if>
-                <form action="/newTrans" class="navbar-form navbar-center " role="search">
-                    <input type="hidden" name="id_user1" value="${user.id_user}">
-                    <input type="hidden" name="id_user2" value="${user2.id_user}">
-                    <div class="form-group ">
-                        <input name="montant"  class="form-control" placeholder="Montant">
-                    </div>
 
-                    <button type="submit" class="btn">Submit</button>
-                </form>
+                    <form action="/newTrans" class="navbar-form navbar-center " role="search">
+                        <input type="hidden" name="id_user1" value="${user.id_user}">
+                        <input type="hidden" name="id_user2" value="${user2.id_user}">
+                        <div class="form-group ">
+                            <input name="montant"  class="form-control" placeholder="Montant">
+                        </div>
+
+                        <button type="submit" class="btn">Submit</button>
+                    </form>
+                </c:if>
+
+            <legend>Mes transactions</legend>
+            <c:forEach var="transaction" items="${transactions}">
+                <widget:myTransactionTag transaction="${transaction}" />
+            </c:forEach>
+
             <div>
                 <p>October 2013 - March 2014</p>
                 <p>Virtual Monetary System Project - Centrale Marseille</p>

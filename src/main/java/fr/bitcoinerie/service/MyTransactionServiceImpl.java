@@ -149,6 +149,42 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
     }
 
+     @Transactional
+     @Override
+     public List<MyTransaction> findByEmetterId(Long id_user) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("from MyTransaction where id_user_emetteur = :id_user");
+
+        query.setLong("id_user", id_user);
+
+        return query.list();
+    }
+
+    @Transactional
+    @Override
+    public List<MyTransaction> findByRecepterId(Long id_user) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("from MyTransaction where id_user_recepteur = :id_user");
+
+        query.setLong("id_user", id_user);
+
+        return query.list();
+    }
+
+    @Transactional
+    @Override
+    public List<MyTransaction> findByUser(Long id_user) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("from MyTransaction where id_user_emetteur = :id_user or id_user_recepteur = :id_user");
+
+        query.setLong("id_user", id_user);
+
+        return query.list();
+    }
+
     @Transactional
     @Override
     public List<MyTransaction> findByRecepterTransaction(String query) {

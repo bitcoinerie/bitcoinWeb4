@@ -26,6 +26,9 @@ public class MyTransactionServiceTest {
     @Inject
     private MyTransactionService myTransactionService;
 
+    @Inject
+    private MyUserService myUserService;
+
     private MyUser Paul;
     private MyUser Jean;
     private Date dateTest = new Date();
@@ -153,6 +156,42 @@ public class MyTransactionServiceTest {
 
         Assert.assertEquals(myTransaction.getId_transaction(), myTransactionService.findByIdTransaction(myTransaction.getId_transaction()).getId_transaction() );
         //Assert.assertEquals(Paul, myTransactionService.findByIdTransaction(myTransaction.getId_transaction()).getEmetteur());
+
+    }
+
+    @Test
+    public void testFindByEmetterAndRecepteerId() {
+        MyTransaction myTransaction = myTransaction(50.);
+        myTransactionService.saveTransaction(myTransaction);
+
+        Assert.assertEquals(1, myTransactionService.findByEmetterId(Paul.getId_user()).size());
+        Assert.assertEquals(0, myTransactionService.findByEmetterId(Jean.getId_user()).size());
+        Assert.assertEquals(0, myTransactionService.findByRecepterId(Paul.getId_user()).size());
+        Assert.assertEquals(1, myTransactionService.findByRecepterId(Jean.getId_user()).size());
+    }
+
+    @Test
+    public void testFindByUser() {
+        MyUser user1 = new MyUser("Nicolas", "Sarkozy", 50.);
+        MyUser user2 = new MyUser("François", "Hollande", 20.);
+        MyUser user3 = new MyUser("Dominique", "De Villepin", 30.);
+        myUserService.save(user1);
+        myUserService.save(user2);
+        myUserService.save(user3);
+
+        MyTransaction trans1 = new MyTransaction(50., new Date(), user1, user2);
+        MyTransaction trans2 = new MyTransaction(50., new Date(), user2, user1);
+        MyTransaction trans3 = new MyTransaction(50., new Date(), user1, user3);
+        myTransactionService.saveTransaction(trans1);
+        myUserService.doTransaction(trans1);
+        myTransactionService.saveTransaction(trans2);
+        myUserService.doTransaction(trans2);
+        myTransactionService.saveTransaction(trans3);
+        myUserService.doTransaction(trans3);
+
+        Assert.assertEquals(3, myTransactionService.findByUser(user1.getId_user()).size());
+        Assert.assertEquals(2, myTransactionService.findByUser(user2.getId_user()).size());
+        Assert.assertEquals(1, myTransactionService.findByUser(user3.getId_user()).size());
 
     }
 

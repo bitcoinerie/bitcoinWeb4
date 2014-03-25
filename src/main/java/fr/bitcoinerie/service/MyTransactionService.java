@@ -31,6 +31,10 @@ public interface MyTransactionService {
     List<MyTransaction> findByEmetterTransaction(String query);
     List<MyTransaction> findByRecepterTransaction(String query);
 
+    List<MyTransaction> findByEmetterId(Long id_user);
+    List<MyTransaction> findByRecepterId(Long id_user);
+    List<MyTransaction> findByUser(Long id_user);
+
     MyTransaction findByIdTransaction(Long id);
 
     //@Override
