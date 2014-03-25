@@ -128,6 +128,21 @@ public class MyUserServiceImpl implements MyUserService {
 
     @Transactional
     @Override
+    public MyUser findUserByPrenomAndNom(String prenom, String nom){
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("from MyUser where prenom = :prenom and nom = :nom");
+
+        query.setString("prenom", prenom);
+        query.setString("nom", nom);
+
+        if (query.list().size() == 0) return null;
+
+        return (MyUser) query.list().get(0);
+    }
+
+    @Transactional
+    @Override
     public MyUser signIn(String login, String mot_de_passe) {
         Session session = sessionFactory.getCurrentSession();
 

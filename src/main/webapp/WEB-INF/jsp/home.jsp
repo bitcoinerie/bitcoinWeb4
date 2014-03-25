@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags/widget" prefix="widget" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
 <!DOCTYPE html>
@@ -44,6 +45,31 @@
                 <widget:myTransactionTag transaction="${transaction}" />
             </c:forEach>&ndash;%&gt;--%>
 
+            <legend>Nouvelle transaction</legend>
+                <form action="/searchUser" class="navbar-form navbar-center " role="search">
+                    <input type="hidden" name="id_user" value="${user.id_user}">
+                    <div class="form-group ">
+                        <input name="prenom_dest" class="form-control" placeholder="Prénom du destinataire">
+                    </div>
+
+                    <div class="form-group ">
+                        <input name="nom_dest"  class="form-control" placeholder="Nom du destinataire">
+                    </div>
+
+                    <button type="submit" class="btn">Search</button>
+                </form>
+                <c:if test="${not empty user2}">
+                    <div class="alert alert-success">Utilisateur trouvé : ${user2.prenom} ${user2.nom}</div>
+                </c:if>
+                <form action="/newTrans" class="navbar-form navbar-center " role="search">
+                    <input type="hidden" name="id_user1" value="${user.id_user}">
+                    <input type="hidden" name="id_user2" value="${user2.id_user}">
+                    <div class="form-group ">
+                        <input name="montant"  class="form-control" placeholder="Montant">
+                    </div>
+
+                    <button type="submit" class="btn">Submit</button>
+                </form>
             <div>
                 <p>October 2013 - March 2014</p>
                 <p>Virtual Monetary System Project - Centrale Marseille</p>

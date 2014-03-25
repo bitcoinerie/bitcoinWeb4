@@ -57,7 +57,12 @@ public class IndexController {
     }
 
     @RequestMapping({"/", "/index"})
-    public String index(Model model) {
+    public String index() {
+        return "redirect:/sign_in";
+    }
+
+    @RequestMapping("/allTransactions")
+    public String allTransactions(Model model) {
 
         model.addAttribute("transactions", myTransactionService.findAllTransaction());
 

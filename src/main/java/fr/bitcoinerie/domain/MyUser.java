@@ -52,7 +52,6 @@ public class MyUser {
     @Column
     private String userStatus;
 
-    //@Column
     @OneToMany(fetch = FetchType.LAZY, mappedBy="emetteur")
     private Set<MyTransaction> liste_depenses;
 

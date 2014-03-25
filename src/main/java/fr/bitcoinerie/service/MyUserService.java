@@ -21,6 +21,8 @@ public interface MyUserService {
 
     MyUser findUserById(Long id);
 
+    MyUser findUserByPrenomAndNom(String prenom, String nom);
+
     MyUser signIn(String login, String mot_de_passe);
 
     int count();

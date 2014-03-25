@@ -139,6 +139,12 @@ public class MyUserServiceTest {
     }
 
     @Test
+    public void testFindByNomAndPrenom() {
+        myUserService.save(myUser1);
+
+        Assert.assertEquals(myUser1.getId_user(),myUserService.findUserByPrenomAndNom("Thierry", "Beccaro").getId_user());
+    }
+    @Test
     public void testSignIn() {
         myUserService.save(myUser1);
 

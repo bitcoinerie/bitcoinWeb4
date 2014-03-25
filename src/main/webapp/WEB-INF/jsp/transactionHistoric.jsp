@@ -26,7 +26,7 @@
 
     <div class="row">
         <div class="col-lg-7 col-lg-offset-1">
-            <legend>All Transaction</legend>
+            <legend>All Transactions</legend>
             <br>
 
             <c:forEach var="transaction" items="${transactions}">
@@ -52,7 +52,7 @@
         </div>
 
         <div class="col-lg-3">
-            <widget:quickLinks/>
+            <%--<widget:quickLinks user=""/>--%>
 
             <widget:tagCloud/>
 
