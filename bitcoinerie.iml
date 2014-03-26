@@ -14,6 +14,7 @@
         </sourceRoots>
       </configuration>
     </facet>
+<<<<<<< HEAD
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
@@ -26,6 +27,8 @@
         </fileset>
       </configuration>
     </facet>
+=======
+>>>>>>> 2fd59ca63d552fa5fdaafda709f368291a196b7e
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />

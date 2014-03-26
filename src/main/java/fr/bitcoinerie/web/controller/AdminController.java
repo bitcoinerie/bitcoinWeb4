@@ -189,7 +189,7 @@ public class AdminController {
 
     @RequestMapping("/mon_historique")
     public String mon_historique() {
-        return "transactionHistoric";
+        return "mon_historique";
     }
 
 
