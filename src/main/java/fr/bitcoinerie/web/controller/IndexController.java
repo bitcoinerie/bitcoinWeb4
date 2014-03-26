@@ -150,8 +150,8 @@ public class IndexController {
             MyTransaction myTransaction = new MyTransaction();
             Arnold = new MyUser("Arnold","Schwarz",120);
             Fabien = new MyUser("Fabien","Bart", 250);
-            myUserService.save(Arnold);
-            myUserService.save(Fabien);
+            myEchangeService.saveuserandmajEchange(Arnold);
+            myEchangeService.saveuserandmajEchange(Fabien);
 
             myTransaction.setDate_temps(new Date());
 
@@ -186,11 +186,11 @@ public class IndexController {
 //            Henri.getListe_depenses().add(myTransaction2);
 //            Julie.getListe_depenses().add(myTransaction2);
 
-            myUserService.save(Henri);
+            myEchangeService.saveuserandmajEchange(Henri);
 
-            myUserService.save(Fabien);
+            myEchangeService.saveuserandmajEchange(Fabien);
 
-            myUserService.save(Julie);
+            myEchangeService.saveuserandmajEchange(Julie);
 
             myTransactionService.saveTransaction(myTransaction2);
             myUserService.doTransaction(myTransaction2);

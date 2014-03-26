@@ -1,18 +1,11 @@
 ----------------------------------------------------------------
-<<<<<<< HEAD
-Wed Mar 26 16:25:00 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-fefe-93ec-000006d67da0 
+Wed Mar 26 16:43:02 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-ff0f-1682-00000ab06140 
 on database directory /Users/pnicolas/bitcoinWeb4/target/taskdb with class loader WebappClassLoader
-=======
-Wed Mar 26 10:36:09 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-fdbf-2d73-000004ef0698 
-on database directory /home/marjolaine/Bureau/bitcoinWeb3/target/taskdb with class loader WebappClassLoader
->>>>>>> 2fd59ca63d552fa5fdaafda709f368291a196b7e
   context: 
   delegate: false
   repositories:
 ----------> Parent Classloader:
-<<<<<<< HEAD
 ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.1, parent: sun.misc.Launcher$AppClassLoader@23137792]
  
 Loaded from file:/Users/pnicolas/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
@@ -22,16 +15,5 @@ user.dir=/Users/pnicolas/bitcoinWeb4
 os.name=Mac OS X
 os.arch=x86_64
 os.version=10.7.5
-=======
-ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.1, parent: sun.misc.Launcher$AppClassLoader@16f0472]
- 
-Loaded from file:/home/marjolaine/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
-java.vendor=Sun Microsystems Inc.
-java.runtime.version=1.6.0_30-b12
-user.dir=/home/marjolaine/Bureau/bitcoinWeb3
-os.name=Linux
-os.arch=i386
-os.version=3.2.0-54-generic-pae
->>>>>>> 2fd59ca63d552fa5fdaafda709f368291a196b7e
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

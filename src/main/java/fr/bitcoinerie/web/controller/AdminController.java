@@ -113,7 +113,7 @@ public class AdminController {
             return "new_user";
         }
 
-        myUserService.save(user);
+        myEchangeService.saveuserandmajEchange(user);
 
         redirectAttributes.addFlashAttribute("user", user);
         redirectAttributes.addFlashAttribute("flashMessage", "User " + user.getLogin() + " created");

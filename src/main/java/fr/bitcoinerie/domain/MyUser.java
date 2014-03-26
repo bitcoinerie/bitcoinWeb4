@@ -61,7 +61,7 @@ public class MyUser {
     public MyUser(){
         setDate_inscription(new Date());
         setMontant_compte(10.);
-        setReputation(0.);
+        setReputation(0.15);
         setUserStatus("normal_user");
 //        setMot_de_passe("user_created");
 
@@ -74,7 +74,7 @@ public class MyUser {
         this.nom = nom;
         this.montant_compte = montant;
         setDate_inscription(new Date());
-        setReputation(0.);
+        setReputation(0.15);
         setUserStatus("normal_user");
         setLogin("user_created");
         setMot_de_passe("user_created");

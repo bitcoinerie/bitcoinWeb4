@@ -265,17 +265,21 @@ public class MyEchangeServiceImpl implements MyEchangeService {
         int i;
         Double s=0.;
         MyEchange ech= findOneEchange(emet,recept);
+        if (ech!=null){
      List<MyEchange> echanges =  findByEmetteurEchange( emet);
         for (i=0; i< echanges.size();i++){
             s=s+((echanges.get(i)).getMontant());
          }
         System.out.println(ech.getMontant());
         System.out.println(s);
+        if (s>0){
         Double proba =ech.getMontant()/s;
         System.out.println(proba);
         ech.setProbabilite(proba);
+        }
         Session session = sessionFactory.getCurrentSession();
         updateEchange(ech);
+        }
     }
 
 
