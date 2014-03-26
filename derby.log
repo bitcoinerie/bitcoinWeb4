@@ -1,17 +1,17 @@
 ----------------------------------------------------------------
-Tue Mar 25 15:54:16 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-f9bc-127a-0000037343a0 
-on database directory /Users/atoudic/IdeaProjects/bitcoinWeb3/target/taskdb with class loader WebappClassLoader
+Wed Mar 26 16:25:00 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0144-fefe-93ec-000006d67da0 
+on database directory /Users/pnicolas/bitcoinWeb4/target/taskdb with class loader WebappClassLoader
   context: 
   delegate: false
   repositories:
 ----------> Parent Classloader:
-ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.1, parent: sun.misc.Launcher$AppClassLoader@1729854]
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.1, parent: sun.misc.Launcher$AppClassLoader@23137792]
  
-Loaded from file:/Users/atoudic/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
-java.vendor=Apple Inc.
-java.runtime.version=1.6.0_65-b14-462-11M4609
-user.dir=/Users/atoudic/IdeaProjects/bitcoinWeb3
+Loaded from file:/Users/pnicolas/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_45-b18
+user.dir=/Users/pnicolas/bitcoinWeb4
 os.name=Mac OS X
 os.arch=x86_64
 os.version=10.7.5
