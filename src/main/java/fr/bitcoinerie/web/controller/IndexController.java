@@ -93,35 +93,35 @@ public class IndexController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        model.addAttribute("user", myUserService.findUserById(id_user));
+//        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByAmountLarger")
     public String searchByAmountLarger(Long id_user, double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountLargerTransaction(query));
-        model.addAttribute("user", myUserService.findUserById(id_user));
+//        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByAmountSmaller")
     public String searchByAmountSmaller(Long id_user, double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountSmallerTransaction(query));
-        model.addAttribute("user", myUserService.findUserById(id_user));
+//        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByAmountEquals")
     public String searchByAmountEquals(Long id_user, double query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByAmountEqualsTransaction(query));
-        model.addAttribute("user", myUserService.findUserById(id_user));
+//        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
     @RequestMapping("/historique/searchByRecepterTransaction")
     public String searchByRecepterTransaction(Long id_user, String query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByRecepterTransaction(query));
-        model.addAttribute("user", myUserService.findUserById(id_user));
+//        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
@@ -129,7 +129,7 @@ public class IndexController {
     @RequestMapping("/historique/searchByEmetterTransaction")
     public String searchByEmetterTransaction(Long id_user, String query, Model model) {
         model.addAttribute("transactionsByQuery", myTransactionService.findByEmetterTransaction(query));
-        model.addAttribute("user", myUserService.findUserById(id_user));
+//        model.addAttribute("user", myUserService.findUserById(id_user));
         return "transactionHistoric";
     }
 
